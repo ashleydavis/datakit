@@ -1,0 +1,66 @@
+{
+  "name": "datakit",
+  "version": "0.0.1",
+  "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
+  "module": "dist/esm/index.esm.js",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "c": "npm run clean",
+    "clean": "rm -rf build && rm -rf dist",
+    "b": "npm run build",
+    "build": "tsc",
+    "cb": "npm run clean-build",
+    "clean-build": "npm run clean && npm run build",
+    "bw": "tsc --watch",
+    "build:watch": "tsc --watch",
+    "cbw": "npm run clean-build:watch",
+    "clean-build:watch": "npm run clean-build && npm run build:watch",
+    "t": "npm run test",
+    "test": "mocha --opts ./src/test/mocha.opts",
+    "tw": "npm run test:watch",
+    "test:watch": "mocha --watch --opts ./src/test/mocha.opts",
+    "api-docs": "typedoc --options typedoc.json --out docs/api ./src/index.ts",
+    "prepublishOnly": "npm run clean && npm run test && npm run build",
+    "postinstall": "node postinstall.js || echo \"ignore\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-forge-notebook/datakit.git"
+  },
+  "keywords": [
+    "data-wrangling",
+    "data",
+    "data-analysis",
+    "csv",
+    "json",
+    "data-munging",
+    "data-cleaning",
+    "data-science",
+    "data-clensing"
+  ],
+  "author": "ashley@codecapers.com.au",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/data-forge-notebook/datakit/issues"
+  },
+  "homepage": "https://github.com/data-forge-notebook/datakit#readme",
+  "dependencies": {
+    "papaparse": "4.4.0",
+    "typy": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "mock-require": "2.0.2",
+    "@types/chai": "4.0.4",
+    "@types/mocha": "2.2.43",
+    "@types/mock-require": "2.0.0",
+    "@types/node": "8.0.28",
+    "mocha": "^6.2.0",
+    "source-map-support": "0.5.6",
+    "ts-loader": "^5.3.3",
+    "ts-node": "6.0.2",
+    "typedoc": "^0.15.0",
+    "typescript": "2.8.3"
+  }
+}
