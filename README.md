@@ -10,7 +10,7 @@ Simple toolkit for reading and writing data CSV and JSON files in JavaScript and
 
 Install using npm:
 
-    npm install --save datakit
+    npm install --save daki
 
 
 ## Read and write CSV files (JavaScript)
@@ -21,16 +21,15 @@ Here's an example of transforming a CSV file using JavaScript:
 
 <a target="_blank" href="http://bit.ly/2t2cJu2"><img align="right" src="images/support2.png"></a>
 
-    const { readCsv, writeCsv } = require("datakit");
+    const { readCsv, writeCsv } = require("daki");
 
     function transform(record) {
         // Your function to transform a data record.
     }
 
     async function main() {
-
         const data = await readCsv("./some/file.csv");
-        const transformed = da  ta.map(transform);
+        const transformed = data.map(transform);
         await writeCsv("./an/output/file.csv");
     }
 
@@ -43,18 +42,17 @@ Here's an example of transforming a CSV file using JavaScript:
 
 ## Read and write JSON files (TypeScript)
 
-Here's a similar code exampe using TypeScript.
+Here's a similar code example using TypeScript.
 
 This time we are reading and writing JSON files:
 
-    import { readJson, writeJson } from "datakit";
+    import { readJson, writeJson } from "daki";
 
-    function transform(record: InputT): OuptutT {
+    function transform(record: InputT): OutputT {
         // Your function to transform a data record.
     }
 
     async function main(): Promise<void> {
-
         const data = await readJson("./some/file.json");
         const transformed = data.map(transform);
         await writeJson("./an/output/file.json");
