@@ -30,7 +30,7 @@ Here's an example of transforming a CSV file using JavaScript:
     async function main() {
         const data = await readCsv("./some/file.csv");
         const transformed = data.map(transform);
-        await writeCsv("./an/output/file.csv");
+        await writeCsv("./an/output/file.csv", transformed);
     }
 
     main()
@@ -55,7 +55,7 @@ This time we are reading and writing JSON files:
     async function main(): Promise<void> {
         const data = await readJson("./some/file.json");
         const transformed = data.map(transform);
-        await writeJson("./an/output/file.json");
+        await writeJson("./an/output/file.json", transformed);
     }
 
     main()
