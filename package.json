@@ -1,6 +1,6 @@
 {
-  "name": "daki",
-  "version": "0.0.2",
+  "name": "datakit",
+  "version": "1.0.0",
   "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
   "module": "dist/esm/index.esm.js",
   "main": "build/index.js",
