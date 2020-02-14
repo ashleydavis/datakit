@@ -32,7 +32,7 @@ describe('csv file', () => {
             callback(null, testCsvData);
         };
 
-        return readCsv(testFilePath)
+        return readCsv(testFilePath, { dynamicTyping: false })
             .then(data => {
                 expect(toCsv(data)).to.eql(testCsvData);
             });
@@ -67,7 +67,7 @@ describe('csv file', () => {
             + "3,4"
             ; 
         
-        const data = fromCsv(testCsvData);
+        const data = fromCsv(testCsvData, { dynamicTyping: false });
 
         mockFs.writeFile = (filePath: string, fileData: string, callback: Function): void => {
             expect(filePath).to.eql(testFilePath);
@@ -109,7 +109,7 @@ describe('csv file', () => {
             + "3,4"
             ; 
         
-        const data = fromCsv(testCsvData);
+        const data = fromCsv(testCsvData, { dynamicTyping: false });
         let writeDone = false;
 
         mockFs.writeFile = (filePath: string, fileData: string, callback: Function): void => {

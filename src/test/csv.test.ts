@@ -60,7 +60,7 @@ describe('csv', () => {
 			"1975-2-24, 100, foo, 22\n" +
 			"2015-10-23, 300, bar, 23";
 
-        const data = fromCsv(csv);
+        const data = fromCsv(csv, { dynamicTyping: false });
         expect(data).to.eql([
             {
                 Date: "1975-2-24",
@@ -85,7 +85,7 @@ describe('csv', () => {
             "\n" +
 			"2015-10-23, 300, bar, 23";
 
-        const data = fromCsv(csv);
+        const data = fromCsv(csv, { dynamicTyping: false });
         expect(data).to.eql([
             {
                 Date: "1975-2-24",
@@ -128,7 +128,7 @@ describe('csv', () => {
 			"1975-2-24, 100, foo, 22\n" +
 			"2015-10-23, 300, bar, 23";
 
-        const data = fromCsv(csv, { columnNames: ["Date", "Value1", "Value2", "Value3"] });
+        const data = fromCsv(csv, { dynamicTyping: false, columnNames: ["Date", "Value1", "Value2", "Value3"] });
         expect(data).to.eql([
             {
                 Date: "1975-2-24", 
@@ -152,7 +152,7 @@ describe('csv', () => {
 			"f, 1,2\n" +
 			"x, 2,2";
 
-        const data = fromCsv(csv);
+        const data = fromCsv(csv, { dynamicTyping: false });
         expect(data).to.eql([
             {
                 c1: "f",
@@ -172,7 +172,7 @@ describe('csv', () => {
 			'"a","1"\n' +
 			'"b","2"';
 
-        const data = fromCsv(csv);
+        const data = fromCsv(csv, { dynamicTyping: false });
         expect(data).to.eql([
             {
                 c1: "a",
@@ -192,7 +192,7 @@ describe('csv', () => {
 			'a,1\n' +
 			'b,2';
 
-        const data = fromCsv(csv);
+        const data = fromCsv(csv, { dynamicTyping: false });
         expect(data).to.eql([
             {
                 c1: "a",
@@ -212,7 +212,7 @@ describe('csv', () => {
 			'a,1\r\n' +
 			'b,2';
 
-        const data = fromCsv(csv);
+        const data = fromCsv(csv, { dynamicTyping: false });
         expect(data).to.eql([
             {
                 c1: "a",
@@ -243,5 +243,40 @@ describe('csv', () => {
                 "Code": "AAD"
             },
         ]);
-	});
+    });
+    
+    it("can load booleans from csv", () => {
+		const csv =
+			'col\r\n' +
+			'true\r\n' +
+			'false';
+
+        const data = fromCsv(csv);
+        expect(data).to.eql([
+            {
+                col: true,
+            },
+            {
+                col: false,
+            },
+        ]);
+    });
+
+    it("can load numbers from csv", () => {
+		const csv =
+			'col\r\n' +
+			'2.2\r\n' +
+			'0.3';
+
+        const data = fromCsv(csv);
+        expect(data).to.eql([
+            {
+                col: 2.2,
+            },
+            {
+                col: 0.3,
+            },
+        ]);
+    });
+
 });

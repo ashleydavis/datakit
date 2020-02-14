@@ -90,32 +90,35 @@ export function fromCsv<RecordT> (csvTextString: string, config?: ICsvInputConfi
         throw new Error("Expected 'csvTextString' parameter to 'datakit.fromCsv' to be a string containing data encoded in the CSV format.");
     }
 
-    if (config) {
+    if (!config) {
+        config = {}; 
+    }
+    else {
         if (!isObject(config)) {
             throw new Error("Expected 'config' parameter to 'datakit.fromCsv' to be an object with configuration options for CSV deserialization.");
         }
 
-        if (config.columnNames) {
-            if (!isArray(config.columnNames)) {
-                throw new Error("Expected 'columnNames' field of 'config' parameter to 'datakit.fromCsv' to be an array of strings that specifies column names to read from the CSV data.");
-            }
+        config = Object.assign({}, config); // Copy config so we can default values as necessary.
+    }
 
-            for (const columnName of config.columnNames) {
-                if (!isString(columnName)) {
-                    throw new Error("Expected 'columnNames' field of 'config' parameter to 'datakit.fromCsv' to be an array of strings that specify column names.");
-                }
-            }
+    if (config.columnNames) {
+        if (!isArray(config.columnNames)) {
+            throw new Error("Expected 'columnNames' field of 'config' parameter to 'datakit.fromCsv' to be an array of strings that specifies column names to read from the CSV data.");
         }
-        
-        if (config.skipEmptyLines === undefined) {
-            config = Object.assign({}, config); // Clone the config. Don't want to modify the original.
-            config.skipEmptyLines = true;
+
+        for (const columnName of config.columnNames) {
+            if (!isString(columnName)) {
+                throw new Error("Expected 'columnNames' field of 'config' parameter to 'datakit.fromCsv' to be an array of strings that specify column names.");
+            }
         }
     }
-    else {
-        config = {
-            skipEmptyLines: true,
-        };
+
+    if (config.dynamicTyping === undefined) {
+        config.dynamicTyping = true;
+    }
+    
+    if (config.skipEmptyLines === undefined) {
+        config.skipEmptyLines = true;
     }
 
     const parsed = PapaParse.parse(csvTextString, config as any);
