@@ -52,9 +52,21 @@ export function fromJson<RecordT> (jsonTextString: string): RecordT[] {
 }
 
 /**
+ * Configures parsing for named columns in the CSV data.
+ */
+export interface IColumnParserConfig {
+    [fieldName: string]: (value: string) => any;
+};
+
+/**
  * Configuration for CSV deserialization.
  */
 export interface ICsvInputConfig {
+
+    /**
+     * Configure parsing for named columns in the CSV data.
+     */
+    columnParser?: IColumnParserConfig;
 
     /**
      * Optionally specifies the column names (when enabled, assumes that the header row is not read from the CSV data).
@@ -138,13 +150,24 @@ export function fromCsv<RecordT> (csvTextString: string, config?: ICsvInputConfi
         columnNames = rows.shift()!.filter(columnName => columnName && columnName.length !== undefined && columnName.length > 0);
     }
 
-    return rows.map(row => {
+    const records = rows.map(row => {
         const record: any = {};
         for (let i = 0; i < columnNames.length; ++i) {
             record[columnNames[i]] = row[i];
         }
         return record;
     });
+
+    if (config.columnParser) {
+        for (const columnName of Object.keys(config.columnParser)) {
+            const parsingFunction = config.columnParser[columnName];
+            for (const record of records) {
+                record[columnName] = parsingFunction(record[columnName]);
+            }
+        }
+    }
+
+    return records;
 }
 
 /**

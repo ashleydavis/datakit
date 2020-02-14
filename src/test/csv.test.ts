@@ -1,6 +1,7 @@
 import { assert, expect } from 'chai';
 import 'mocha';
 import { toCsv, fromCsv } from '..';
+import dayjs from "dayjs";
 
 describe('csv', () => {
 
@@ -279,4 +280,22 @@ describe('csv', () => {
         ]);
     });
 
-});
+    it("can do custom field parsing", async () => {
+		const csv =
+			"Date\n" +
+			"1975-2-24\n" +
+            "2015-10-23";
+            
+        const data = fromCsv(csv, { columnParser: {  Date: value => dayjs(value, "YYYY-MM-D").toDate() } });
+        expect(data).to.eql([
+            {
+                Date: dayjs("1975-2-24", "YYYY-MM-D").toDate(),
+            },
+            {
+                Date: dayjs("2015-10-23", "YYYY-MM-D").toDate(),
+            },
+        ]);
+
+    });
+
+});     
