@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ICsvOutputConfig | datakit</title>
+	<title>IFieldFormatterConfig | datakit</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="icsvoutputconfig.html">ICsvOutputConfig</a>
+					<a href="ifieldformatterconfig.html">IFieldFormatterConfig</a>
 				</li>
 			</ul>
-			<h1>Interface ICsvOutputConfig</h1>
+			<h1>Interface IFieldFormatterConfig</h1>
 		</div>
 	</div>
 </header>
@@ -65,7 +65,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Configuration for CSV serialization.</p>
+						<p>Configures formatting for named fields in the JSON data.</p>
 					</div>
 				</div>
 			</section>
@@ -73,73 +73,36 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ICsvOutputConfig</span>
+						<span class="target">IFieldFormatterConfig</span>
 					</li>
 				</ul>
 			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icsvoutputconfig.html#columnnames" class="tsd-kind-icon">column<wbr>Names</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icsvoutputconfig.html#formatter" class="tsd-kind-icon">formatter</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icsvoutputconfig.html#header" class="tsd-kind-icon">header</a></li>
-							</ul>
-						</section>
+			<section class="tsd-panel tsd-kind-interface">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>fieldName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">function</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Configures formatting for named fields in the JSON data.</p>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="columnnames" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> column<wbr>Names</h3>
-					<div class="tsd-signature tsd-kind-icon">column<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L460">index.ts:460</a></li>
+				</div>
+				<ul class="tsd-parameters">
+					<li class="tsd-parameter-siganture">
+						<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+							<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Names of columns to output.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="formatter" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> formatter</h3>
-					<div class="tsd-signature tsd-kind-icon">formatter<span class="tsd-signature-symbol">:</span> <a href="icolumnformatterconfig.html" class="tsd-signature-type">IColumnFormatterConfig</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L449">index.ts:449</a></li>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>value: <span class="tsd-signature-type">string</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							</li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Configures formatting for named columns in the CSV data.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="header" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> header</h3>
-					<div class="tsd-signature tsd-kind-icon">header<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L455">index.ts:455</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Enable or disable output of the CSV header line.
-							Defaults to true.</p>
-						</div>
-					</div>
-				</section>
+					</li>
+				</ul>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -161,30 +124,19 @@
 					<li class=" tsd-kind-interface">
 						<a href="icsvinputconfig.html" class="tsd-kind-icon">ICsv<wbr>Input<wbr>Config</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="icsvoutputconfig.html" class="tsd-kind-icon">ICsv<wbr>Output<wbr>Config</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="icsvoutputconfig.html#columnnames" class="tsd-kind-icon">column<wbr>Names</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="icsvoutputconfig.html#formatter" class="tsd-kind-icon">formatter</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="icsvoutputconfig.html#header" class="tsd-kind-icon">header</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="ifielddesc.html" class="tsd-kind-icon">IField<wbr>Desc</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="ifieldformatterconfig.html" class="tsd-kind-icon">IField<wbr>Formatter<wbr>Config</a>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="ifieldparserconfig.html" class="tsd-kind-icon">IField<wbr>Parser<wbr>Config</a>
 					</li>
