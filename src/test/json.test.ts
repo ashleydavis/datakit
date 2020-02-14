@@ -1,6 +1,7 @@
 import { assert, expect } from 'chai';
 import 'mocha';
-import { toJson } from '..';
+import { toJson, fromJson } from '..';
+import dayjs from "dayjs";
 
 describe('json', () => {
 
@@ -34,4 +35,49 @@ describe('json', () => {
 		);
     });	
     
+    it("can do custom column parsing", async () => {
+        const json =
+            '[\n' +
+            '    {\n' +
+            '        "Date": "1975-2-24"\n' +
+            '    },\n' +
+            '    {\n' +
+            '        "Date": "2015-10-23"\n' +
+            '    }\n' +
+            ']';
+            
+        const data = fromJson(json, { parser: {  Date: value => dayjs(value, "YYYY-MM-D").toDate() } });
+        expect(data).to.eql([
+            {
+                Date: dayjs("1975-2-24", "YYYY-MM-D").toDate(),
+            },
+            {
+                Date: dayjs("2015-10-23", "YYYY-MM-D").toDate(),
+            },
+        ]);
+
+    });
+
+    it("can do custom column formatting", async () => {
+        const data = [
+            {
+                Date: dayjs("1975-2-24", "YYYY-M-D").toDate(),
+            },
+            {
+                Date: dayjs("2015-10-23", "YYYY-M-D").toDate(),
+            },
+        ];
+
+		const jsonData = toJson(data, { formatter: { Date: date => dayjs(date).format("YYYY-M-D") } });
+		expect(jsonData).to.eql(
+            '[\n' +
+            '    {\n' +
+            '        "Date": "1975-2-24"\n' +
+            '    },\n' +
+            '    {\n' +
+            '        "Date": "2015-10-23"\n' +
+            '    }\n' +
+            ']'
+		);
+    });
 });

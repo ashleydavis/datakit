@@ -36,26 +36,61 @@ export function fromObject (obj: any): IFieldDesc[] {
 }
 
 /**
+ * Configures parsing for named fields in the JSON data.
+ */
+export interface IFieldParserConfig {
+    [fieldName: string]: (value: string) => any;
+};
+
+/**
+ * Configuration for JSON deserialization.
+ */
+export interface IJsonInputConfig {
+
+    /**
+     * Configures parsing for named fields in the JSON data.
+     */
+    parser?: IFieldParserConfig;
+}
+
+/**
  * Deserialize JSON text to a JavaScript array.
  *
  * @param jsonTextString The JSON text to deserialize.
  * 
  * @returns Returns an array of JavaScript objects that were deserialized from the JSON text.
  */
-export function fromJson<RecordT> (jsonTextString: string): RecordT[] {
+export function fromJson<RecordT> (jsonTextString: string, config?: IJsonInputConfig): RecordT[] {
     
     if (!isString(jsonTextString)) {
         throw new Error("Expected 'jsonTextString' parameter to 'datakit.fromJson' to be a string containing data encoded in the JSON format.");
     }
 
-    return JSON.parse(jsonTextString);
+    if (config) {
+        if (!isObject(config)) {
+            throw new Error("Expected 'config' parameter to 'datakit.fromJson' to be an object with configuration options for JSON deserialization.");
+        }
+    }
+
+    const records = JSON.parse(jsonTextString);
+
+    if (config && config.parser) {
+        for (const columnName of Object.keys(config.parser)) {
+            const parsingFunction = config.parser[columnName];
+            for (const record of records) {
+                record[columnName] = parsingFunction(record[columnName]);
+            }
+        }
+    }
+
+    return records;
 }
 
 /**
  * Configures parsing for named columns in the CSV data.
  */
 export interface IColumnParserConfig {
-    [fieldName: string]: (value: string) => any;
+    [columnName: string]: (value: string) => any;
 };
 
 /**
@@ -66,7 +101,7 @@ export interface ICsvInputConfig {
     /**
      * Configure parsing for named columns in the CSV data.
      */
-    columnParser?: IColumnParserConfig;
+    parser?: IColumnParserConfig;
 
     /**
      * Optionally specifies the column names (when enabled, assumes that the header row is not read from the CSV data).
@@ -158,9 +193,9 @@ export function fromCsv<RecordT> (csvTextString: string, config?: ICsvInputConfi
         return record;
     });
 
-    if (config.columnParser) {
-        for (const columnName of Object.keys(config.columnParser)) {
-            const parsingFunction = config.columnParser[columnName];
+    if (config.parser) {
+        for (const columnName of Object.keys(config.parser)) {
+            const parsingFunction = config.parser[columnName];
             for (const record of records) {
                 record[columnName] = parsingFunction(record[columnName]);
             }
@@ -337,6 +372,24 @@ export function readJsonSync<RecordT> (filePath: string): RecordT[] {
 } 
 
 /**
+ * Configures formatting for named fields in the JSON data.
+ */
+export interface IFieldFormatterConfig {
+    [fieldName: string]: (value: string) => any;
+};
+
+/**
+ * Configuration for JSON serialization.
+ */
+export interface IJsonOutputConfig {
+
+    /**
+     * Configures formatting for named fields in the JSON data.
+     */
+    formatter?: IColumnFormatterConfig;
+}
+
+/**
  * Serialize a JavaScript array to the JSON data format.
  * 
  * @param input The data to be serialized.
@@ -351,10 +404,28 @@ export function readJsonSync<RecordT> (filePath: string): RecordT[] {
  * console.log(jsonData);
  * </pre>
  */
-export function toJson<RecordT> (input: RecordT[]): string {
+export function toJson(input: any[], config?: IJsonOutputConfig): string {
 
     if (!input || !isArray(input)) {
         throw new Error("Expected 'input' parameter to 'datakit.toJson' to be a JavaScript array.");
+    }
+
+    if (config) {
+        if (!isObject(config)) {
+            throw new Error("Expected optional 'config' parameter to 'datakit.toJson' to be an object with configuration options for JSON serialization.");
+        }
+
+        if (config.formatter) {
+            // Make a copy of the input so that we can change the formatting.
+            input = input.map(record => Object.assign({}, record));
+
+            for(const columnName of Object.keys(config.formatter)) {
+                const formatterFunction = config.formatter[columnName];
+                for (const record of input) {
+                    record[columnName] = formatterFunction(record[columnName]);
+                }
+            }
+        }
     }
 
     return JSON.stringify(input, null, 4);
@@ -364,7 +435,7 @@ export function toJson<RecordT> (input: RecordT[]): string {
  * Configures formatting for named columns in the CSV data.
  */
 export interface IColumnFormatterConfig {
-    [fieldName: string]: (value: string) => any;
+    [columnName: string]: (value: string) => any;
 };
 
 /**
@@ -375,7 +446,7 @@ export interface ICsvOutputConfig {
     /**
      * Configures formatting for named columns in the CSV data.
      */
-    columnFormatter?: IColumnFormatterConfig;
+    formatter?: IColumnFormatterConfig;
 
     /**
      * Enable or disable output of the CSV header line.
@@ -428,12 +499,12 @@ export function toCsv(input: any[], config?: ICsvOutputConfig): string {
             throw new Error("Expected optional 'config' parameter to 'datakit.toCsv' to be an object with configuration options for CSV serialization.");
         }
 
-        if (config.columnFormatter) {
+        if (config.formatter) {
             // Make a copy of the input so that we can change the formatting.
             input = input.map(record => Object.assign({}, record));
 
-            for(const columnName of Object.keys(config.columnFormatter)) {
-                const formatterFunction = config.columnFormatter[columnName];
+            for(const columnName of Object.keys(config.formatter)) {
+                const formatterFunction = config.formatter[columnName];
                 for (const record of input) {
                     record[columnName] = formatterFunction(record[columnName]);
                 }
@@ -588,7 +659,7 @@ export function writeCsvSync(filePath: string, input: any[], config?: ICsvOutput
  * await datakit.writeJson("my-data-file.json", data);
  * </pre>
  */
-export async function writeJson<RecordT> (filePath: string, input: RecordT[]): Promise<void> {
+export async function writeJson(filePath: string, input: any[]): Promise<void> {
 
     if (!isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'writeJson' to be a string that specifies the path of the file to write to the local file system.");
@@ -598,7 +669,7 @@ export async function writeJson<RecordT> (filePath: string, input: RecordT[]): P
         throw new Error("Expected 'input' parameter to 'datakit.writeJson' to be a JavaScript array.");
     }
 
-    await writeFile(filePath, toJson<RecordT>(input));
+    await writeFile(filePath, toJson(input));
 }
 
 /**
@@ -615,7 +686,7 @@ export async function writeJson<RecordT> (filePath: string, input: RecordT[]): P
  * datakit.writeJsonSync("my-data-file.json", data);
  * </pre>
  */
-export function writeJsonSync<RecordT> (filePath: string, input: RecordT[]): void {
+export function writeJsonSync(filePath: string, input: any[]): void {
 
     if (!isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeJsonSync' to be a string that specifies the path of the file to write to the local file system.");
@@ -626,5 +697,5 @@ export function writeJsonSync<RecordT> (filePath: string, input: RecordT[]): voi
     }
 
     const fs = require("fs");
-    fs.writeFileSync(filePath, toJson<RecordT>(input));
+    fs.writeFileSync(filePath, toJson(input));
 }

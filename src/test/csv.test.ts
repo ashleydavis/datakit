@@ -286,7 +286,7 @@ describe('csv', () => {
 			"1975-2-24\n" +
             "2015-10-23";
             
-        const data = fromCsv(csv, { columnParser: {  Date: value => dayjs(value, "YYYY-MM-D").toDate() } });
+        const data = fromCsv(csv, { parser: {  Date: value => dayjs(value, "YYYY-MM-D").toDate() } });
         expect(data).to.eql([
             {
                 Date: dayjs("1975-2-24", "YYYY-MM-D").toDate(),
@@ -308,12 +308,11 @@ describe('csv', () => {
             },
         ];
 
-		const csvData = toCsv(data, { columnFormatter: { Date: date => dayjs(date).format("YYYY-M-D") } });
+		const csvData = toCsv(data, { formatter: { Date: date => dayjs(date).format("YYYY-M-D") } });
 		expect(csvData).to.eql(
 			"Date\r\n" +
 			"1975-2-24\r\n" +
 			"2015-10-23"
 		);
     });
-
-});     
+});
