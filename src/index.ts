@@ -361,9 +361,22 @@ export function toJson<RecordT> (input: RecordT[]): string {
 }
 
 /**
+ * Configures formatting for named columns in the CSV data.
+ */
+export interface IColumnFormatterConfig {
+    [fieldName: string]: (value: string) => any;
+};
+
+/**
  * Configuration for CSV serialization.
  */
 export interface ICsvOutputConfig {
+
+    /**
+     * Configures formatting for named columns in the CSV data.
+     */
+    columnFormatter?: IColumnFormatterConfig;
+
     /**
      * Enable or disable output of the CSV header line.
      * Defaults to true.
@@ -404,7 +417,7 @@ export interface ICsvOutputConfig {
  * console.log(csvData);
  * </pre>
  */
-export function toCsv<RecordT> (input: RecordT[], config?: ICsvOutputConfig): string {
+export function toCsv(input: any[], config?: ICsvOutputConfig): string {
 
     if (!input || !isArray(input)) {
         throw new Error("Expected 'input' parameter to 'datakit.toCsv' to be a JavaScript array.");
@@ -414,13 +427,24 @@ export function toCsv<RecordT> (input: RecordT[], config?: ICsvOutputConfig): st
         if (!isObject(config)) {
             throw new Error("Expected optional 'config' parameter to 'datakit.toCsv' to be an object with configuration options for CSV serialization.");
         }
+
+        if (config.columnFormatter) {
+            // Make a copy of the input so that we can change the formatting.
+            input = input.map(record => Object.assign({}, record));
+
+            for(const columnName of Object.keys(config.columnFormatter)) {
+                const formatterFunction = config.columnFormatter[columnName];
+                for (const record of input) {
+                    record[columnName] = formatterFunction(record[columnName]);
+                }
+            }
+        }
     }
 
     const columnNames = (config && config.columnNames) || (input && input.length > 0 && Object.keys(input[0])) || [];
     const headerLine = config === undefined || config.header === undefined || config.header
         ? [columnNames]
-        : []
-        ;
+        : []    ;
     const data = input.map((obj: any) => columnNames.map(columnName => obj[columnName]));
     const rows = headerLine.concat(data);
     return PapaParse.unparse(rows, config);
@@ -487,7 +511,7 @@ export function writeFile(filePath: string, data: string): Promise<string> {
  * await datakit.writeCsv("my-data-file.csv", config);
  * </pre>
  */
-export async function writeCsv<RecordT> (filePath: string, input: RecordT[], config?: ICsvOutputConfig): Promise<void> {
+export async function writeCsv(filePath: string, input: any[], config?: ICsvOutputConfig): Promise<void> {
 
     if (!isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeCsv' to be a string that specifies the path of the file to write to the local file system.");
@@ -503,7 +527,7 @@ export async function writeCsv<RecordT> (filePath: string, input: RecordT[], con
         }
     }
 
-    await writeFile(filePath, toCsv<RecordT>(input, config));
+    await writeFile(filePath, toCsv(input, config));
 }
 
 /**
@@ -530,7 +554,7 @@ export async function writeCsv<RecordT> (filePath: string, input: RecordT[], con
  * datakit.writeCsvSync("my-data-file.csv", config);
  * </pre>
  */
-export function writeCsvSync<RecordT> (filePath: string, input: RecordT[], config?: ICsvOutputConfig): void {
+export function writeCsvSync(filePath: string, input: any[], config?: ICsvOutputConfig): void {
 
     if (!isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeCsvSync' to be a string that specifies the path of the file to write to the local file system.");
@@ -547,7 +571,7 @@ export function writeCsvSync<RecordT> (filePath: string, input: RecordT[], confi
     }
 
     const fs = require("fs");
-    fs.writeFileSync(filePath, toCsv<RecordT>(input, config));
+    fs.writeFileSync(filePath, toCsv(input, config));
 }
 
 /**

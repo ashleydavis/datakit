@@ -280,7 +280,7 @@ describe('csv', () => {
         ]);
     });
 
-    it("can do custom field parsing", async () => {
+    it("can do custom column parsing", async () => {
 		const csv =
 			"Date\n" +
 			"1975-2-24\n" +
@@ -296,6 +296,24 @@ describe('csv', () => {
             },
         ]);
 
+    });
+
+    it("can do custom column formatting", async () => {
+        const data = [
+            {
+                Date: dayjs("1975-2-24", "YYYY-M-D").toDate(),
+            },
+            {
+                Date: dayjs("2015-10-23", "YYYY-M-D").toDate(),
+            },
+        ];
+
+		const csvData = toCsv(data, { columnFormatter: { Date: date => dayjs(date).format("YYYY-M-D") } });
+		expect(csvData).to.eql(
+			"Date\r\n" +
+			"1975-2-24\r\n" +
+			"2015-10-23"
+		);
     });
 
 });     
