@@ -77,7 +77,7 @@ Consider using [Data-Forge](http://data-forge-js.com/) for data transformation, 
 - [API docs](https://data-forge-notebook.github.io/datakit/)
 
 
-## Support the develper 
+## Support the developer 
 
 You can help support my work in any of the following ways:
 
