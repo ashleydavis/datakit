@@ -6,6 +6,8 @@ Simple toolkit for reading and writing data CSV and JSON files in JavaScript and
 
 [Click here for API docs](https://data-forge-notebook.github.io/datakit/).
 
+<a href="#support-the-developer">Skip to the end to see how you can **support the developer.**</a>
+
 ## Install
 
 Install using npm:
@@ -75,3 +77,12 @@ Consider using [Data-Forge](http://data-forge-js.com/) for data transformation, 
 - [API docs](https://data-forge-notebook.github.io/datakit/)
 
 
+## Support the develper 
+
+You can help support my work in any of the following ways:
+
+- Star this repository (and my other repos [here](https://github.com/data-forge), [here](https://github.com/grademark) and [here](https://github.com/data-forge-notebook)).
+- Share links to my work on Twitter and other social media.
+- [Sponsor me on GitHub](https://github.com/sponsors/ashleydavis).
+- Purchase [Data-Forge Notebook](https://www.data-forge-notebook.com/).
+- Purchase either of my books [Data Wrangling with JavaScript](http://bit.ly/2t2cJu2) or [Bootsrapping Microservices](http://bit.ly/2o0aDsP).

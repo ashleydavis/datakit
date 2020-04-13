@@ -15,7 +15,7 @@ var DISABLE_OPENCOLLECTIVE = is(env.DISABLE_OPENCOLLECTIVE);
 var SILENT = ['silent', 'error', 'warn'].indexOf(env.npm_config_loglevel) !== -1;
 var MINUTE = 60 * 1000;
 
-var BANNER = '\u001B[96mThanks for using datakit! See the see the README to learn more: \u001B[94m https://github.com/data-forge-notebook/datakit/ \u001B[96m\u001B[0m\n\n';
+var BANNER = '\u001B[96mThanks for using datakit! See the README for help and to support the developer: \u001B[94m https://github.com/data-forge-notebook/datakit/ \u001B[96m\u001B[0m\n\n';
 
 function isBannerRequired() {
   if (ADBLOCK || CI || DISABLE_OPENCOLLECTIVE || SILENT) return false;
