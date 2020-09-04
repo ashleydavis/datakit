@@ -46,7 +46,7 @@
   },
   "homepage": "https://github.com/data-forge-notebook/datakit#readme",
   "dependencies": {
-    "papaparse": "4.4.0",
+    "papaparse": "5.2.0",
     "typy": "^3.0.1"
   },
   "devDependencies": {
