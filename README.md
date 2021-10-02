@@ -6,7 +6,7 @@ Simple toolkit for reading and writing data CSV and JSON files in JavaScript and
 
 [Click here for API docs](https://data-forge-notebook.github.io/datakit/).
 
-<a target="_blank" href="http://www.codecapers.com.au/#support-my-work">Click here to **support the developer.**</a>
+[Click here to support my work](https://www.codecapers.com.au/about#support-my-work)
 
 ## Install
 
