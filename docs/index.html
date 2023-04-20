@@ -83,18 +83,24 @@
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#fromcsv" class="tsd-kind-icon">from<wbr>Csv</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#fromjson" class="tsd-kind-icon">from<wbr>Json</a></li>
 								<li class="tsd-kind-function"><a href="index.html#fromobject" class="tsd-kind-icon">from<wbr>Object</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#fromyaml" class="tsd-kind-icon">from<wbr>Yaml</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#readcsv" class="tsd-kind-icon">read<wbr>Csv</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#readcsvsync" class="tsd-kind-icon">read<wbr>Csv<wbr>Sync</a></li>
 								<li class="tsd-kind-function"><a href="index.html#readfile" class="tsd-kind-icon">read<wbr>File</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#readjson" class="tsd-kind-icon">read<wbr>Json</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#readjsonsync" class="tsd-kind-icon">read<wbr>Json<wbr>Sync</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#readyaml" class="tsd-kind-icon">read<wbr>Yaml</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="index.html#readyamlsync" class="tsd-kind-icon">read<wbr>Yaml<wbr>Sync</a></li>
 								<li class="tsd-kind-function"><a href="index.html#tocsv" class="tsd-kind-icon">to<wbr>Csv</a></li>
 								<li class="tsd-kind-function"><a href="index.html#tojson" class="tsd-kind-icon">to<wbr>Json</a></li>
+								<li class="tsd-kind-function"><a href="index.html#toyaml" class="tsd-kind-icon">to<wbr>Yaml</a></li>
 								<li class="tsd-kind-function"><a href="index.html#writecsv" class="tsd-kind-icon">write<wbr>Csv</a></li>
 								<li class="tsd-kind-function"><a href="index.html#writecsvsync" class="tsd-kind-icon">write<wbr>Csv<wbr>Sync</a></li>
 								<li class="tsd-kind-function"><a href="index.html#writefile" class="tsd-kind-icon">write<wbr>File</a></li>
 								<li class="tsd-kind-function"><a href="index.html#writejson" class="tsd-kind-icon">write<wbr>Json</a></li>
 								<li class="tsd-kind-function"><a href="index.html#writejsonsync" class="tsd-kind-icon">write<wbr>Json<wbr>Sync</a></li>
+								<li class="tsd-kind-function"><a href="index.html#writeyaml" class="tsd-kind-icon">write<wbr>Yaml</a></li>
+								<li class="tsd-kind-function"><a href="index.html#writeyamlsync" class="tsd-kind-icon">write<wbr>Yaml<wbr>Sync</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,7 +118,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L134">index.ts:134</a></li>
+									<li>Defined in index.ts:135</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -154,7 +160,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L63">index.ts:63</a></li>
+									<li>Defined in index.ts:64</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -195,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L29">index.ts:29</a></li>
+									<li>Defined in index.ts:30</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -219,6 +225,44 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="fromyaml" class="tsd-anchor"></a>
+					<h3>from<wbr>Yaml</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Yaml&lt;RecordT&gt;<span class="tsd-signature-symbol">(</span>yamlTextString<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecordT</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:217</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Deserialize YAML text to a JavaScript array.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>RecordT</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>yamlTextString: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The YAML text to deserialize.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RecordT</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Returns an array of JavaScript objects that were deserialized from the YAML text.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
 					<a name="readcsv" class="tsd-anchor"></a>
 					<h3>read<wbr>Csv</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
@@ -228,7 +272,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L266">index.ts:266</a></li>
+									<li>Defined in index.ts:284</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -286,7 +330,7 @@ console.log(data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L333">index.ts:333</a></li>
+									<li>Defined in index.ts:375</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -348,7 +392,7 @@ console.log(data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L223">index.ts:223</a></li>
+									<li>Defined in index.ts:241</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -389,7 +433,7 @@ console.log(data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L296">index.ts:296</a></li>
+									<li>Defined in index.ts:314</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -400,7 +444,7 @@ console.log(data);
 									<dt>example</dt>
 									<dd><pre>
 
-const data = await datakit.readFile("my-data-file.json");
+const data = await datakit.readJson("my-data-file.json");
 console.log(data);
 </pre>
 									</dd>
@@ -436,7 +480,7 @@ console.log(data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L364">index.ts:364</a></li>
+									<li>Defined in index.ts:405</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -473,6 +517,100 @@ console.log(data);
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="readyaml" class="tsd-anchor"></a>
+					<h3>read<wbr>Yaml</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Yaml&lt;RecordT&gt;<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RecordT</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:338</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Asynchronously deserialize a YAML file to a JavaScript array.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre>
+
+const data = await datakit.readYaml("my-data-file.yaml");
+console.log(data);
+</pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>RecordT</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>filePath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Path to the file to be loaded.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RecordT</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns a promise for the loaded data.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="readyamlsync" class="tsd-anchor"></a>
+					<h3>read<wbr>Yaml<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Yaml<wbr>Sync&lt;RecordT&gt;<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RecordT</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:429</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Synchronously deserialize a YAML file to a JavaScript array.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre>
+
+const data = datakit.readYamlSync("my-data-file.yaml");
+console.log(data);
+</pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>RecordT</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>filePath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Path to the file to be loaded.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RecordT</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Returns the loaded data.</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="tocsv" class="tsd-anchor"></a>
 					<h3>to<wbr>Csv</h3>
@@ -483,7 +621,7 @@ console.log(data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L491">index.ts:491</a></li>
+									<li>Defined in index.ts:556</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -541,7 +679,7 @@ console.log(csvData);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L407">index.ts:407</a></li>
+									<li>Defined in index.ts:472</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -577,6 +715,48 @@ console.log(jsonData);
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="toyaml" class="tsd-anchor"></a>
+					<h3>to<wbr>Yaml</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Yaml<span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:604</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Serialize a JavaScript array to the YAML data format.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre>
+
+const data = [ ... JavaScript array of data ... ];
+const yamlData = datakit.toYaml(data);
+console.log(yamlData);
+</pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>input: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The data to be serialized.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>Returns a string in the YAML data format that represents the data.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="writecsv" class="tsd-anchor"></a>
 					<h3>write<wbr>Csv</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -586,7 +766,7 @@ console.log(jsonData);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L585">index.ts:585</a></li>
+									<li>Defined in index.ts:673</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -643,7 +823,7 @@ await datakit.writeCsv("my-data-file.csv", config);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L628">index.ts:628</a></li>
+									<li>Defined in index.ts:716</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -694,13 +874,13 @@ datakit.writeCsvSync("my-data-file.csv", config);
 					<a name="writefile" class="tsd-anchor"></a>
 					<h3>write<wbr>File</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>File<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<wbr>File<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L541">index.ts:541</a></li>
+									<li>Defined in index.ts:629</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -732,7 +912,7 @@ await datakit.writeFile("some-data-file.txt", data);
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>A promise that is resolved when the file has been written.</p>
 						</li>
 					</ul>
@@ -747,7 +927,7 @@ await datakit.writeFile("some-data-file.txt", data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L662">index.ts:662</a></li>
+									<li>Defined in index.ts:750</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -791,7 +971,7 @@ await datakit.writeJson("my-data-file.json", data);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/data-forge-notebook/datakit/blob/16c9ff9/src/index.ts#L689">index.ts:689</a></li>
+									<li>Defined in index.ts:777</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -804,6 +984,94 @@ await datakit.writeJson("my-data-file.json", data);
 
 const data = [ ... JavaScript array of data ... ];
 datakit.writeJsonSync("my-data-file.json", data);
+</pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>filePath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Path to the file to be written.</p>
+									</div>
+								</li>
+								<li>
+									<h5>input: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>Returns a promise that resolves when the file has been written.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="writeyaml" class="tsd-anchor"></a>
+					<h3>write<wbr>Yaml</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Yaml<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:805</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Asynchronously serialize a JavaScript array to a YAML file.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre>
+
+const data = [ ... JavaScript array of data ... ];
+await datakit.writeYaml("my-data-file.yaml", data);
+</pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>filePath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Path to the file to be written.</p>
+									</div>
+								</li>
+								<li>
+									<h5>input: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns a promise that resolves when the file has been written.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="writeyamlsync" class="tsd-anchor"></a>
+					<h3>write<wbr>Yaml<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Yaml<wbr>Sync<span class="tsd-signature-symbol">(</span>filePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:832</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Synchronously serialize a JavaScript array to a Yaml file.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre>
+
+const data = [ ... JavaScript array of data ... ];
+datakit.writeYamlSync("my-data-file.yaml", data);
 </pre>
 									</dd>
 								</dl>
@@ -874,6 +1142,9 @@ datakit.writeJsonSync("my-data-file.json", data);
 						<a href="index.html#fromobject" class="tsd-kind-icon">from<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="index.html#fromyaml" class="tsd-kind-icon">from<wbr>Yaml</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="index.html#readcsv" class="tsd-kind-icon">read<wbr>Csv</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
@@ -888,11 +1159,20 @@ datakit.writeJsonSync("my-data-file.json", data);
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="index.html#readjsonsync" class="tsd-kind-icon">read<wbr>Json<wbr>Sync</a>
 					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="index.html#readyaml" class="tsd-kind-icon">read<wbr>Yaml</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="index.html#readyamlsync" class="tsd-kind-icon">read<wbr>Yaml<wbr>Sync</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="index.html#tocsv" class="tsd-kind-icon">to<wbr>Csv</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="index.html#tojson" class="tsd-kind-icon">to<wbr>Json</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="index.html#toyaml" class="tsd-kind-icon">to<wbr>Yaml</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="index.html#writecsv" class="tsd-kind-icon">write<wbr>Csv</a>
@@ -908,6 +1188,12 @@ datakit.writeJsonSync("my-data-file.json", data);
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="index.html#writejsonsync" class="tsd-kind-icon">write<wbr>Json<wbr>Sync</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="index.html#writeyaml" class="tsd-kind-icon">write<wbr>Yaml</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="index.html#writeyamlsync" class="tsd-kind-icon">write<wbr>Yaml<wbr>Sync</a>
 					</li>
 				</ul>
 			</nav>
