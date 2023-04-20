@@ -47,7 +47,8 @@
   "homepage": "https://github.com/data-forge-notebook/datakit#readme",
   "dependencies": {
     "papaparse": "4.4.0",
-    "typy": "^3.0.1"
+    "typy": "^3.0.1",
+    "yaml": "^2.2.1"
   },
   "devDependencies": {
     "@types/chai": "4.0.4",

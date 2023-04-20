@@ -67,6 +67,7 @@ This time we are reading and writing JSON files:
             console.error(err && err.stack || err);
         });
 
+You can also read and write YAML files using similar functions.
 
 ## Need to do more?
 

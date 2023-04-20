@@ -1,4 +1,5 @@
 import { isString, isObject, isArray } from './lib/utils';
+const YAML = require("yaml");
 
 // @ts-ignore
 import PapaParse from 'papaparse';
@@ -205,6 +206,23 @@ export function fromCsv<RecordT> (csvTextString: string, config?: ICsvInputConfi
     return records;
 }
 
+
+/**
+ * Deserialize YAML text to a JavaScript array.
+ *
+ * @param yamlTextString The YAML text to deserialize.
+ * 
+ * @returns Returns an array of JavaScript objects that were deserialized from the YAML text.
+ */
+export function fromYaml<RecordT> (yamlTextString: string): RecordT[] {
+    
+    if (!isString(yamlTextString)) {
+        throw new Error("Expected 'yamlTextString' parameter to 'datakit.fromYaml' to be a string containing data encoded in the YAML format.");
+    }
+
+    return YAML.parse(yamlTextString);
+}
+
 /**
  * Like fs.readFile but returns a promise for the file data.
  * 
@@ -289,7 +307,7 @@ export async function readCsv<RecordT> (filePath: string, config?: ICsvInputConf
  * @example
  * <pre>
  * 
- * const data = await datakit.readFile("my-data-file.json");
+ * const data = await datakit.readJson("my-data-file.json");
  * console.log(data);
  * </pre>
  */
@@ -301,6 +319,30 @@ export async function readJson<RecordT> (filePath: string): Promise<RecordT[]> {
 
     const fileData = await readFile(filePath);
     return fromJson<RecordT>(fileData);
+} 
+
+/**
+ * Asynchronously deserialize a YAML file to a JavaScript array.
+ * 
+ * @param filePath Path to the file to be loaded.
+ * 
+ * @returns Returns a promise for the loaded data.
+ * 
+ * @example
+ * <pre>
+ * 
+ * const data = await datakit.readYaml("my-data-file.yaml");
+ * console.log(data);
+ * </pre>
+ */
+export async function readYaml<RecordT> (filePath: string): Promise<RecordT[]> {
+
+    if (!filePath || !isString(filePath)) {
+        throw new Error("Expected 'filePath' parameter to 'datakit.readYaml' function to be a string.");
+    }
+
+    const fileData = await readFile(filePath);
+    return fromYaml<RecordT>(fileData);
 } 
 
 /**
@@ -350,7 +392,6 @@ export function readCsvSync<RecordT> (filePath: string, config?: ICsvInputConfig
  * Synchronously deserialize a JSON file to a JavaScript array.
  * 
  * @param filePath Path to the file to be loaded.
- * @param [config] Optional configuration file for parsing.
  * 
  * @returns Returns the loaded data.
  *
@@ -369,6 +410,30 @@ export function readJsonSync<RecordT> (filePath: string): RecordT[] {
 
     const fs = require("fs");
     return fromJson<RecordT>(fs.readFileSync(filePath, 'utf8'));
+} 
+
+/**
+ * Synchronously deserialize a YAML file to a JavaScript array.
+ * 
+ * @param filePath Path to the file to be loaded.
+ * 
+ * @returns Returns the loaded data.
+ *
+ * @example
+ * <pre>
+ * 
+ * const data = datakit.readYamlSync("my-data-file.yaml");
+ * console.log(data);
+ * </pre>
+ */
+export function readYamlSync<RecordT> (filePath: string): RecordT[] {
+
+    if (!filePath || !isString(filePath)) {
+        throw new Error("Expected 'filePath' parameter to 'datakit.readYamlSync' function to be a string.");
+    }
+
+    const fs = require("fs");
+    return fromYaml<RecordT>(fs.readFileSync(filePath, 'utf8'));
 } 
 
 /**
@@ -521,6 +586,29 @@ export function toCsv(input: any[], config?: ICsvOutputConfig): string {
     return PapaParse.unparse(rows, config);
 }
 
+/**
+ * Serialize a JavaScript array to the YAML data format.
+ * 
+ * @param input The data to be serialized.
+ * 
+ * @return Returns a string in the YAML data format that represents the data.
+ * 
+ * @example
+ * <pre>
+ * 
+ * const data = [ ... JavaScript array of data ... ];
+ * const yamlData = datakit.toYaml(data);
+ * console.log(yamlData);
+ * </pre>
+ */
+export function toYaml(input: any[]): string {
+
+    if (!input || !isArray(input)) {
+        throw new Error("Expected 'input' parameter to 'datakit.toYaml' to be a JavaScript array.");
+    }
+
+    return YAML.stringify(input);
+}
 
 /**
  * Like fs.writeFile but returns a promise for completion of the asynchronous file write.
@@ -538,13 +626,13 @@ export function toCsv(input: any[], config?: ICsvOutputConfig): string {
  * </pre>
  *
  */
-export function writeFile(filePath: string, data: string): Promise<string> {
+export function writeFile(filePath: string, data: string): Promise<void> {
 
     if (!filePath || !isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeFile' function to be a string.");
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         const fs = require("fs");
         fs.writeFile(filePath, data, (err: any) => {
             if (err) {
@@ -662,7 +750,7 @@ export function writeCsvSync(filePath: string, input: any[], config?: ICsvOutput
 export async function writeJson(filePath: string, input: any[]): Promise<void> {
 
     if (!isString(filePath)) {
-        throw new Error("Expected 'filePath' parameter to 'writeJson' to be a string that specifies the path of the file to write to the local file system.");
+        throw new Error("Expected 'filePath' parameter to 'datakit.writeJson' to be a string that specifies the path of the file to write to the local file system.");
     }
 
     if (!input || !isArray(input)) {
@@ -698,4 +786,59 @@ export function writeJsonSync(filePath: string, input: any[]): void {
 
     const fs = require("fs");
     fs.writeFileSync(filePath, toJson(input));
+}
+
+/**
+ * Asynchronously serialize a JavaScript array to a YAML file.
+ * 
+ * @param filePath Path to the file to be written.
+ * 
+ * @return Returns a promise that resolves when the file has been written.
+ *
+ * @example
+ * <pre>
+ * 
+ * const data = [ ... JavaScript array of data ... ];
+ * await datakit.writeYaml("my-data-file.yaml", data);
+ * </pre>
+ */
+export async function writeYaml(filePath: string, input: any[]): Promise<void> {
+
+    if (!isString(filePath)) {
+        throw new Error("Expected 'filePath' parameter to 'datakit.writeYaml' to be a string that specifies the path of the file to write to the local file system.");
+    }
+
+    if (!input || !isArray(input)) {
+        throw new Error("Expected 'input' parameter to 'datakit.writeYaml' to be a JavaScript array.");
+    }
+
+    await writeFile(filePath, toYaml(input));
+}
+
+/**
+ * Synchronously serialize a JavaScript array to a Yaml file.
+ * 
+ * @param filePath Path to the file to be written.
+ * 
+ * @return Returns a promise that resolves when the file has been written.
+ *
+ * @example
+ * <pre>
+ * 
+ * const data = [ ... JavaScript array of data ... ];
+ * datakit.writeYamlSync("my-data-file.yaml", data);
+ * </pre>
+ */
+export function writeYamlSync(filePath: string, input: any[]): void {
+
+    if (!isString(filePath)) {
+        throw new Error("Expected 'filePath' parameter to 'datakit.writeYamlSync' to be a string that specifies the path of the file to write to the local file system.");
+    }
+
+    if (!input || !isArray(input)) {
+        throw new Error("Expected 'input' parameter to 'datakit.writeYamlSync' to be a JavaScript array.");
+    }
+
+    const fs = require("fs");
+    fs.writeFileSync(filePath, toYaml(input));
 }
