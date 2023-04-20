@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
   "module": "dist/esm/index.esm.js",
   "main": "build/index.js",
@@ -22,7 +22,13 @@
     "test:watch": "mocha --watch --opts ./src/test/mocha.opts",
     "api-docs": "typedoc --options typedoc.json --out docs/api ./src/index.ts",
     "prepublishOnly": "npm run clean && npm run test && npm run build",
-    "postinstall": "node postinstall.js || echo \"ignore\""
+    "postinstall": "node postinstall.js || echo \"ignore\"",
+    "test-pipeline": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-yaml"
+  },
+  "bin": {
+    "from-yaml": "./bin/from-yaml",
+    "to-yaml": "./bin/to-yaml",
+    "transform": "./bin/transform"
   },
   "repository": {
     "type": "git",
@@ -46,12 +52,14 @@
   },
   "homepage": "https://github.com/data-forge-notebook/datakit#readme",
   "dependencies": {
+    "minimist": "^1.2.8",
     "papaparse": "4.4.0",
     "typy": "^3.0.1",
     "yaml": "^2.2.1"
   },
   "devDependencies": {
     "@types/chai": "4.0.4",
+    "@types/minimist": "^1.2.2",
     "@types/mocha": "2.2.43",
     "@types/mock-require": "2.0.0",
     "@types/node": "8.0.28",
