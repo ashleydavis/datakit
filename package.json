@@ -55,7 +55,7 @@
   "homepage": "https://github.com/data-forge-notebook/datakit#readme",
   "dependencies": {
     "minimist": "^1.2.8",
-    "papaparse": "4.4.0",
+    "papaparse": "^5.4.1",
     "typy": "^3.0.1",
     "yaml": "^2.2.1"
   },
