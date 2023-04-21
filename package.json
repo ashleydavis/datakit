@@ -24,7 +24,8 @@
     "prepublishOnly": "npm run clean && npm run test && npm run build",
     "postinstall": "node postinstall.js || echo \"ignore\"",
     "test-pipeline1": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-yaml",
-    "test-pipeline2": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/length"
+    "test-pipeline2": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform -f ./src/test/code/transform-test.js | ts-node ./src/cli/to-yaml",
+    "test-pipeline3": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/length"
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -54,6 +55,7 @@
   },
   "homepage": "https://github.com/data-forge-notebook/datakit#readme",
   "dependencies": {
+    "fs-extra": "^11.1.1",
     "minimist": "^1.2.8",
     "papaparse": "^5.4.1",
     "typy": "^3.0.1",
@@ -61,6 +63,7 @@
   },
   "devDependencies": {
     "@types/chai": "4.0.4",
+    "@types/fs-extra": "^11.0.1",
     "@types/minimist": "^1.2.2",
     "@types/mocha": "2.2.43",
     "@types/mock-require": "2.0.0",
