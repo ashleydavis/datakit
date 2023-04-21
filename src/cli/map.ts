@@ -2,13 +2,20 @@ import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/read-stdin";
 import minimist from "minimist";
 import { loadTransformFn } from "./lib/transform-fn";
+import { isArray } from "util";
 
 async function main() {
     const argv = minimist(process.argv.slice(2));
+
     const transformFn = loadTransformFn(argv);
     const input = await readStdin();
     const data = fromJson(input);
-    const transformed = transformFn(data);
+
+    if (!isArray(data)) {
+        throw new Error(`Expected input to 'map' to be an array.`);
+    }
+
+    const transformed = data.map(transformFn);
     console.log(toJson(transformed));
 }
 
