@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
   "module": "dist/esm/index.esm.js",
   "main": "build/index.js",
@@ -27,10 +27,10 @@
     "test-pipeline2": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/length"
   },
   "bin": {
-    "from-yaml": "./bin/from-yaml",
-    "to-yaml": "./bin/to-yaml",
-    "transform": "./bin/transform",
-    "length": "./bin/length"
+    "from-yaml": "./cli/from-yaml",
+    "to-yaml": "./cli/to-yaml",
+    "transform": "./cli/transform",
+    "length": "./cli/length"
   },
   "repository": {
     "type": "git",
