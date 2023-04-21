@@ -23,12 +23,14 @@
     "api-docs": "typedoc --options typedoc.json --out docs/api ./src/index.ts",
     "prepublishOnly": "npm run clean && npm run test && npm run build",
     "postinstall": "node postinstall.js || echo \"ignore\"",
-    "test-pipeline": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-yaml"
+    "test-pipeline1": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-yaml",
+    "test-pipeline2": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/length"
   },
   "bin": {
     "from-yaml": "./bin/from-yaml",
     "to-yaml": "./bin/to-yaml",
-    "transform": "./bin/transform"
+    "transform": "./bin/transform",
+    "length": "./bin/length"
   },
   "repository": {
     "type": "git",
