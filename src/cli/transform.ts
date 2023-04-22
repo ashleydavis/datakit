@@ -1,4 +1,3 @@
-import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/read-stdin";
 import minimist from "minimist";
 import { loadTransformFn } from "./lib/transform-fn";
@@ -7,9 +6,9 @@ async function main() {
     const argv = minimist(process.argv.slice(2));
     const transformFn = loadTransformFn(argv);
     const input = await readStdin();
-    const data = fromJson(input);
+    const data = JSON.parse(input);
     const transformed = transformFn(data);
-    console.log(toJson(transformed));
+    console.log(JSON.stringify(transformed, null, 4));
 }
 
 main()

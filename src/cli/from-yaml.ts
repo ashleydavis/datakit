@@ -1,10 +1,10 @@
-import { fromYaml, toJson } from "..";
 import { readStdin } from "../lib/read-stdin";
+const YAML = require("yaml");
 
 async function main() {
     const input = await readStdin();
-    const data = fromYaml(input);
-    console.log(toJson(data));
+    const data = YAML.parse(input);
+    console.log(JSON.stringify(data, null, 4));
 }
 
 main()
