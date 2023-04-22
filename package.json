@@ -30,7 +30,8 @@
     "test-pipeline5": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/filter \"r => r.SharesValue > 17555\" | ts-node ./src/cli/to-yaml",
     "test-pipeline6": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/reduce \"(a, r) => a + r.SharesValue\" \"0\"",
     "test-pipeline7": "ts-node ./src/cli/from-csv < .\\src\\test\\data\\example-data.csv | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-csv",
-    "test-pipeline8": "echo { \"x\": 1, \"hello\": \"world\" } | ts-node ./src/cli/transform \"data => ({ ...data, hello: 'computer'})\" | ts-node ./src/cli/to-yaml"
+    "test-pipeline8": "echo { \"x\": 1, \"hello\": \"world\" } | ts-node ./src/cli/transform \"data => ({ ...data, hello: 'computer'})\" | ts-node ./src/cli/to-yaml",
+    "test-pipeline9": "cat ./src/test/data/star-wars-characters.json | ts-node ./src/cli/sort \"r => r.gender\" \"r => r.name\" |  ts-node ./src/cli/to-yaml"
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -41,6 +42,7 @@
     "map": "./cli/map",
     "filter": "./cli/filter",
     "reduce": "./cli/reduce",
+    "sort": "./cli/sort",
     "length": "./cli/length"
   },
   "repository": {
