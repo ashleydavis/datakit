@@ -27,7 +27,8 @@
     "test-pipeline2": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform -f ./src/test/code/transform-test.js | ts-node ./src/cli/to-yaml",
     "test-pipeline3": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/length",
     "test-pipeline4": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/map \"r => ({ ...r, CashPool: Math.floor(r.CashPool) })\" | ts-node ./src/cli/to-yaml",
-    "test-pipeline5": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/filter \"r => r.SharesValue > 17555\" | ts-node ./src/cli/to-yaml"
+    "test-pipeline5": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/filter \"r => r.SharesValue > 17555\" | ts-node ./src/cli/to-yaml",
+    "test-pipeline6": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/reduce \"(a, r) => a + r.SharesValue\" \"0\""
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -35,6 +36,7 @@
     "transform": "./cli/transform",
     "map": "./cli/map",
     "filter": "./cli/filter",
+    "reduce": "./cli/reduce",
     "length": "./cli/length"
   },
   "repository": {

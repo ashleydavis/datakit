@@ -12,11 +12,11 @@ export function loadTransformFn(argv: minimist.ParsedArgs): (data: any) => any {
         transformFn = require(path.resolve(transformFile));
     }
     else {
-        if (argv._.length !== 1) {
-            throw new Error(`Expected transformation argument: transform "data => transformed_data"`);
+        if (argv._.length < 1) {
+            throw new Error(`Expected transformation argument like: "data => transformed_data"`);
         }
 
-        const transform = argv._[0];
+        const transform = argv._.shift()!;
         transformFn = eval(transform);
     }
 
