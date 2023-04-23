@@ -8,10 +8,36 @@ async function main() {
     const argv = minimist(process.argv.slice(2));
 
     const keySelectors: any[] = [];
+    let sortDirections: ("ascending" | "descending")[];;
 
     while (argv._.length > 0) {
-        const keySelectorFn = loadTransformFn(argv); //todo: this needs multiple transform fns.
+        const keySelectorFn = loadTransformFn(argv);
         keySelectors.push(keySelectorFn);
+    }
+
+    if (argv.direction) {
+        if (isArray(argv.direction)) {
+            sortDirections = argv.direction;
+            let lastSpecified = argv.direction.length - 1;
+
+            for (let i = sortDirections.length; i < keySelectors.length; ++i) {
+                sortDirections.push(argv.direction[lastSpecified]);
+            }
+        }
+        else {
+            sortDirections = [];
+
+            for (let i = 0; i < keySelectors.length; ++i) {
+                sortDirections.push(argv.direction);
+            }
+        }
+    }
+    else {
+        sortDirections = [];
+
+        for (let i = 0; i < keySelectors.length; ++i) {
+            sortDirections.push("ascending");
+        }
     }
 
     const input = await readStdin();
@@ -22,17 +48,25 @@ async function main() {
     }
 
     data.sort((a: any, b: any): number => {
-        for (const keySelector of keySelectors) {
+        for (let i = 0; i < keySelectors.length; ++i) {
+            const keySelector = keySelectors[i];
             const A = keySelector(a);
             const B = keySelector(b);
+            let comparison = -1;
             if (A === B) {
-                // Nothing.
+                comparison = 0;
             }
             else if (A > B) {
-                return 1;
+                comparison = 1;
             }
-            else {
-                return -1;
+
+            if (sortDirections[i] === "descending") {
+                // Inverts the comparison.
+                comparison = -comparison;
+            }
+
+            if (comparison !== 0) {
+                return comparison;
             }
         }
 
