@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
   "module": "dist/esm/index.esm.js",
   "main": "build/index.js",
