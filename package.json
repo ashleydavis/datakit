@@ -33,7 +33,8 @@
     "test-pipeline8": "echo { \"x\": 1, \"hello\": \"world\" } | ts-node ./src/cli/transform \"data => ({ ...data, hello: 'computer'})\" | ts-node ./src/cli/to-yaml",
     "test-pipeline9": "cat ./src/test/data/star-wars-characters.json | ts-node ./src/cli/map \"r => ({ name: r.name, gender: r.gender, homeworld: r.homeworld })\" | ts-node ./src/cli/sort \"r => r.gender\" --direction=ascending \"r => r.name\" --direction=ascending |  ts-node ./src/cli/to-csv",
     "test-pipeline10": "ts-node ./src/cli/format-tree < ./src/test/data/example-tree.json",
-    "test-pipeline11": "ts-node ./src/cli/transform -f ./src/test/code/transform-tree.js < ./src/test/data/example-tree.json | ts-node ./src/cli/format-tree"
+    "test-pipeline11": "ts-node ./src/cli/transform -f ./src/test/code/transform-tree.js < ./src/test/data/example-tree.json | ts-node ./src/cli/format-tree",
+    "test-pipeline12": "ts-node ./src/cli/format-table < ./src/test/data/star-wars-characters.json"
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -46,7 +47,8 @@
     "reduce": "./cli/reduce",
     "sort": "./cli/sort",
     "length": "./cli/length",
-    "format-tree": "./cli/format-tree"
+    "format-tree": "./cli/format-tree",
+    "format-table": "./cli/format-table"
   },
   "repository": {
     "type": "git",
@@ -70,8 +72,10 @@
   },
   "homepage": "https://github.com/data-forge-notebook/datakit#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "minimist": "^1.2.8",
     "papaparse": "^5.4.1",
+    "table": "^6.8.1",
     "treeify": "^1.1.0",
     "typy": "^3.0.1",
     "yaml": "^2.2.1"
