@@ -34,7 +34,7 @@
     "test-pipeline9": "cat ./src/test/data/star-wars-characters.json | ts-node ./src/cli/map \"r => ({ name: r.name, gender: r.gender, homeworld: r.homeworld })\" | ts-node ./src/cli/sort \"r => r.gender\" --direction=ascending \"r => r.name\" --direction=ascending |  ts-node ./src/cli/to-csv",
     "test-pipeline10": "ts-node ./src/cli/format-tree < ./src/test/data/example-tree.json",
     "test-pipeline11": "ts-node ./src/cli/transform -f ./src/test/code/transform-tree.js < ./src/test/data/example-tree.json | ts-node ./src/cli/format-tree",
-    "test-pipeline12": "ts-node ./src/cli/map --color=always \"r => ({ ...r, name: chalk.green(r.name) })\" < ./src/test/data/star-wars-characters.json | ts-node ./src/cli/format-table",
+    "test-pipeline12": "ts-node ./src/cli/map \"r => ({ ...r, name: chalk.green(r.name) })\" < ./src/test/data/star-wars-characters.json | ts-node ./src/cli/format-table",
     "test-pipeline13": "ts-node ./src/cli/map --color=always \"r => ({ ...r, name: r.homeworld === 'Tatooine' ? chalk.green(r.name) : r.name })\" < ./src/test/data/star-wars-characters.json | ts-node ./src/cli/format-table"
   },
   "bin": {
