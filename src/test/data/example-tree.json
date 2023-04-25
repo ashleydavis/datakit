@@ -1,0 +1,198 @@
+{
+    "name": "Animalia",
+    "children": [
+        {
+            "name": "Chordata",
+            "children": [
+                {
+                    "name": "Mammalia",
+                    "children": [
+                        {
+                            "name": "Carnivora",
+                            "children": [
+                                {
+                                    "name": "Felidae",
+                                    "children": [
+                                        {
+                                            "name": "Panthera",
+                                            "children": [
+                                                {
+                                                    "name": "Tiger",
+                                                    "scientific_name": "Panthera tigris",
+                                                    "habitat": "Asia",
+                                                    "conservation_status": "Endangered",
+                                                    "diet": "Carnivorous",
+                                                    "size": "2.5-3.3m",
+                                                    "weight": "90-310 kg"
+                                                },
+                                                {
+                                                    "name": "Lion",
+                                                    "scientific_name": "Panthera leo",
+                                                    "habitat": "Africa",
+                                                    "conservation_status": "Vulnerable",
+                                                    "diet": "Carnivorous",
+                                                    "size": "1.7-2.5m",
+                                                    "weight": "120-190 kg"
+                                                },
+                                                {
+                                                    "name": "Leopard",
+                                                    "scientific_name": "Panthera pardus",
+                                                    "habitat": "Africa, Asia",
+                                                    "conservation_status": "Vulnerable",
+                                                    "diet": "Carnivorous",
+                                                    "size": "1.1-1.9m",
+                                                    "weight": "30-90 kg"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Puma",
+                                            "scientific_name": "Puma concolor",
+                                            "habitat": "North and South America",
+                                            "conservation_status": "Least Concern",
+                                            "diet": "Carnivorous",
+                                            "size": "1.4-1.9m",
+                                            "weight": "53-100 kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Canidae",
+                                    "children": [
+                                        {
+                                            "name": "Canis",
+                                            "children": [
+                                                {
+                                                    "name": "Dog",
+                                                    "scientific_name": "Canis lupus familiaris",
+                                                    "habitat": "Worldwide",
+                                                    "conservation_status": "Not evaluated",
+                                                    "diet": "Omnivorous",
+                                                    "size": "0.3-1.3m",
+                                                    "weight": "1-90 kg"
+                                                },
+                                                {
+                                                    "name": "Wolf",
+                                                    "scientific_name": "Canis lupus",
+                                                    "habitat": "North America, Eurasia",
+                                                    "conservation_status": "Least Concern",
+                                                    "diet": "Carnivorous",
+                                                    "size": "1.1-1.6m",
+                                                    "weight": "32-80 kg"
+                                                },
+                                                {
+                                                    "name": "Coyote",
+                                                    "scientific_name": "Canis latrans",
+                                                    "habitat": "North and Central America",
+                                                    "conservation_status": "Least Concern",
+                                                    "diet": "Omnivorous",
+                                                    "size": "1-1.3m",
+                                                    "weight": "7-21 kg"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Vulpes",
+                                            "children": [
+                                                {
+                                                    "name": "Fox",
+                                                    "scientific_name": "Vulpes vulpes",
+                                                    "habitat": "Worldwide",
+                                                    "conservation_status": "Least Concern",
+                                                    "diet": "Omnivorous",
+                                                    "size": "0.5-1.4m",
+                                                    "weight": "0.8-14 kg"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Primates",
+                            "children": [
+                                {
+                                    "name": "Hominidae",
+                                    "children": [
+                                        {
+                                            "name": "Homo",
+                                            "children": [
+                                                {
+                                                    "name": "Homo sapiens",
+                                                    "scientific_name": "Homo sapiens",
+                                                    "habitat": "Worldwide",
+                                                    "conservation_status": "Not evaluated",
+                                                    "diet": "Omnivorous",
+                                                    "size": "1.5-1.8m",
+                                                    "weight": "50-90 kg"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Cercopithecidae",
+                                    "children": [
+                                        {
+                                            "name": "Macaca",
+                                            "children": [
+                                                {
+                                                    "name": "Rhesus Macaque",
+                                                    "scientific_name": "Macaca mulatta",
+                                                    "habitat": "South, Central, and Southeast Asia",
+                                                    "conservation_status": "Least Concern",
+                                                    "diet": "Omnivorous",
+                                                    "size": "0.4-0.7m",
+                                                    "weight": "4-12 kg"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Reptilia",
+                    "children": [
+                        {
+                            "name": "Squamata",
+                            "children": [
+                                {
+                                    "name": "Pythonidae",
+                                    "children": [
+                                        {
+                                            "name": "Python",
+                                            "scientific_name": "Pythonidae",
+                                            "habitat": "Africa, Asia, Australia",
+                                            "conservation_status": "Not evaluated",
+                                            "diet": "Carnivorous",
+                                            "size": "0.5-10m",
+                                            "weight": "1-140 kg"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Viperidae",
+                                    "children": [
+                                        {
+                                            "name": "Viper",
+                                            "scientific_name": "Viperidae",
+                                            "habitat": "Worldwide",
+                                            "conservation_status": "Not evaluated",
+                                            "diet": "Carnivorous",
+                                            "size": "0.3-3m",
+                                            "weight": "0.1-6 kg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
