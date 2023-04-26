@@ -2,7 +2,6 @@
   "name": "datakit",
   "version": "1.0.10",
   "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
-  "module": "dist/esm/index.esm.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -92,8 +91,6 @@
     "dayjs": "^1.8.20",
     "mocha": "^10.2.0",
     "mock-require": "2.0.2",
-    "source-map-support": "0.5.6",
-    "ts-loader": "^5.3.3",
     "ts-node": "6.0.2",
     "typedoc": "^0.15.0",
     "typescript": "2.8.3"
