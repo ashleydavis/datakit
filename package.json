@@ -34,7 +34,8 @@
     "test-pipeline10": "ts-node ./src/cli/format-tree < ./src/test/data/example-tree.json",
     "test-pipeline11": "ts-node ./src/cli/transform -f ./src/test/code/transform-tree.js < ./src/test/data/example-tree.json | ts-node ./src/cli/format-tree",
     "test-pipeline12": "ts-node ./src/cli/map \"r => ({ ...r, name: chalk.green(r.name) })\" < ./src/test/data/star-wars-characters.json | ts-node ./src/cli/format-table",
-    "test-pipeline13": "ts-node ./src/cli/map --color=always \"r => ({ ...r, name: r.homeworld === 'Tatooine' ? chalk.green(r.name) : r.name })\" < ./src/test/data/star-wars-characters.json | ts-node ./src/cli/format-table"
+    "test-pipeline13": "ts-node ./src/cli/map --color=always \"r => ({ ...r, name: r.homeworld === 'Tatooine' ? chalk.green(r.name) : r.name })\" < ./src/test/data/star-wars-characters.json | ts-node ./src/cli/format-table",
+    "test-pipeline14": "cat ./src/test/data/star-wars-characters.json | ts-node ./src/cli/skip 1 | ts-node ./src/cli/take 5 | ts-node ./src/cli/to-csv"
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -48,7 +49,9 @@
     "sort": "./cli/sort",
     "length": "./cli/length",
     "format-tree": "./cli/format-tree",
-    "format-table": "./cli/format-table"
+    "format-table": "./cli/format-table",
+    "skip": "./cli/skip",
+    "take": "./cli/take"
   },
   "repository": {
     "type": "git",
