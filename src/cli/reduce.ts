@@ -2,8 +2,8 @@ import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/read-stdin";
 import minimist from "minimist";
 import { loadTransformFn } from "./lib/transform-fn";
-import { isArray } from "util";
 import "./lib/load-globals";
+import { isArray } from "../lib/utils";
 
 async function main() {
     const argv = minimist(process.argv.slice(2));
