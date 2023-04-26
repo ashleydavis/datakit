@@ -16,7 +16,7 @@ async function main() {
         throw new Error(`Expected input to 'map' to be an array.`);
     }
 
-    const transformed = data.map(transformFn);
+    const transformed = data.map(transformFn as any);
     console.log(toJson(transformed));
 }
 

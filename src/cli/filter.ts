@@ -15,7 +15,7 @@ async function main() {
         throw new Error(`Expected input to 'filter' to be an array.`);
     }
 
-    const filtered = data.filter(predicateFn);
+    const filtered = data.filter(predicateFn as any);
     console.log(toJson(filtered));
 }
 

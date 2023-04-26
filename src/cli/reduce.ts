@@ -22,7 +22,7 @@ async function main() {
     }
 
     const initialValue = JSON.parse(argv._[0]);
-    const reduced = data.reduce(transformFn, initialValue);
+    const reduced = data.reduce(transformFn as any, initialValue);
     console.log(JSON.stringify(reduced, null, 4));
 }
 
