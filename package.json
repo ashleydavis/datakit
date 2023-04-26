@@ -85,14 +85,14 @@
     "@types/minimist": "^1.2.2",
     "@types/mocha": "2.2.43",
     "@types/mock-require": "2.0.0",
-    "@types/node": "8.0.28",
+    "@types/node": "^18.16.1",
     "@types/treeify": "^1.0.0",
     "chai": "4.1.2",
     "dayjs": "^1.8.20",
     "mocha": "^10.2.0",
     "mock-require": "2.0.2",
-    "ts-node": "6.0.2",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.15.0",
-    "typescript": "2.8.3"
+    "typescript": "^5.0.4"
   }
 }
