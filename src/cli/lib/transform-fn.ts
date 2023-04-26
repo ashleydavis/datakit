@@ -5,7 +5,7 @@ import { isFunction } from "../../lib/utils";
 //
 // Loads a transform function.
 //
-export function loadTransformFn(argv: minimist.ParsedArgs): (data: any) => any {
+export function loadTransformFn(argv: minimist.ParsedArgs): Function {
     let transformFn: any;
     let transformFile = argv.f || argv.file;
     if (transformFile) {
