@@ -1,7 +1,6 @@
 import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/read-stdin";
 import minimist from "minimist";
-import { loadTransformFn } from "./lib/transform-fn";
 import "./lib/load-globals";
 import { isArray } from "../lib/utils";
 
