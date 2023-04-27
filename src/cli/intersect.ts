@@ -75,7 +75,7 @@ async function main() {
         const leftRecord = left[leftIndex]
         const leftKey = leftKeys[leftIndex];
         const rightMatches = rightMap[leftKey];
-        if (rightMatches) {
+        if (rightMatches && rightMatches.length > 0) {
             for (const right of rightMatches) {
                 const rightIndex = right.index;
                 const comboKey = `${leftIndex}-${rightIndex}`;
@@ -88,8 +88,12 @@ async function main() {
                         output.push(merged);
                     }
                 }
-                
-
+            }
+        }
+        else {
+            const merged = mergeFn(leftRecord, undefined);
+            if (merged !== undefined) {
+                output.push(merged);
             }
         }
     }
@@ -98,7 +102,7 @@ async function main() {
         const rightRecord = right[rightIndex]
         const rightKey = rightKeys[rightIndex];
         const leftMatches = leftMap[rightKey];
-        if (leftMatches) {
+        if (leftMatches && leftMatches.length > 0) {
             for (const left of leftMatches) {
                 const leftIndex = left.index;
                 const comboKey = `${leftIndex}-${rightIndex}`;
@@ -111,6 +115,12 @@ async function main() {
                         output.push(merged);
                     }
                 }
+            }
+        }
+        else {
+            const merged = mergeFn(undefined, rightRecord);
+            if (merged !== undefined) {
+                output.push(merged);
             }
         }
     }
