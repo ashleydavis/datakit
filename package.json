@@ -38,7 +38,9 @@
     "test-pipeline14": "cat ./src/test/data/starwars/characters.json | ts-node ./src/cli/skip 1 | ts-node ./src/cli/take 5 | ts-node ./src/cli/to-csv",
     "test-pipeline15": "ts-node ./src/cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => ({ character, planet })\"",
     "test-pipeline16": "ts-node ./src/cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => character ? (planet ? ({ ...planet, ...character}) : character) : undefined\"",
-    "test-pipeline17": "ts-node ./src/cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json"
+    "test-pipeline17": "ts-node ./src/cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json",   
+    "test-pipeline18": "ts-node ./src/cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./src/cli/reduce \"(o, r) => { o[r.key] = r. records; return o; }\" \"{}\"",
+    "test-pipeline19": "ts-node ./src/cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./src/cli/to-object   \"r => r.key\" \"r => r.records\""
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -56,7 +58,8 @@
     "skip": "./cli/skip",
     "take": "./cli/take",
     "intersect": "./cli/intersect",
-    "group": "./cli/group"
+    "group": "./cli/group",
+    "to-object": "./cli/to-object"
   },
   "repository": {
     "type": "git",
