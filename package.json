@@ -37,7 +37,8 @@
     "test-pipeline13": "ts-node ./src/cli/map --color=always \"r => ({ ...r, name: r.homeworld === 'Tatooine' ? chalk.green(r.name) : r.name })\" < ./src/test/data/starwars/characters.json | ts-node ./src/cli/format-table",
     "test-pipeline14": "cat ./src/test/data/starwars/characters.json | ts-node ./src/cli/skip 1 | ts-node ./src/cli/take 5 | ts-node ./src/cli/to-csv",
     "test-pipeline15": "ts-node ./src/cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => ({ character, planet })\"",
-    "test-pipeline16": "ts-node ./src/cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => character ? (planet ? ({ ...planet, ...character}) : character) : undefined\""
+    "test-pipeline16": "ts-node ./src/cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => character ? (planet ? ({ ...planet, ...character}) : character) : undefined\"",
+    "test-pipeline17": "ts-node ./src/cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json"
   },
   "bin": {
     "from-yaml": "./cli/from-yaml",
@@ -54,7 +55,8 @@
     "format-table": "./cli/format-table",
     "skip": "./cli/skip",
     "take": "./cli/take",
-    "intersect": "./cli/intersect"
+    "intersect": "./cli/intersect",
+    "group": "./cli/group"
   },
   "repository": {
     "type": "git",
