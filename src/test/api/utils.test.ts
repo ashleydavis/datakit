@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import 'mocha';
-import { isObject, isNumber, isString, isDate, isBoolean, isUndefined, isFunction } from '../lib/utils';
+import { isObject, isNumber, isString, isDate, isBoolean, isUndefined, isFunction } from '../../lib/utils';
 
 describe("utils", () => {
 

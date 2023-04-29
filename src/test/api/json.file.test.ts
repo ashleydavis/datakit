@@ -1,7 +1,7 @@
 import { assert, expect } from 'chai';
 import 'mocha';
 import mock from 'mock-require';
-import { readJson, readJsonSync, fromJson, writeJson, writeJsonSync, toJson } from '..';
+import { readJson, readJsonSync, fromJson, writeJson, writeJsonSync, toJson } from '../..';
 
 describe('json file', () => {
 
@@ -9,7 +9,7 @@ describe('json file', () => {
 
     before(() => {
         mock('fs', mockFs);
-        mock.reRequire("../index");
+        mock.reRequire("../../index");
     });
 
     after(() => {

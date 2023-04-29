@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import 'mocha';
-import { toYaml, fromYaml } from '..';
+import { toYaml, fromYaml } from '../..';
 import dayjs from "dayjs";
 const YAML = require("yaml");
 

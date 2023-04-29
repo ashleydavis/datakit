@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import 'mocha';
-import { toCsv, fromCsv } from '..';
+import { toCsv, fromCsv } from '../..';
 import dayjs from "dayjs";
 
 describe('csv', () => {

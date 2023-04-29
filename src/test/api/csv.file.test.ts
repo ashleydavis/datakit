@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 import mock from 'mock-require';
-import { readCsv, readCsvSync, fromCsv, writeCsv, writeCsvSync, toCsv } from '../index';
+import { readCsv, readCsvSync, fromCsv, writeCsv, writeCsvSync, toCsv } from '../../index';
 
 describe('csv file', () => {
 
@@ -9,7 +9,7 @@ describe('csv file', () => {
 
     before(() => {
         mock('fs', mockFs);
-        mock.reRequire("../index");
+        mock.reRequire("../../index");
     });
 
     after(() => {

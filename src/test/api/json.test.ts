@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import 'mocha';
-import { toJson, fromJson } from '..';
+import { toJson, fromJson } from '../..';
 import dayjs from "dayjs";
 
 describe('json', () => {

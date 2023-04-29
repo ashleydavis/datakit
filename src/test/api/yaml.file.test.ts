@@ -1,7 +1,7 @@
 import { assert, expect } from 'chai';
 import 'mocha';
 import mock from 'mock-require';
-import { readYaml, readYamlSync, fromYaml, writeYaml, writeYamlSync, toYaml } from '..';
+import { readYaml, readYamlSync, fromYaml, writeYaml, writeYamlSync, toYaml } from '../..';
 const YAML = require("yaml");
 
 describe('Yaml file', () => {
@@ -10,7 +10,7 @@ describe('Yaml file', () => {
 
     before(() => {
         mock('fs', mockFs);
-        mock.reRequire("../index");
+        mock.reRequire("../../index");
     });
 
     after(() => {

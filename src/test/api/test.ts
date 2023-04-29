@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { fromJson, fromObject } from '..';
+import { fromJson, fromObject } from '../..';
 
 describe('test', () => {
     
