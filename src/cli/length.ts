@@ -1,5 +1,5 @@
 import { fromJson } from "..";
-import { readStdin } from "../lib/read-stdin";
+import { readStdin } from "../lib/io";
 
 async function main() {
     const input = await readStdin();

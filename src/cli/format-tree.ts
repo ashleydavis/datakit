@@ -1,4 +1,4 @@
-import { readStdin } from "../lib/read-stdin";
+import { readStdin } from "../lib/io";
 import { asTree } from "treeify";
 
 async function main() {

@@ -1,4 +1,4 @@
-import { readStdin } from "../lib/read-stdin";
+import { readStdin } from "../lib/io";
 const YAML = require("yaml");
 
 async function main() {

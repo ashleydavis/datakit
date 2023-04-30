@@ -1,5 +1,5 @@
 import { fromJson } from "..";
-import { readStdin } from "../lib/read-stdin";
+import { readStdin } from "../lib/io";
 const { table } = require("table"); // Use import when I update TypeScript. 
 import chalk from 'chalk';
 

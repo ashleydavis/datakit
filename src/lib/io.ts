@@ -20,3 +20,10 @@ export function readStdin(): Promise<string> {
         });
     });
 }
+
+//
+// Writes to standard output.
+//
+export function writeStdout(data: string): void {
+    process.stdout.write(data);
+}

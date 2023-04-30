@@ -1,5 +1,5 @@
 import { fromJson, toJson } from "..";
-import { readStdin } from "../lib/read-stdin";
+import { readStdin } from "../lib/io";
 import minimist from "minimist";
 import "./lib/load-globals";
 import { isArray } from "../lib/utils";

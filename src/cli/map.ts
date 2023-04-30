@@ -1,12 +1,12 @@
 import { fromJson, toJson } from "..";
-import { readStdin } from "../lib/read-stdin";
+import { readStdin, writeStdout } from "../lib/io";
 import minimist from "minimist";
 import { loadTransformFn } from "./lib/transform-fn";
 import "./lib/load-globals";
 import { isArray } from "../lib/utils";
 
-async function main() {
-    const argv = minimist(process.argv.slice(2));
+export async function main(args: string[]) {
+    const argv = minimist(args);
 
     const transformFn = loadTransformFn(argv);
     const input = await readStdin();
@@ -17,12 +17,14 @@ async function main() {
     }
 
     const transformed = data.map(transformFn as any);
-    console.log(toJson(transformed));
+    writeStdout(toJson(transformed));
 }
 
-main()
-    .catch(err => {
-        console.error(`Failed with error:`);
-        console.error(err);
-        process.exit(1);
-    });
+if (require.main === module) {
+    main(process.argv.slice(2))
+        .catch(err => {
+            console.error(`Failed with error:`);
+            console.error(err);
+            process.exit(1);
+        });
+}
