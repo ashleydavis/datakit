@@ -22,8 +22,23 @@ export function readStdin(): Promise<string> {
 }
 
 //
+// Input data from JSON on standard input.
+// 
+export async function inputJson(): Promise<any> {
+    const input = await readStdin();
+    return JSON.parse(input);
+}
+
+//
 // Writes to standard output.
 //
 export function writeStdout(data: string): void {
     process.stdout.write(data);
+}
+
+//
+// Outputs data as JSON to standard output.
+//
+export function outputJson(data: any): void {
+    writeStdout(JSON.stringify(data, null, 4));
 }

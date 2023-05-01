@@ -1,5 +1,4 @@
-import { fromJson, toJson } from "..";
-import { readStdin, writeStdout } from "../lib/io";
+import { inputJson, outputJson } from "../lib/io";
 import minimist from "minimist";
 import { loadTransformFn } from "./lib/transform-fn";
 import "./lib/load-globals";
@@ -9,15 +8,14 @@ export async function main(args: string[]) {
     const argv = minimist(args);
 
     const transformFn = loadTransformFn(argv);
-    const input = await readStdin();
-    const data = fromJson(input);
 
+    const data = await inputJson();
     if (!isArray(data)) {
         throw new Error(`Expected input to 'map' to be an array.`);
     }
 
     const transformed = data.map(transformFn as any);
-    writeStdout(toJson(transformed));
+    outputJson(transformed);
 }
 
 if (require.main === module) {
