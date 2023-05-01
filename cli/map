@@ -2,4 +2,4 @@
 
 'use strict';
 
-require('../build/cli/group.js');
+require('../build/cli/map.js');
