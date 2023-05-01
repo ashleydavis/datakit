@@ -4,20 +4,55 @@ import * as readline from "readline";
 // Reads data from standard input.
 //
 export function readStdin(): Promise<string> {
-    return new Promise<string>(resolve => {
+    return new Promise<string>((resolve, reject) => {
         const rl = readline.createInterface({
             input: process.stdin,
         });
 
         let input = "";
 
+        let timeout: NodeJS.Timeout | undefined = undefined;
+        let timedout = false;
+        
+        //
+        // Cancels the timeout, if it's still in progress.
+        //
+        function cancelTimeout() {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = undefined;
+            }            
+        }
+
+        //
+        // Starts a new timeout (cancelling any previous timeout).
+        //
+        function startTimeout() {
+            cancelTimeout();
+            timeout = setTimeout(() => {
+                timedout = true;
+                reject(new Error(`Timed out with no input on standard input.`));
+            }, 1000 * 5);  
+        };
+
         rl.on("line", (line: string) => {
+            if (timedout) {
+                return;
+            }
             input += line + '\n';
+            startTimeout();
         });
 
         rl.on("close", () => {
-            resolve(input);
+            if (timedout) {
+                return;
+            }
+            
+            cancelTimeout();
+            resolve(input);           
         });
+
+        startTimeout();
     });
 }
 

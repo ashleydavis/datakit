@@ -18,8 +18,13 @@ export async function main(args: string[]) {
 if (require.main === module) {
     main(process.argv.slice(2))
         .catch(err => {
-            console.error(`Failed with error:`);
-            console.error(err);
+            if (err.message) {
+                console.error(`Error: ${err.message}`);
+            }
+            else {
+                console.error(`Failed with error:`);
+                console.error(err);
+            }
             process.exit(1);
         });
 }
