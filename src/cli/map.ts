@@ -1,11 +1,11 @@
 import { inputJson, outputJson } from "../lib/io";
-import minimist from "minimist";
+import { ParsedArgs } from "minimist";
 import { loadTransformFn } from "./lib/transform-fn";
-import "./lib/load-globals";
 import { verifyInputArray } from "../lib/verify";
+import { run } from "../lib/command";
 
-export async function main(args: string[]) {
-    const argv = minimist(args);
+export async function main(argv: ParsedArgs): Promise<void> {
+
     const transformFn = loadTransformFn(argv);
     const data = await inputJson();
     verifyInputArray(data, "map");
@@ -16,15 +16,5 @@ export async function main(args: string[]) {
 }
 
 if (require.main === module) {
-    main(process.argv.slice(2))
-        .catch(err => {
-            if (err.message) {
-                console.error(`Error: ${err.message}`);
-            }
-            else {
-                console.error(`Failed with error:`);
-                console.error(err);
-            }
-            process.exit(1);
-        });
+    run(main);
 }

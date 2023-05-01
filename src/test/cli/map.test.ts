@@ -20,7 +20,7 @@ describe("cli/map", () => {
             output = data;
         };
 
-        await main([ `r => ({ a: r.a + 1 })` ]);
+        await main({ _: [ `r => ({ a: r.a + 1 })` ] });
 
         expect(output).to.eql([]);
     });
@@ -37,7 +37,7 @@ describe("cli/map", () => {
             output = data;
         };
 
-        await main([ `r => ({ a: r.a + 1 })` ]);
+        await main({ _: [ `r => ({ a: r.a + 1 })` ] });
 
         const expectedOutput = [ { "a": 2 } ];
         expect(output).to.eql(expectedOutput);
@@ -55,7 +55,7 @@ describe("cli/map", () => {
             output = data;
         };
 
-        await main([ `r => ({ a: r.a + 1 })` ]);
+        await main({ _: [ `r => ({ a: r.a + 1 })` ] });
 
         const expectedOutput = [ { "a": 2 },  { "a": 3 },  { "a": 4 }  ];
         expect(output).to.eql(expectedOutput);
