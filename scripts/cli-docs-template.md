@@ -1,4 +1,4 @@
-{{#each doc}}
+{{#each docs}}
 
 # {{this.name}}
 
