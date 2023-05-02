@@ -17,3 +17,4 @@ tsconfig.json
 webpack.*
 rollup.config.js
 images/
+scripts/

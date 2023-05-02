@@ -8,7 +8,7 @@ export interface IDocumentation {
     syntax: string;
     inputs: string[];
     outputs: string[];
-    arguments: {
+    args: {
         name: string;
         desc: string;
     }[];
@@ -49,7 +49,7 @@ function displayDocumentation(doco: IDocumentation): void {
     console.log();
     console.log("Arguments:");
     console.log();
-    console.log(indent(doco.arguments.map(input => `- ${chalk.blue(input.name)}: ${input.desc}`).join("\n"), "\t"));
+    console.log(indent(doco.args.map(input => `- ${chalk.blue(input.name)}: ${input.desc}`).join("\n"), "\t"));
     console.log();
     console.log("Examples:");
     console.log();
