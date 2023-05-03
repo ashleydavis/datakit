@@ -1,4 +1,4 @@
-# Commands
+# Help
 
 Use `--help` for each command to display help for it on the command line.
 
@@ -8,12 +8,14 @@ For example:
 map --help
 ```
 
+# Commands
+
 - [length](#length)
 - [map](#map)
 
 # length
 
-Gets the number of records in a dataset.
+Gets the number of records in a dataset. Works just like &#x60;array.length&#x60; in JavaScript.
 
 ## Syntax
 
@@ -54,7 +56,7 @@ length input-file.csv
 ```
 # map
 
-Creates an output dataset by calling the transformer function on every record of the input dataset.
+Creates an output dataset by calling the transformer function on every record of the input dataset. Works just like &#x60;array.map&#x60; in JavaScript.
 
 ## Syntax
 

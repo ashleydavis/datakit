@@ -1,4 +1,4 @@
-# Commands
+# Help
 
 Use `--help` for each command to display help for it on the command line.
 
@@ -7,6 +7,8 @@ For example:
 ```bash
 map --help
 ```
+
+# Commands
 
 {{#each docs}}
 - [{{this.name}}](#{{this.name}})

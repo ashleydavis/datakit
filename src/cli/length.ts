@@ -9,7 +9,7 @@ export async function main(argv: string[]): Promise<void> {
 
 export const documentation = {
     name: "length",
-    desc: "Gets the number of records in a dataset.",
+    desc: "Gets the number of records in a dataset. Works just like `array.length` in JavaScript.",
     syntax: "length <input-file>",
     inputs: [
         "JSON file",
