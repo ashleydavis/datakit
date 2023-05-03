@@ -1,3 +1,8 @@
+# Commands
+
+- [length](#length)
+- [map](#map)
+
 
 # length
 

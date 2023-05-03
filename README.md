@@ -4,7 +4,7 @@ Simple toolkit for reading and writing data CSV and JSON files in JavaScript and
 
 <a target="_blank" href="https://www.data-forge-notebook.com/"><img align="right" src="images/support1.png"></a>
 
-[API docs](https://data-forge-notebook.github.io/datakit/).
+[API docs](https://data-forge-notebook.github.io/datakit/)
 
 [CLI docs](./docs/cli.md)
 
@@ -14,8 +14,15 @@ Simple toolkit for reading and writing data CSV and JSON files in JavaScript and
 
 Install using npm:
 
-    npm install --save datakit
+```bash
+npm install --save datakit
+```
 
+Install globally for the command line tools:
+
+```bash
+npm install -g datakit
+```
 
 ## Read and write CSV files (JavaScript)
 

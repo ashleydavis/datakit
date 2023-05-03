@@ -1,3 +1,9 @@
+# Commands
+
+{{#each docs}}
+- [{{this.name}}](#{{this.name}})
+{{/each}}
+
 {{#each docs}}
 
 # {{this.name}}
