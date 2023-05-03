@@ -15,7 +15,7 @@ map --help
 
 # length
 
-Gets the number of records in a dataset. Works just like &#x60;array.length&#x60; in JavaScript.
+Gets the number of records in a dataset. Works just like `array.length` in JavaScript.
 
 ## Syntax
 
@@ -56,7 +56,7 @@ length input-file.csv
 ```
 # map
 
-Creates an output dataset by calling the transformer function on every record of the input dataset. Works just like &#x60;array.map&#x60; in JavaScript.
+Creates an output dataset by calling the transformer function on every record of the input dataset. Works just like `array.map` in JavaScript.
 
 ## Syntax
 

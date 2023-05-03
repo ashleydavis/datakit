@@ -17,7 +17,7 @@ map --help
 {{#each docs}}
 # {{this.name}}
 
-{{this.desc}}
+{{{this.desc}}}
 
 ## Syntax
 
