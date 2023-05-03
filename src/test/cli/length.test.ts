@@ -4,13 +4,13 @@ import mock from 'mock-require';
 const mockIo: any = {
 };
 mock('../../lib/io', mockIo);
-mock.reRequire("../../cli/map");
+mock.reRequire("../../cli/length");
 
-import { main }  from "../../cli/map";
+import { main }  from "../../cli/length";
 
-describe("cli/map", () => {
+describe("cli/length", () => {
 
-    it("can map over empty data set", async () => {
+    it("can length of empty data set", async () => {
 
         mockIo.inputJson = async () => {
             return [];
@@ -21,14 +21,14 @@ describe("cli/map", () => {
             output = data;
         };
 
-        await main({ _: [ `r => ({ a: r.a + 1 })` ] });
+        await main({ _: [] });
 
-        expect(output).to.eql([]);
+        expect(output).to.eql(0);
     });
 
-    it("can map over 1 item", async () => {
+    it("can get length with 1 item", async () => {
 
-        const input = [ { "a": 1 } ];
+        const input = [ {} ];
         mockIo.inputJson = async () => {
             return input;
         };
@@ -38,15 +38,14 @@ describe("cli/map", () => {
             output = data;
         };
 
-        await main({ _: [ `r => ({ a: r.a + 1 })` ] });
+        await main({ _: [] });
 
-        const expectedOutput = [ { "a": 2 } ];
-        expect(output).to.eql(expectedOutput);
+        expect(output).to.eql(1);
     });
 
-    it("can map over 3 items", async () => {
+    it("can get length with 3 items", async () => {
 
-        const input = [ { "a": 1 },  { "a": 2 },  { "a": 3 } ];
+        const input = [ {},  {},  {} ];
         mockIo.inputJson = async () => {
             return input;
         };
@@ -56,9 +55,8 @@ describe("cli/map", () => {
             output = data;
         };
 
-        await main({ _: [ `r => ({ a: r.a + 1 })` ] });
+        await main({ _: [] });
 
-        const expectedOutput = [ { "a": 2 },  { "a": 3 },  { "a": 4 }  ];
-        expect(output).to.eql(expectedOutput);
+        expect(output).to.eql(3);
     });
 });
