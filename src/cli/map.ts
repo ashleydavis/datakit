@@ -47,20 +47,20 @@ export const documentation = {
     ],
     examples: [
         {
-            name: "Reads from standard input, applies the transformation and writes to standard output",
+            name: "Reads JSON data from standard input, applies the transformation and writes to standard output",
             cmd: 'map - "r => r.x"',
         },
         {
-            name: "Reads from a file, applies the transformation and writes to standard output",
+            name: "Reads data from a file, applies the transformation and writes to standard output",
             cmd: 'map input-file.csv "r -> r.x"',
         },
         {
-            name: "Reads from a file, applies the transformation and writes output to another file",
+            name: "Reads data from a file, applies the transformation and writes output to another file",
             cmd: 'map input-file.csv "r -> r.x" output-file.csv'
         },
         {
             name: "Loads a JavaScript file for the transformation",
-            cmd: 'map - my-transformation.js',
+            cmd: 'map input-file.csv my-transformation.js',
         },
     ],
 };
