@@ -1,4 +1,3 @@
-import minimist, { ParsedArgs } from "minimist";
 import "../cli/lib/load-globals";
 import chalk from 'chalk';
 
@@ -70,12 +69,20 @@ function displayDocumentation(doco: IDocumentation): void {
 //
 // Parses args before invoking a command then handling errors.
 //
-export async function run(invoke: (argv: ParsedArgs) => Promise<void>, doco: IDocumentation): Promise<void> {
+export async function run(invoke: (argv: string[]) => Promise<void>, doco: IDocumentation): Promise<void> {
 
-    const argv = minimist(process.argv.slice(2));
-    if (argv.h || argv.help || (argv._.length > 0 && argv._[0] === "help")) {
-        displayDocumentation(doco)
-        process.exit(2);
+    const argv = process.argv.slice(2);
+    if (argv.length > 0) {
+        if (argv[0] === "-h" ||
+            argv[0] === "--h" ||
+            argv[0] === "-?" ||
+            argv[0] === "--?" ||
+            argv[0] === "-help" ||
+            argv[0] === "--help" ||
+            argv[0] === "help") {
+            displayDocumentation(doco)
+            process.exit(2);
+        }
     }
 
     try {

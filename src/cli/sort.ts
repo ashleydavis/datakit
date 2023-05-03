@@ -1,43 +1,36 @@
 import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/io";
-import minimist from "minimist";
-import { loadTransformFn } from "./lib/user-fn";
+import { loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
+import { consumeOptionalArg } from "./lib/args";
+
+type SortDirection = "ascending" | "descending";
+interface ISortCriteria {
+    keySelectorFn: Function;
+    direction: SortDirection;
+}
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
+    const argv = process.argv.slice(2);
 
-    const keySelectors: any[] = [];
-    let sortDirections: ("ascending" | "descending")[];;
+    const sortCriteria: ISortCriteria[] = [];
+    let lastSortDirection: SortDirection = "ascending";
 
-    while (argv._.length > 0) {
-        const keySelectorFn = loadTransformFn(argv);
-        keySelectors.push(keySelectorFn);
-    }
+    while (argv.length > 1) {
+        const keySelectorFn = loadUserFn(argv, `r => r.key`);
 
-    if (argv.direction) {
-        if (isArray(argv.direction)) {
-            sortDirections = argv.direction;
-            let lastSpecified = argv.direction.length - 1;
-
-            for (let i = sortDirections.length; i < keySelectors.length; ++i) {
-                sortDirections.push(argv.direction[lastSpecified]);
-            }
+        let direction = consumeOptionalArg(argv, ["--dir", "--direction"], "ascending|descending");
+        if (direction !== undefined) {
+            lastSortDirection = direction as SortDirection;
         }
         else {
-            sortDirections = [];
-
-            for (let i = 0; i < keySelectors.length; ++i) {
-                sortDirections.push(argv.direction);
-            }
+            direction = lastSortDirection;
         }
-    }
-    else {
-        sortDirections = [];
 
-        for (let i = 0; i < keySelectors.length; ++i) {
-            sortDirections.push("ascending");
-        }
+        sortCriteria.push({
+            keySelectorFn,
+            direction: direction as SortDirection,
+        });
     }
 
     const input = await readStdin();
@@ -48,8 +41,8 @@ async function main() {
     }
 
     data.sort((a: any, b: any): number => {
-        for (let i = 0; i < keySelectors.length; ++i) {
-            const keySelector = keySelectors[i];
+        for (const criteria of sortCriteria) {
+            const keySelector = criteria.keySelectorFn;
             const A = keySelector(a);
             const B = keySelector(b);
             let comparison = -1;
@@ -60,7 +53,7 @@ async function main() {
                 comparison = 1;
             }
 
-            if (sortDirections[i] === "descending") {
+            if (criteria.direction === "descending") {
                 // Inverts the comparison.
                 comparison = -comparison;
             }

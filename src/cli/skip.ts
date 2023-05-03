@@ -1,16 +1,15 @@
 import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/io";
-import minimist from "minimist";
 import "./lib/load-globals";
 import { isArray } from "../lib/utils";
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
-    if (argv._.length < 1) {
+    const argv = process.argv.slice(2);
+    if (argv.length < 1) {
         throw new Error(`Expected <number> argument.`);
     }
 
-    const number = parseInt(argv._[0]);
+    const number = parseInt(argv[0]);
     const input = await readStdin();
     const data = fromJson(input);
 

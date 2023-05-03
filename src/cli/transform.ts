@@ -1,11 +1,10 @@
 import { readStdin } from "../lib/io";
-import minimist from "minimist";
-import { loadTransformFn } from "./lib/user-fn";
+import { loadUserFn } from "./lib/user-fn";
 import "./lib/load-globals";
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
-    const transformFn = loadTransformFn(argv);
+    const argv = process.argv.slice(2);
+    const transformFn = loadUserFn(argv, `dataset => transform(dataset)`);
     const input = await readStdin();
     const data = JSON.parse(input);
     const transformed = transformFn(data);

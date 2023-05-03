@@ -1,8 +1,7 @@
-import { ParsedArgs } from "minimist";
 import { inputJson, outputJson } from "../lib/io";
 import { run } from "../lib/command";
 
-export async function main(argv: ParsedArgs): Promise<void> {
+export async function main(argv: string[]): Promise<void> {
    
     const data = await inputJson();
     outputJson(data.length);

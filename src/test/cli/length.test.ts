@@ -21,7 +21,7 @@ describe("cli/length", () => {
             output = data;
         };
 
-        await main({ _: [] });
+        await main([]);
 
         expect(output).to.eql(0);
     });
@@ -38,7 +38,7 @@ describe("cli/length", () => {
             output = data;
         };
 
-        await main({ _: [] });
+        await main([]);
 
         expect(output).to.eql(1);
     });
@@ -55,7 +55,7 @@ describe("cli/length", () => {
             output = data;
         };
 
-        await main({ _: [] });
+        await main([]);
 
         expect(output).to.eql(3);
     });

@@ -1,13 +1,11 @@
 import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/io";
-import minimist from "minimist";
-import { loadTransformFn } from "./lib/user-fn";
+import { loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
-
-    const predicateFn = loadTransformFn(argv);
+    const argv = process.argv.slice(2);
+    const predicateFn = loadUserFn(argv, `r => predicate(key)`);
     const input = await readStdin();
     const data = fromJson(input);
 

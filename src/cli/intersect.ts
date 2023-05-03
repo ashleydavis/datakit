@@ -1,19 +1,19 @@
 import { fromCsv, readJson, toJson } from "..";
-import minimist from "minimist";
-import { loadTransformFn } from "./lib/user-fn";
+import { loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
-    if (argv._.length !== 5) {
+    const argv = process.argv.slice(2);
+    if (argv.length !== 5) {
         throw new Error(`Usage: intersect <left-selector-fn> <left-file-name> <right-selector-fn> <right-file-name> <merge-fn>`);
     }
 
-    const leftSelectorFn = loadTransformFn(argv);
-    const leftFileName = argv._.shift()!;
-    const rightSelectorFn = loadTransformFn(argv);
-    const rightFileName = argv._.shift()!;
-    const mergeFn = loadTransformFn(argv);
+    const exampleFn = `r => r.key`;
+    const leftSelectorFn = loadUserFn(argv, exampleFn);
+    const leftFileName = argv.shift()!;
+    const rightSelectorFn = loadUserFn(argv, exampleFn);
+    const rightFileName = argv.shift()!;
+    const mergeFn = loadUserFn(argv, `(left, right) => merge(left, right)`);
 
     const left = await readJson(leftFileName);
     if (!isArray(left)) {

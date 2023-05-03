@@ -1,16 +1,15 @@
-import { fromJson, toJson } from "..";
+import { fromJson } from "..";
 import { readStdin } from "../lib/io";
-import minimist from "minimist";
-import { loadTransformFn } from "./lib/user-fn";
+import { loadUserFn } from "./lib/user-fn";
 import "./lib/load-globals";
 import { isArray } from "../lib/utils";
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
+    const argv = process.argv.slice(2);
 
-    const transformFn = loadTransformFn(argv);
+    const transformFn = loadUserFn(argv, `(accumulator, record) => accumulate(accumulator, record)`);
 
-    if (argv._.length < 1) {
+    if (argv.length < 1) {
         throw new Error(`Expected argument for initial value.`);
     }
 
@@ -21,7 +20,7 @@ async function main() {
         throw new Error(`Expected input to 'reduce' to be an array.`);
     }
 
-    const initialValue = JSON.parse(argv._[0]);
+    const initialValue = JSON.parse(argv[0]);
     const reduced = data.reduce(transformFn as any, initialValue);
     console.log(JSON.stringify(reduced, null, 4));
 }
