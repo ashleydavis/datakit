@@ -30,7 +30,7 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input, outputs the number of records",
-            cmd: 'length -',
+            cmd: 'command-that-produces-json | length -',
         },
         {
             name: "Reads data from a file, outputs the number of records",

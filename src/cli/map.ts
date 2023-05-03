@@ -48,7 +48,7 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input, applies the transformation and writes to standard output",
-            cmd: 'map - "r => r.x"',
+            cmd: 'command-that-produces-json | map - "r => r.x"',
         },
         {
             name: "Reads data from a file, applies the transformation and writes to standard output",
