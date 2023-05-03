@@ -5,7 +5,6 @@
 {{/each}}
 
 {{#each docs}}
-
 # {{this.name}}
 
 {{this.desc}}

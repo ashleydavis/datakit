@@ -3,7 +3,6 @@
 - [length](#length)
 - [map](#map)
 
-
 # length
 
 Gets the number of records in a dataset.
@@ -38,14 +37,13 @@ Output can be one of the following:
 ### Reads JSON data from standard input, outputs the number of records
 
 ```bash
-length -
+command-that-produces-json | length -
 ```
 ### Reads data from a file, outputs the number of records
 
 ```bash
 length input-file.csv
 ```
-
 # map
 
 Creates an output dataset by calling the transformer function on every record of the input dataset.
@@ -85,7 +83,7 @@ Output can be one of the following:
 ### Reads JSON data from standard input, applies the transformation and writes to standard output
 
 ```bash
-map - "r => r.x"
+command-that-produces-json | map - "r => r.x"
 ```
 ### Reads data from a file, applies the transformation and writes to standard output
 
