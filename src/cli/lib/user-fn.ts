@@ -3,9 +3,9 @@ import * as path from "path";
 import { isFunction } from "../../lib/utils";
 
 //
-// Loads a transform function.
+// Loads a user function.
 //
-export function loadTransformFn(argv: minimist.ParsedArgs): Function {
+export function loadUserFn(argv: minimist.ParsedArgs): Function {
     let transformFn: any;
     let transformFile = argv.f || argv.file;
     if (transformFile) {

@@ -1,12 +1,12 @@
 import { inputJson, outputJson } from "../lib/io";
 import { ParsedArgs } from "minimist";
-import { loadTransformFn } from "./lib/transform-fn";
+import { loadUserFn } from "./lib/user-fn";
 import { verifyInputArray } from "../lib/verify";
 import { run } from "../lib/command";
 
 export async function main(argv: ParsedArgs): Promise<void> {
 
-    const transformFn = loadTransformFn(argv);
+    const transformFn = loadUserFn(argv);
     const data = await inputJson();
     verifyInputArray(data, "map");
 

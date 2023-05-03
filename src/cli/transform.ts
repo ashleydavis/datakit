@@ -1,6 +1,6 @@
 import { readStdin } from "../lib/io";
 import minimist from "minimist";
-import { loadTransformFn } from "./lib/transform-fn";
+import { loadTransformFn } from "./lib/user-fn";
 import "./lib/load-globals";
 
 async function main() {

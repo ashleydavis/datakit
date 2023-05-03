@@ -1,6 +1,6 @@
 import { fromCsv, readJson, toJson } from "..";
 import minimist from "minimist";
-import { loadTransformFn } from "./lib/transform-fn";
+import { loadTransformFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
 
 async function main() {
