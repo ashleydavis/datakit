@@ -90,10 +90,10 @@ export async function run(invoke: (argv: string[]) => Promise<void>, doco: IDocu
     }
     catch (err: any) {
         if (err.message) {
-            console.error(`Error: ${err.message}`);
+            console.error(`${chalk.red("Error")}: ${err.message}`);
         }
         else {
-            console.error(`Failed with error:`);
+            console.error(chalk.red(`Failed with error:`));
             console.error(err);
         }
         process.exit(1);
