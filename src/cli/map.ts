@@ -42,10 +42,12 @@ export async function main(argv: string[]): Promise<void> {
                 const sourceCode = loadSourceCode();
                 const sourceCodeLines = sourceCode.split("\n");
                 console.error();
-                console.error(sourceCodeLines.slice(Math.max(0, lineNumber-3), lineNumber).map(line => "  " + line).join("\n"));
-                console.error(" ".repeat(columnNumber-1) + chalk.red("  ^ "  + message));
-                console.error(sourceCodeLines.slice(lineNumber, lineNumber + 3).map(line => "  " + line).join("\n"));
+                console.error(sourceCodeLines.slice(Math.max(0, lineNumber-3), lineNumber-1).map(line => "    " + line).join("\n"));
+                console.error(`${chalk.red("  > ")}${sourceCodeLines[lineNumber-1]}`);
+                console.error(" ".repeat(columnNumber-1) + chalk.red("    ^ "  + message));
+                console.error(sourceCodeLines.slice(lineNumber, lineNumber + 3).map(line => "    " + line).join("\n"));
 
+                console.error();
                 console.error(err.stack.split("\n").map((line: string) => "  " + line).join("\n"));
                 console.error();
 
