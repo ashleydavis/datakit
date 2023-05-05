@@ -1,12 +1,11 @@
-import { fromJson, toJson } from "..";
-import { readStdin } from "../lib/io";
-import { loadUserFn } from "./lib/user-fn";
+import { inputJson, outputJson } from "../lib/io";
+import { IUserFn, invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
 import { consumeOptionalArg } from "./lib/args";
 
 type SortDirection = "ascending" | "descending";
 interface ISortCriteria {
-    keySelectorFn: Function;
+    keySelectorFn: IUserFn;
     direction: SortDirection;
 }
 
@@ -33,8 +32,7 @@ async function main() {
         });
     }
 
-    const input = await readStdin();
-    const data = fromJson(input);
+    const data = await inputJson();
 
     if (!isArray(data)) {
         throw new Error(`Expected input to 'map' to be an array.`);
@@ -43,8 +41,16 @@ async function main() {
     data.sort((a: any, b: any): number => {
         for (const criteria of sortCriteria) {
             const keySelector = criteria.keySelectorFn;
-            const A = keySelector(a);
-            const B = keySelector(b);
+            const A = invokeUserFn({
+                fn: () => keySelector.fn(a),
+                loadSourceCode: keySelector.loadSourceCode,
+                fileName: keySelector.fileName,
+            });
+            const B = invokeUserFn({
+                fn: () => keySelector.fn(b),
+                loadSourceCode: keySelector.loadSourceCode,
+                fileName: keySelector.fileName,
+            });
             let comparison = -1;
             if (A === B) {
                 comparison = 0;
@@ -66,7 +72,7 @@ async function main() {
         return 0;
     });
 
-    console.log(toJson(data));
+    outputJson(data);
 }
 
 main()

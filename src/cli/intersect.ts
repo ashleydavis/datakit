@@ -1,6 +1,7 @@
-import { fromCsv, readJson, toJson } from "..";
-import { loadUserFn } from "./lib/user-fn";
+import { readJson } from "..";
+import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
+import { outputJson } from "../lib/io";
 
 async function main() {
     const argv = process.argv.slice(2);
@@ -25,8 +26,20 @@ async function main() {
         throw new Error(`Expect an array loaded from ${rightFileName}`);
     }
 
-    const leftKeys = left.map(record => leftSelectorFn(record));
-    const rightKeys = right.map(record => rightSelectorFn(record));
+    const leftKeys = left.map(record => {
+        return invokeUserFn({
+            fn: () => leftSelectorFn.fn(record),
+            loadSourceCode: leftSelectorFn.loadSourceCode,
+            fileName: leftSelectorFn.fileName,
+        });
+    });
+    const rightKeys = right.map(record => {
+        return invokeUserFn({
+            fn: () => rightSelectorFn.fn(record),
+            loadSourceCode: rightSelectorFn.loadSourceCode,
+            fileName: rightSelectorFn.fileName,
+        });
+    });
 
     //
     // Index the left hand side data.
@@ -68,7 +81,7 @@ async function main() {
     // Generate the merged output.
     //
 
-    const combinations: any = {}; // Records cominations already generated.
+    const combinations: any = {}; // Records combinations already generated.
     const output = [];
 
     for (let leftIndex = 0; leftIndex < left.length; ++leftIndex) {
@@ -83,7 +96,11 @@ async function main() {
                     // This combination is not recorded yet.
                     combinations[comboKey] = true;
 
-                    const merged = mergeFn(leftRecord, right.record);
+                    const merged = invokeUserFn({
+                        fn: () => mergeFn.fn(leftRecord, right.record),
+                        loadSourceCode: mergeFn.loadSourceCode,
+                        fileName: mergeFn.fileName,
+                    });
                     if (merged !== undefined) {
                         output.push(merged);
                     }
@@ -91,7 +108,11 @@ async function main() {
             }
         }
         else {
-            const merged = mergeFn(leftRecord, undefined);
+            const merged = invokeUserFn({
+                fn: () => mergeFn.fn(leftRecord, undefined),
+                loadSourceCode: mergeFn.loadSourceCode,
+                fileName: mergeFn.fileName,
+            });
             if (merged !== undefined) {
                 output.push(merged);
             }
@@ -110,7 +131,11 @@ async function main() {
                     // This combination is not recorded yet.
                     combinations[comboKey] = true;
 
-                    const merged = mergeFn(left.record, rightRecord);
+                    const merged = invokeUserFn({
+                        fn: () => mergeFn.fn(left.record, rightRecord),
+                        loadSourceCode: mergeFn.loadSourceCode,
+                        fileName: mergeFn.fileName,
+                    });
                     if (merged !== undefined) {
                         output.push(merged);
                     }
@@ -118,14 +143,18 @@ async function main() {
             }
         }
         else {
-            const merged = mergeFn(undefined, rightRecord);
+            const merged = invokeUserFn({
+                fn: () => mergeFn.fn(undefined, rightRecord),
+                loadSourceCode: mergeFn.loadSourceCode,
+                fileName: mergeFn.fileName,
+            });
             if (merged !== undefined) {
                 output.push(merged);
             }
         }
     }
 
-    console.log(toJson(output));
+    outputJson(output);
 }
 
 main()

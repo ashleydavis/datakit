@@ -61,7 +61,7 @@ export function loadUserFn(argv: string[], exampleFn: string): IUserFn {
 //
 // Invokes a user function and handlers errors.
 //
-export function invokeUserFn(userFn: IUserFn): void {
+export function invokeUserFn(userFn: IUserFn): any {
     try {
         return userFn.fn();
     }

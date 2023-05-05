@@ -20,7 +20,7 @@
     "tw": "npm run test:watch",
     "test:watch": "mocha --watch --watch-files src/test/**/*.test.ts --require ts-node/register --require source-map-support/register --full-trace --recursive src/test/**/*.test.ts",
     "api-docs": "typedoc --options typedoc.json --out docs/api ./src/index.ts",
-    "create-cli-docs": "ts-node ./scripts/create-cli-docs",
+    "create-cli-docs": "ts-node ./src/scripts/create-cli-docs",
     "prepublishOnly": "npm run clean && npm run test && npm run build && npm run create-cli-docs",
     "postinstall": "node postinstall.js || echo \"ignore\"",
     "test-1": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-yaml",

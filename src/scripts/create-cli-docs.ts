@@ -12,8 +12,8 @@
 
 import * as fs from 'fs';
 import handlebars from 'handlebars';
-import { documentation as map  } from "../src/cli/map";
-import { documentation as length  } from "../src/cli/length";
+import { documentation as map  } from "../cli/map";
+import { documentation as length  } from "../cli/length";
 
 const docs = [
     length,

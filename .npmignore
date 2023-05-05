@@ -1,6 +1,7 @@
 docs/
 src/
 build/test
+build/scripts
 node_modules/
 /.rpt2_cache
 .vscode/

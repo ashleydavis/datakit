@@ -1,14 +1,12 @@
-import { fromJson } from "..";
-import { readStdin } from "../lib/io";
-import { loadUserFn } from "./lib/user-fn";
+import { inputJson, outputJson } from "../lib/io";
+import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import "./lib/load-globals";
 import { isArray } from "../lib/utils";
 
 async function main() {
     const argv = process.argv.slice(2);
     const keySelectorFn = loadUserFn(argv, `r => r.key`);
-    const input = await readStdin();
-    const data = fromJson(input);
+    const data = await inputJson();
 
     if (!isArray(data)) {
         throw new Error(`Expected input to 'group' to be an array.`);
@@ -22,7 +20,11 @@ async function main() {
     const groupMap: any = {};
 
     for (const record of data) {
-        const key = keySelectorFn(record);
+        const key = invokeUserFn({
+            fn: () => keySelectorFn.fn(record),
+            loadSourceCode: keySelectorFn.loadSourceCode,
+            fileName: keySelectorFn.fileName,
+        }); 
         if (groupMap[key] === undefined) {
             let group = {
                 key: key,
@@ -35,7 +37,7 @@ async function main() {
         groupMap[key].records.push(record);
     }
 
-    console.log(JSON.stringify(groups, null, 4));
+    outputJson(groups);
 }
 
 main()
