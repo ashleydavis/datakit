@@ -12,6 +12,11 @@ interface ISortCriteria {
 async function main() {
     const argv = process.argv.slice(2);
 
+    const data = await inputJson(argv);
+    if (!isArray(data)) {
+        throw new Error(`Expected input to 'map' to be an array.`);
+    }
+
     const sortCriteria: ISortCriteria[] = [];
     let lastSortDirection: SortDirection = "ascending";
 
@@ -30,12 +35,6 @@ async function main() {
             keySelectorFn,
             direction: direction as SortDirection,
         });
-    }
-
-    const data = await inputJson();
-
-    if (!isArray(data)) {
-        throw new Error(`Expected input to 'map' to be an array.`);
     }
 
     data.sort((a: any, b: any): number => {

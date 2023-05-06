@@ -2,7 +2,7 @@ import { fromCsv, toJson } from "..";
 import { readStdin } from "../lib/io";
 
 async function main() {
-    const input = await readStdin();
+    const input = await readStdin(); //todo: this can just called inputJson!!
     const data = fromCsv(input);
     console.log(toJson(data));
 }

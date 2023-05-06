@@ -1,4 +1,8 @@
 import * as readline from "readline";
+import { readFile } from "..";
+import { readJson } from "..";
+import { readCsv } from "..";
+import { readYaml } from "..";
 
 //
 // Reads data from standard input.
@@ -49,7 +53,7 @@ export function readStdin(): Promise<string> {
             }
             
             cancelTimeout();
-            resolve(input);           
+            resolve(input);
         });
 
         startTimeout();
@@ -57,11 +61,37 @@ export function readStdin(): Promise<string> {
 }
 
 //
-// Input data from JSON on standard input.
+// Input data from a data file or JSON on standard input.
 // 
-export async function inputJson(): Promise<any> {
-    const input = await readStdin();
-    return JSON.parse(input);
+export async function inputJson(argv: string[]): Promise<any> {
+    if (argv.length === 0) {
+        throw new Error(`Expected a file name for input data. For example foo.csv, foo.json, foo.yaml or foo.yml. Use a hyphen (-) to read JSON data from standard input.`);
+    }
+    else {
+        const fileName = argv.shift()!.toLowerCase();
+        if (fileName === "-") {
+            
+            const input = await readStdin();
+            return JSON.parse(input);
+        }
+        else {
+            if (fileName.endsWith(".json")) {
+                return await readJson(fileName);
+            }
+            else if (fileName.endsWith(".csv")) {
+                return await readCsv(fileName);
+            }
+            else if (fileName.endsWith(".yaml")) {
+                return await readYaml(fileName);
+            }
+            else if (fileName.endsWith(".yml")) {
+                return await readYaml(fileName);
+            }
+            else {
+                throw new Error(`Expected a file name for input data. The file name should end with .json, .csv, .yaml or .yml. Use a hyphen (-) to read JSON data from standard input.`);
+            }
+        }
+    }
 }
 
 //

@@ -5,8 +5,8 @@ import { isArray } from "../lib/utils";
 
 async function main() {
     const argv = process.argv.slice(2);
+    const data = await inputJson(argv);
     const keySelectorFn = loadUserFn(argv, `r => r.key`);
-    const data = await inputJson();
 
     if (!isArray(data)) {
         throw new Error(`Expected input to 'group' to be an array.`);

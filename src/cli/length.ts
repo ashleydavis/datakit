@@ -3,7 +3,7 @@ import { run } from "../lib/command";
 
 export async function main(argv: string[]): Promise<void> {
    
-    const data = await inputJson();
+    const data = await inputJson(argv);
     outputJson(data.length);
 }
 

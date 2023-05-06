@@ -5,10 +5,10 @@ import { inputJson, outputJson } from "../lib/io";
 
 async function main() {
     const argv = process.argv.slice(2);
+    const data = await inputJson(argv);
     const keySelectorFn = loadUserFn(argv, `r => r.key`);
     const valueSelectorFn = loadUserFn(argv, `r => r.value`);
 
-    const data = await inputJson();
     if (!isArray(data)) {
         throw new Error(`Expected input to 'to-object' to be an array.`);
     }

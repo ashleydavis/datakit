@@ -2,7 +2,8 @@ import { readStdin } from "../lib/io";
 const YAML = require("yaml");
 
 async function main() {
-    const input = await readStdin();
+    
+    const input = await readStdin(); //todo: this can just called inputJson!!
     const data = YAML.parse(input);
     console.log(JSON.stringify(data, null, 4));
 }

@@ -46,9 +46,45 @@ function unindent(input: string) {
 describe("pipelines", () => {
 
     const pipelines = [
+        //
+        // File reading
+        //
+        [
+            "count json from stdin",
+            "npx ts-node ./src/cli/length - < ./src/test/data/example-data.json",
+            "3",
+        ],
+        [
+            "count json from file",
+            "npx ts-node ./src/cli/length ./src/test/data/example-data.json",
+            "3",
+        ],
+        [
+            "count csv from stdin",
+            "npx ts-node ./src/cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./src/cli/length -",
+            "3",
+        ],
+        [
+            "count csv from file",
+            "npx ts-node ./src/cli/length ./src/test/data/example-data.csv",
+            "3",
+        ],
+        [
+            "count yaml from stdin",
+            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/length -",
+            "3",
+        ],
+        [
+            "count yaml from file",
+            "npx ts-node ./src/cli/length ./src/test/data/example-data.yaml",
+            "3",
+        ],
+        //
+        // Transformation.
+        //
         [
             "test-1",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./src/cli/to-yaml",
+            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./src/cli/to-yaml",
             unindent(`
                 - Date: 2013-01-02
                   CashPool: 20000
@@ -64,7 +100,7 @@ describe("pipelines", () => {
         ],
         [
             "test-2",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform -f ./src/test/code/transform-test.js | npx ts-node ./src/cli/to-yaml",
+            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - -f ./src/test/code/transform-test.js | npx ts-node ./src/cli/to-yaml",
             unindent(`
                 - Date: 2013-01-02
                   CashPool: 20000
@@ -77,6 +113,11 @@ describe("pipelines", () => {
                   SharesValue: 17555.82369
                 
             `),
+        ],
+        [
+            "test-3",
+            "npx ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | npx ts-node ./src/cli/length -",
+            "3",
         ],
     ];
 

@@ -5,8 +5,8 @@ import { run } from "../lib/command";
 
 export async function main(argv: string[]): Promise<void> {
 
+    const data = await inputJson(argv);
     const { fn, details } = loadUserFn(argv, `r => transform(r)`);
-    const data = await inputJson();
     verifyInputArray(data, "map");
 
     const transformed = data.map((record: any) => invokeUserFn(() => fn(record), details));

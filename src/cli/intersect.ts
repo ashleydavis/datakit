@@ -16,7 +16,7 @@ async function main() {
     const rightFileName = argv.shift()!;
     const mergeFn = loadUserFn(argv, `(left, right) => merge(left, right)`);
 
-    const left = await readJson(leftFileName);
+    const left = await readJson(leftFileName); //todo: This should be allowed to use - for stdin.
     if (!isArray(left)) {
         throw new Error(`Expect an array loaded from ${leftFileName}`);
     }

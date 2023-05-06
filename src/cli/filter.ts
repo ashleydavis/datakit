@@ -1,20 +1,20 @@
-import { fromJson, toJson } from "..";
-import { readStdin } from "../lib/io";
-import { loadUserFn } from "./lib/user-fn";
+import { inputJson, outputJson, readStdin } from "../lib/io";
+import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
 
 async function main() {
     const argv = process.argv.slice(2);
-    const predicateFn = loadUserFn(argv, `r => predicate(key)`);
-    const input = await readStdin();
-    const data = fromJson(input);
-
+    
+    const data = await inputJson(argv);
     if (!isArray(data)) {
         throw new Error(`Expected input to 'filter' to be an array.`);
     }
 
-    const filtered = data.filter(predicateFn as any);
-    console.log(toJson(filtered));
+    const { fn, details } = loadUserFn(argv, `r => predicate(key)`);
+
+    const filtered = data.filter(record => invokeUserFn(() => fn(record), details));
+
+    outputJson(filtered)
 }
 
 main()

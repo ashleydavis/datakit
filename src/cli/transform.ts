@@ -5,9 +5,8 @@ import "./lib/load-globals";
 async function main() {
     const argv = process.argv.slice(2);
 
+    const data = await inputJson(argv);
     const { fn, details } = loadUserFn(argv, `dataset => transform(dataset)`);
-
-    const data = await inputJson();
 
     const transformed = invokeUserFn(() => fn(data), details);
 
