@@ -4,11 +4,10 @@ import { isFunction } from "../../lib/utils";
 import { consumeOptionalArg } from "./args";
 import chalk from "chalk";
 
-export interface IUserFn {
-    //
-    // User defined function to be invoked for data transformation.
-    //
-    fn: Function;
+//
+// Records the details of a user function.
+//
+export interface IUserFnDetails {
 
     //
     // Function to lazy load source code error reporting.
@@ -24,7 +23,7 @@ export interface IUserFn {
 //
 // Loads a user function.
 //
-export function loadUserFn(argv: string[], exampleFn: string): IUserFn {
+export function loadUserFn(argv: string[], exampleFn: string): { fn: Function, details: IUserFnDetails } {
 
     let userFn: any;
 
@@ -53,21 +52,23 @@ export function loadUserFn(argv: string[], exampleFn: string): IUserFn {
 
     return {
         fn: userFn,
-        loadSourceCode,
-        fileName,
+        details: {
+            loadSourceCode,
+            fileName,
+        },
     };
 }
 
 //
-// Invokes a user function and handlers errors.
+// Wraps a user function for error handling.
 //
-export function invokeUserFn(userFn: IUserFn): any {
+export function invokeUserFn(fn: Function, details: IUserFnDetails): any {
     try {
-        return userFn.fn();
+        return fn();
     }
     catch (err: any) {
         if (err.stack) {
-            const matches = (new RegExp(`${userFn.fileName}:(\\d+):(\\d+)`)).exec(err.stack);
+            const matches = (new RegExp(`${details.fileName}:(\\d+):(\\d+)`)).exec(err.stack);
             if (matches) {
 
                 const message = err.message || firstLine(err.stack);
@@ -75,9 +76,9 @@ export function invokeUserFn(userFn: IUserFn): any {
                 const columnNumber = parseInt(matches[2]);
 
                 console.error(chalk.red(`Error: `) + message);
-                console.error(` ${chalk.cyan("-->")} ${userFn.fileName}:${lineNumber}:${columnNumber}`)
+                console.error(` ${chalk.cyan("-->")} ${details.fileName}:${lineNumber}:${columnNumber}`)
 
-                const sourceCode = userFn.loadSourceCode();
+                const sourceCode = details.loadSourceCode();
                 const sourceCodeLines = sourceCode.split("\n");
                 console.error();
                 console.error(sourceCodeLines.slice(Math.max(0, lineNumber-3), lineNumber-1).map(line => "    " + line).join("\n"));

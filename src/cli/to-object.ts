@@ -14,16 +14,8 @@ async function main() {
     }
 
     const reduced = data.reduce((a: any, r: any) => {
-        const key = invokeUserFn({
-            fn: () => keySelectorFn.fn(r),
-            loadSourceCode: keySelectorFn.loadSourceCode,
-            fileName: keySelectorFn.fileName,
-        });
-        const value = invokeUserFn({
-            fn: () => valueSelectorFn.fn(r),
-            loadSourceCode: valueSelectorFn.loadSourceCode,
-            fileName: valueSelectorFn.fileName,
-        });
+        const key = invokeUserFn(() => keySelectorFn.fn(r), keySelectorFn.details);
+        const value = invokeUserFn(() => valueSelectorFn.fn(r), valueSelectorFn.details);
         a[key] = value;
         return a;
     }, {});

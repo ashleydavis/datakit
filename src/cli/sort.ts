@@ -1,11 +1,11 @@
 import { inputJson, outputJson } from "../lib/io";
-import { IUserFn, invokeUserFn, loadUserFn } from "./lib/user-fn";
+import { IUserFnDetails, invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { isArray } from "../lib/utils";
 import { consumeOptionalArg } from "./lib/args";
 
 type SortDirection = "ascending" | "descending";
 interface ISortCriteria {
-    keySelectorFn: IUserFn;
+    keySelectorFn: { fn: Function, details: IUserFnDetails };
     direction: SortDirection;
 }
 
@@ -41,16 +41,8 @@ async function main() {
     data.sort((a: any, b: any): number => {
         for (const criteria of sortCriteria) {
             const keySelector = criteria.keySelectorFn;
-            const A = invokeUserFn({
-                fn: () => keySelector.fn(a),
-                loadSourceCode: keySelector.loadSourceCode,
-                fileName: keySelector.fileName,
-            });
-            const B = invokeUserFn({
-                fn: () => keySelector.fn(b),
-                loadSourceCode: keySelector.loadSourceCode,
-                fileName: keySelector.fileName,
-            });
+            const A = invokeUserFn(() => keySelector.fn(a), keySelector.details);
+            const B = invokeUserFn(() => keySelector.fn(b), keySelector.details);
             let comparison = -1;
             if (A === B) {
                 comparison = 0;

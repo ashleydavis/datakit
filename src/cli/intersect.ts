@@ -27,18 +27,10 @@ async function main() {
     }
 
     const leftKeys = left.map(record => {
-        return invokeUserFn({
-            fn: () => leftSelectorFn.fn(record),
-            loadSourceCode: leftSelectorFn.loadSourceCode,
-            fileName: leftSelectorFn.fileName,
-        });
+        return invokeUserFn(() => leftSelectorFn.fn(record), leftSelectorFn.details);
     });
     const rightKeys = right.map(record => {
-        return invokeUserFn({
-            fn: () => rightSelectorFn.fn(record),
-            loadSourceCode: rightSelectorFn.loadSourceCode,
-            fileName: rightSelectorFn.fileName,
-        });
+        return invokeUserFn(() => rightSelectorFn.fn(record), rightSelectorFn.details);
     });
 
     //
@@ -96,11 +88,7 @@ async function main() {
                     // This combination is not recorded yet.
                     combinations[comboKey] = true;
 
-                    const merged = invokeUserFn({
-                        fn: () => mergeFn.fn(leftRecord, right.record),
-                        loadSourceCode: mergeFn.loadSourceCode,
-                        fileName: mergeFn.fileName,
-                    });
+                    const merged = invokeUserFn(() => mergeFn.fn(leftRecord, right.record), mergeFn.details);
                     if (merged !== undefined) {
                         output.push(merged);
                     }
@@ -108,11 +96,7 @@ async function main() {
             }
         }
         else {
-            const merged = invokeUserFn({
-                fn: () => mergeFn.fn(leftRecord, undefined),
-                loadSourceCode: mergeFn.loadSourceCode,
-                fileName: mergeFn.fileName,
-            });
+            const merged = invokeUserFn(() => mergeFn.fn(leftRecord, undefined), mergeFn.details);
             if (merged !== undefined) {
                 output.push(merged);
             }
@@ -131,11 +115,7 @@ async function main() {
                     // This combination is not recorded yet.
                     combinations[comboKey] = true;
 
-                    const merged = invokeUserFn({
-                        fn: () => mergeFn.fn(left.record, rightRecord),
-                        loadSourceCode: mergeFn.loadSourceCode,
-                        fileName: mergeFn.fileName,
-                    });
+                    const merged = invokeUserFn(() => mergeFn.fn(left.record, rightRecord), mergeFn.details);
                     if (merged !== undefined) {
                         output.push(merged);
                     }
@@ -143,11 +123,7 @@ async function main() {
             }
         }
         else {
-            const merged = invokeUserFn({
-                fn: () => mergeFn.fn(undefined, rightRecord),
-                loadSourceCode: mergeFn.loadSourceCode,
-                fileName: mergeFn.fileName,
-            });
+            const merged = invokeUserFn(() => mergeFn.fn(undefined, rightRecord), mergeFn.details);
             if (merged !== undefined) {
                 output.push(merged);
             }

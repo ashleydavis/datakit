@@ -5,15 +5,11 @@ import "./lib/load-globals";
 async function main() {
     const argv = process.argv.slice(2);
 
-    const { fn, loadSourceCode, fileName } = loadUserFn(argv, `dataset => transform(dataset)`);
+    const { fn, details } = loadUserFn(argv, `dataset => transform(dataset)`);
 
     const data = await inputJson();
 
-    const transformed = invokeUserFn({ 
-        fn: () => fn(data),
-        loadSourceCode,
-        fileName,
-    });
+    const transformed = invokeUserFn(() => fn(data), details);
 
     outputJson(transformed);
 }

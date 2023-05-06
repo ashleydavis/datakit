@@ -5,16 +5,11 @@ import { run } from "../lib/command";
 
 export async function main(argv: string[]): Promise<void> {
 
-    const { fn, loadSourceCode, fileName } = loadUserFn(argv, `r => transform(r)`);
+    const { fn, details } = loadUserFn(argv, `r => transform(r)`);
     const data = await inputJson();
     verifyInputArray(data, "map");
 
-    const transformed = invokeUserFn({
-        fn: () => data.map(fn),
-        loadSourceCode,
-        fileName,
-    });
-
+    const transformed = data.map((record: any) => invokeUserFn(() => fn(record), details));
     outputJson(transformed);
 }
 

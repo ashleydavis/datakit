@@ -20,11 +20,7 @@ async function main() {
     const groupMap: any = {};
 
     for (const record of data) {
-        const key = invokeUserFn({
-            fn: () => keySelectorFn.fn(record),
-            loadSourceCode: keySelectorFn.loadSourceCode,
-            fileName: keySelectorFn.fileName,
-        }); 
+        const key = invokeUserFn(() => keySelectorFn.fn(record), keySelectorFn.details);
         if (groupMap[key] === undefined) {
             let group = {
                 key: key,
