@@ -25,6 +25,7 @@
     "create-cli-docs": "ts-node ./src/scripts/create-cli-docs",
     "prepublishOnly": "npm run clean && npm run test && npm run test-pipelines && npm run build && npm run create-cli-docs",
     "postinstall": "node postinstall.js || echo \"ignore\"",
+    "test-help": "ts-node ./src/cli/map --help",
     "test-1": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform - \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-yaml",
     "test-2": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/transform - -f ./src/test/code/transform-test.js | ts-node ./src/cli/to-yaml",
     "test-3": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/length -",

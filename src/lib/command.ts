@@ -30,7 +30,7 @@ function indent(input: string, indent: string): string {
 //
 function displayDocumentation(doco: IDocumentation): void {
     console.log();
-    console.log(chalk.blueBright(doco.name));
+    console.log(chalk.cyanBright(doco.name));
     console.log();
     console.log(doco.desc);
     console.log();
@@ -48,7 +48,7 @@ function displayDocumentation(doco: IDocumentation): void {
     console.log();
     console.log("Arguments:");
     console.log();
-    console.log(indent(doco.args.map(input => `- ${chalk.blue(input.name)}: ${input.desc}`).join("\n"), "\t"));
+    console.log(indent(doco.args.map(input => `- ${chalk.cyan(input.name)}: ${input.desc}`).join("\n"), "\t"));
     console.log();
     console.log("Examples:");
     console.log();
@@ -64,6 +64,7 @@ function displayDocumentation(doco: IDocumentation): void {
         console.log();
     }
     console.log();
+    console.log(`See this help online: ${chalk.cyan.underline(`https://github.com/data-forge-notebook/datakit/blob/master/docs/cli.md#${doco.name}`)}`);
 }
 
 //
