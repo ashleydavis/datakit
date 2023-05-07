@@ -1,3 +1,11 @@
+# Installation
+
+Install globally for the command line tools:
+
+```bash
+npm install -g datakit
+```
+
 # Help
 
 Use `--help` for each command to display help for it on the command line.
