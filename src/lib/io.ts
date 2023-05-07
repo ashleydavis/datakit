@@ -37,7 +37,7 @@ export function readStdin(): Promise<string> {
             cancelTimeout();
             timeout = setTimeout(() => {
                 timedout = true;
-                reject(new Error(`Timed out with no input on standard input.`));
+                reject(new Error(`Timed out with no input on standard input. Use argument --help to get help about this command.`));
             }, 1000 * 5);  
         };
 
@@ -151,6 +151,13 @@ function determineFormat(fileName: string): DataFormat {
 }
 
 //
+// Writes text to standard output.
+//
+export function writeStdout(data: string): void {
+    process.stdout.write(data);
+}
+
+//
 // Write data to standard output in the requested format.
 // Data format defaults to JSON if none is specified.
 //
@@ -174,7 +181,7 @@ function outputDataToStdout(data: any, expectedFormat?: DataFormat): void {
         throw new Error(`Unexpected data format: ${expectedFormat}`);
     }
 
-    process.stdout.write(formattedData);
+    writeStdout(formattedData);
 }
 
 //

@@ -73,17 +73,9 @@ function displayDocumentation(doco: IDocumentation): void {
 export async function run(invoke: (argv: string[]) => Promise<void>, doco: IDocumentation): Promise<void> {
 
     const argv = process.argv.slice(2);
-    if (argv.length > 0) {
-        if (argv[0] === "-h" ||
-            argv[0] === "--h" ||
-            argv[0] === "-?" ||
-            argv[0] === "--?" ||
-            argv[0] === "-help" ||
-            argv[0] === "--help" ||
-            argv[0] === "help") {
-            displayDocumentation(doco)
-            process.exit(2);
-        }
+    if (detectHelpArg(argv)) {
+        displayDocumentation(doco)
+        process.exit(2);
     }
 
     try {
@@ -99,4 +91,30 @@ export async function run(invoke: (argv: string[]) => Promise<void>, doco: IDocu
         }
         process.exit(1);
     }
+}
+
+//
+// Detects if the help argument is anywhere in the array of arguments.
+//
+function detectHelpArg(argv: string[]): boolean {
+    for (const arg of argv) {
+        if (checkHelpArg(arg)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//
+// Checks if the specified argument is the help argument.
+//
+function checkHelpArg(arg: string): boolean {
+    return arg === "-h" ||
+        arg === "--h" ||
+        arg === "-?" ||
+        arg === "--?" ||
+        arg === "-help" ||
+        arg === "--help" ||
+        arg === "help";
 }
