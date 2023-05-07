@@ -1,7 +1,7 @@
 import { fromJson, toJson } from "..";
 import { readStdin } from "../lib/io";
 import "./lib/load-globals";
-import { isArray } from "../lib/utils";
+import { verifyInputArray } from "../lib/verify";
 
 async function main() {
     const argv = process.argv.slice(2);
@@ -12,10 +12,7 @@ async function main() {
     const number = parseInt(argv[0]);
     const input = await readStdin();
     const data = fromJson(input);
-
-    if (!isArray(data)) {
-        throw new Error(`Expected input to 'take' to be an array.`);
-    }
+    verifyInputArray(data, "take");
 
     const transformed = data.slice(0, number);
     console.log(toJson(transformed));

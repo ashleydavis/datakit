@@ -1,16 +1,14 @@
 import { inputJson, outputJson } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import "./lib/load-globals";
-import { isArray } from "../lib/utils";
+import { verifyInputArray } from "../lib/verify";
 
 async function main() {
     const argv = process.argv.slice(2);
     const data = await inputJson(argv);
-    const keySelectorFn = loadUserFn(argv, `r => r.key`);
+    verifyInputArray(data, "group");
 
-    if (!isArray(data)) {
-        throw new Error(`Expected input to 'group' to be an array.`);
-    }
+    const keySelectorFn = loadUserFn(argv, `r => r.key`);
 
     interface IGroup {
         key: any;

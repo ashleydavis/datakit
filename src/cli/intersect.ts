@@ -1,7 +1,7 @@
 import { readJson } from "..";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
-import { isArray } from "../lib/utils";
 import { outputJson } from "../lib/io";
+import { verifyArray } from "../lib/verify";
 
 async function main() {
     const argv = process.argv.slice(2);
@@ -17,14 +17,10 @@ async function main() {
     const mergeFn = loadUserFn(argv, `(left, right) => merge(left, right)`);
 
     const left = await readJson(leftFileName); //todo: This should be allowed to use - for stdin.
-    if (!isArray(left)) {
-        throw new Error(`Expect an array loaded from ${leftFileName}`);
-    }
+    verifyArray(left, "left input", "intersect");
 
     const right = await readJson(rightFileName);
-    if (!isArray(right)) {
-        throw new Error(`Expect an array loaded from ${rightFileName}`);
-    }
+    verifyArray(right, "right input", "intersect");
 
     const leftKeys = left.map(record => {
         return invokeUserFn(() => leftSelectorFn.fn(record), leftSelectorFn.details);

@@ -1,7 +1,7 @@
 import { inputJson, outputJson } from "../lib/io";
 import { IUserFnDetails, invokeUserFn, loadUserFn } from "./lib/user-fn";
-import { isArray } from "../lib/utils";
 import { consumeOptionalArg } from "./lib/args";
+import { verifyInputArray } from "../lib/verify";
 
 type SortDirection = "ascending" | "descending";
 interface ISortCriteria {
@@ -13,9 +13,7 @@ async function main() {
     const argv = process.argv.slice(2);
 
     const data = await inputJson(argv);
-    if (!isArray(data)) {
-        throw new Error(`Expected input to 'map' to be an array.`);
-    }
+    verifyInputArray(data, "sort");
 
     const sortCriteria: ISortCriteria[] = [];
     let lastSortDirection: SortDirection = "ascending";
