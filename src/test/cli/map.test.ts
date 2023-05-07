@@ -17,7 +17,7 @@ describe("cli/map", () => {
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (data: any[]) => {
+        mockIo.outputJson = async (argv: string[], data: any[]) => {
             output = data;
         };
 
@@ -34,7 +34,7 @@ describe("cli/map", () => {
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (data: any[]) => {
+        mockIo.outputJson = async (argv: string[], data: any[]) => {
             output = data;
         };
 
@@ -52,7 +52,7 @@ describe("cli/map", () => {
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (data: any[]) => {
+        mockIo.outputJson = async (argv: string[], data: any[]) => {
             output = data;
         };
 

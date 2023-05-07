@@ -66,11 +66,18 @@ export function readStdin(): Promise<string> {
 // 
 export async function inputJson(argv: string[]): Promise<any> {
     if (argv.length === 0) {
-        throw new Error(`Expected a file name for input data. For example foo.csv, foo.json, foo.yaml or foo.yml. Use a hyphen (-) to read JSON data from standard input.`);
+        //
+        // Default to reading JSON data from standard input.
+        //
+        const input = await readStdin();
+        return JSON.parse(input);
     }
     else {
         const fileName = argv.shift()!.toLowerCase();
         if (fileName === "-") {
+            //
+            // Excplicitly read JSON data from standard input.
+            //
             const input = await readStdin();
             return JSON.parse(input);
         }

@@ -10,7 +10,7 @@ export async function main(argv: string[]): Promise<void> {
     verifyInputArray(data, "map");
 
     const transformed = data.map((record: any) => invokeUserFn(() => fn(record), details));
-    
+
     await outputJson(argv, transformed);
 }
 
