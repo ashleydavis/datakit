@@ -19,7 +19,7 @@ async function main() {
 
     const reduced = data.reduce((a: any, r: any) => invokeUserFn(() => fn(a, r), details), initialValue);
 
-    outputJson(reduced);
+    await outputJson(argv, reduced);
 }
 
 main()

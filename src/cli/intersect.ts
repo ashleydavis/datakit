@@ -126,7 +126,7 @@ async function main() {
         }
     }
 
-    outputJson(output);
+    await outputJson(argv, output);
 }
 
 main()

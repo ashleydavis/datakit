@@ -61,7 +61,7 @@ async function main() {
         return 0;
     });
 
-    outputJson(data);
+    await outputJson(argv, data);
 }
 
 main()

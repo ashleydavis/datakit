@@ -18,7 +18,7 @@ async function main() {
         return a;
     }, {});
 
-    outputJson(reduced);
+    await outputJson(argv, reduced);
 }
 
 main()

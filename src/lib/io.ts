@@ -1,8 +1,9 @@
 import * as readline from "readline";
-import { readFile } from "..";
+import { readFile, writeCsv, writeJson, writeYaml } from "..";
 import { readJson } from "..";
 import { readCsv } from "..";
 import { readYaml } from "..";
+import { isArray } from "./utils";
 
 //
 // Reads data from standard input.
@@ -70,7 +71,6 @@ export async function inputJson(argv: string[]): Promise<any> {
     else {
         const fileName = argv.shift()!.toLowerCase();
         if (fileName === "-") {
-            
             const input = await readStdin();
             return JSON.parse(input);
         }
@@ -102,8 +102,43 @@ export function writeStdout(data: string): void {
 }
 
 //
-// Outputs data as JSON to standard output.
+// Outputs data as JSON to a file or to standard output.
 //
-export function outputJson(data: any): void {
-    writeStdout(JSON.stringify(data, null, 4));
+export async function outputJson(argv: string[], data: any): Promise<void> {
+    if (argv.length === 0) {
+        //
+        // Default is to output to stdout.
+        //
+        writeStdout(JSON.stringify(data, null, 4));
+    }
+    else {
+        const fileName = argv.shift()!.toLowerCase();
+        if (fileName === "-") {
+            //
+            // Explicitly output to stdout.
+            //
+            writeStdout(JSON.stringify(data, null, 4));
+        }
+        else {
+            if (fileName.endsWith(".json")) {
+                return await writeJson(fileName, data);
+            }
+            else if (fileName.endsWith(".csv")) {
+                if (!isArray(data)) {
+                    throw new Error(`To write csv file ${fileName}, expect the data to be an array of records. Instead got "${typeof data}".`);
+                }
+                return await writeCsv(fileName, data);
+            }
+            else if (fileName.endsWith(".yaml")) {
+                return await writeYaml(fileName, data);
+            }
+            else if (fileName.endsWith(".yml")) {
+                return await writeYaml(fileName, data);
+            }
+            else {
+                throw new Error(`Expected a file name for output data. The file name should end with .json, .csv, .yaml or .yml. Use a hyphen (-) to write JSON data to standard output.`);
+            }
+        }
+
+    }
 }

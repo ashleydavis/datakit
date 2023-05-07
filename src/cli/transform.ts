@@ -9,7 +9,7 @@ async function main(argv: string[]): Promise<void> {
 
     const transformed = invokeUserFn(() => fn(data), details);
 
-    outputJson(transformed);
+    await outputJson(argv, transformed);
 }
 
 export const documentation = {

@@ -31,7 +31,7 @@ async function main() {
         groupMap[key].records.push(record);
     }
 
-    outputJson(groups);
+    await outputJson(argv, groups);
 }
 
 main()

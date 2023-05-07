@@ -12,7 +12,7 @@ async function main() {
 
     const filtered = data.filter((record: any) => invokeUserFn(() => fn(record), details));
 
-    outputJson(filtered)
+    await outputJson(argv, filtered)
 }
 
 main()
