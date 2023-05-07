@@ -145,7 +145,7 @@ describe("pipelines", () => {
         ],
         [
             "csv to yaml",
-            "npx ts-node ./src/cli/from-csv ./src/test/output/output.yaml < ./src/test/data/example-data.csv",
+            "npx ts-node ./src/cli/from-csv ./src/test/data/example-data.csv ./src/test/output/output.yaml",
             {
                 file: {
                     "output.yaml": unindent(`
@@ -164,7 +164,7 @@ describe("pipelines", () => {
         ],
         [
             "yaml to csv",
-            "npx ts-node ./src/cli/from-yaml ./src/test/output/output.csv < ./src/test/data/example-data.yaml",
+            "npx ts-node ./src/cli/from-yaml ./src/test/data/example-data.yaml ./src/test/output/output.csv",
             {
                 file: {
                     "output.csv": unindent(`
@@ -193,7 +193,6 @@ describe("pipelines", () => {
                     - Date: 2013-01-04
                       CashPool: 2121
                       SharesValue: 17555.82369
-                    
                 `),
             },
         ],
@@ -211,7 +210,6 @@ describe("pipelines", () => {
                     - Date: 2013-01-04
                       CashPool: 2121
                       SharesValue: 17555.82369
-                    
                 `),
             },
         ],

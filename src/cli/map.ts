@@ -1,17 +1,17 @@
-import { inputJson, outputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { verifyInputArray } from "../lib/verify";
 import { run } from "../lib/command";
 
 export async function main(argv: string[]): Promise<void> {
 
-    const data = await inputJson(argv);
+    const data = await inputData(argv);
     const { fn, details } = loadUserFn(argv, `record => transform(record)`);
     verifyInputArray(data, "map");
 
     const transformed = data.map((record: any) => invokeUserFn(() => fn(record), details));
 
-    await outputJson(argv, transformed);
+    await outputData(argv, transformed);
 }
 
 export const documentation = {

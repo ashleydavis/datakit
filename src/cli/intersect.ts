@@ -1,6 +1,6 @@
 import { readJson } from "..";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
-import { outputJson } from "../lib/io";
+import { outputData } from "../lib/io";
 import { verifyArray } from "../lib/verify";
 
 async function main() {
@@ -126,7 +126,7 @@ async function main() {
         }
     }
 
-    await outputJson(argv, output);
+    await outputData(argv, output);
 }
 
 main()

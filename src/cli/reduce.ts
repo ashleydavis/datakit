@@ -1,4 +1,4 @@
-import { inputJson, outputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import "./lib/load-globals";
 import { verifyInputArray } from "../lib/verify";
@@ -6,7 +6,7 @@ import { verifyInputArray } from "../lib/verify";
 async function main() {
     const argv = process.argv.slice(2);
 
-    const data = await inputJson(argv);
+    const data = await inputData(argv);
     verifyInputArray(data, "reduce");
 
     const { fn, details } = loadUserFn(argv, `(accumulator, record) => accumulate(accumulator, record)`);
@@ -19,7 +19,7 @@ async function main() {
 
     const reduced = data.reduce((a: any, r: any) => invokeUserFn(() => fn(a, r), details), initialValue);
 
-    await outputJson(argv, reduced);
+    await outputData(argv, reduced);
 }
 
 main()

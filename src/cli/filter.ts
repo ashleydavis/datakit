@@ -1,18 +1,18 @@
-import { inputJson, outputJson, readStdin } from "../lib/io";
+import { inputData, outputData, readStdin } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { verifyInputArray } from "../lib/verify";
 
 async function main() {
     const argv = process.argv.slice(2);
     
-    const data = await inputJson(argv);
+    const data = await inputData(argv);
     verifyInputArray(data, "filter");
 
     const { fn, details } = loadUserFn(argv, `r => predicate(key)`);
 
     const filtered = data.filter((record: any) => invokeUserFn(() => fn(record), details));
 
-    await outputJson(argv, filtered)
+    await outputData(argv, filtered)
 }
 
 main()

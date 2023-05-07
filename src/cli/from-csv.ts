@@ -1,13 +1,12 @@
-import { fromCsv } from "..";
-import { outputJson, readStdin } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 
 async function main() {
 
-    const input = await readStdin();
-    const data = fromCsv(input);
-
     const argv = process.argv.slice(2);
-    await outputJson(argv, data);
+
+    const data = await inputData(argv, "csv");
+
+    await outputData(argv, data);
 }
 
 main()

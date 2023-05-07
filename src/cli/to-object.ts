@@ -1,11 +1,11 @@
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import "./lib/load-globals";
-import { inputJson, outputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { verifyInputArray } from "../lib/verify";
 
 async function main() {
     const argv = process.argv.slice(2);
-    const data = await inputJson(argv);
+    const data = await inputData(argv);
     verifyInputArray(data, "to-object");
 
     const keySelectorFn = loadUserFn(argv, `r => r.key`);
@@ -18,7 +18,7 @@ async function main() {
         return a;
     }, {});
 
-    await outputJson(argv, reduced);
+    await outputData(argv, reduced);
 }
 
 main()

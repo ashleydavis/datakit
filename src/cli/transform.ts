@@ -1,15 +1,15 @@
-import { inputJson, outputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { run } from "../lib/command";
 
 async function main(argv: string[]): Promise<void> {
 
-    const data = await inputJson(argv);
+    const data = await inputData(argv);
     const { fn, details } = loadUserFn(argv, `dataset => transform(dataset)`);
 
     const transformed = invokeUserFn(() => fn(data), details);
 
-    await outputJson(argv, transformed);
+    await outputData(argv, transformed);
 }
 
 export const documentation = {

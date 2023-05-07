@@ -1,10 +1,10 @@
-import { inputJson, outputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { run } from "../lib/command";
 
 export async function main(argv: string[]): Promise<void> {
    
-    const data = await inputJson(argv);
-    await outputJson(argv, data.length);
+    const data = await inputData(argv);
+    await outputData(argv, data.length);
 }
 
 export const documentation = {

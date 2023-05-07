@@ -1,4 +1,4 @@
-import { inputJson, outputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { IUserFnDetails, invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { consumeOptionalArg } from "./lib/args";
 import { verifyInputArray } from "../lib/verify";
@@ -12,7 +12,7 @@ interface ISortCriteria {
 async function main() {
     const argv = process.argv.slice(2);
 
-    const data = await inputJson(argv);
+    const data = await inputData(argv);
     verifyInputArray(data, "sort");
 
     const sortCriteria: ISortCriteria[] = [];
@@ -61,7 +61,7 @@ async function main() {
         return 0;
     });
 
-    await outputJson(argv, data);
+    await outputData(argv, data);
 }
 
 main()

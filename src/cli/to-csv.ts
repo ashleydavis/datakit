@@ -1,11 +1,12 @@
-import { toCsv } from "..";
-import { inputJson } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 
 async function main() {
 
     const argv = process.argv.slice(2); 
-    const data = await inputJson(argv);
-    console.log(toCsv(data));
+    
+    const data = await inputData(argv);
+    
+    await outputData(argv, data, "csv");
 }
 
 main()

@@ -1,9 +1,10 @@
 import * as readline from "readline";
-import { readFile, writeCsv, writeJson, writeYaml } from "..";
+import { fromCsv, fromYaml, readFile, toCsv, toYaml, writeCsv, writeJson, writeYaml } from "..";
 import { readJson } from "..";
 import { readCsv } from "..";
 import { readYaml } from "..";
 import { isArray } from "./utils";
+import exp from "constants";
 
 //
 // Reads data from standard input.
@@ -26,7 +27,7 @@ export function readStdin(): Promise<string> {
             if (timeout) {
                 clearTimeout(timeout);
                 timeout = undefined;
-            }            
+            }
         }
 
         //
@@ -61,62 +62,130 @@ export function readStdin(): Promise<string> {
     });
 }
 
+type DataFormat = "json" | "csv" | "yaml";
+
 //
-// Input data from a data file or JSON on standard input.
+// Reads data from standard input in the requested format.
+// Data format defaults to JSON if none is specified.
+//
+async function inputDataFromStdin(expectedFormat?: DataFormat): Promise<any> {
+    const input = await readStdin();
+    if (expectedFormat === undefined || expectedFormat === "json") {
+        return JSON.parse(input);
+    }
+    else if (expectedFormat == "csv") {
+        return fromCsv(input);
+    }
+    else if (expectedFormat === "yaml") {
+        return fromYaml(input);
+    }
+    else {
+        throw new Error(`Unexpected data format: ${expectedFormat}`);
+    }
+}
+
+//
+// Input data from a data file or standard input.
 // 
-export async function inputJson(argv: string[]): Promise<any> {
+export async function inputData(argv: string[], expectedFormat?: DataFormat): Promise<any> {
     if (argv.length === 0) {
         //
         // Default to reading JSON data from standard input.
         //
-        const input = await readStdin();
-        return JSON.parse(input);
+        return await inputDataFromStdin(expectedFormat);
     }
     else {
         const fileName = argv.shift()!.toLowerCase();
         if (fileName === "-") {
             //
-            // Excplicitly read JSON data from standard input.
+            // Explicitly read JSON data from standard input.
             //
-            const input = await readStdin();
-            return JSON.parse(input);
+            return await inputDataFromStdin(expectedFormat);
         }
         else {
-            if (fileName.endsWith(".json")) {
+            if (expectedFormat === undefined) {
+                //
+                // Choose data format from the file extension.
+                //
+                expectedFormat = determineFormat(fileName);
+            }
+
+            //
+            // Load data from the requested file.
+            //
+            if (expectedFormat === "json") {
                 return await readJson(fileName);
             }
-            else if (fileName.endsWith(".csv")) {
+            else if (expectedFormat === "csv") {
                 return await readCsv(fileName);
             }
-            else if (fileName.endsWith(".yaml")) {
-                return await readYaml(fileName);
-            }
-            else if (fileName.endsWith(".yml")) {
+            else if (expectedFormat === "yaml") {
                 return await readYaml(fileName);
             }
             else {
-                throw new Error(`Expected a file name for input data. The file name should end with .json, .csv, .yaml or .yml. Use a hyphen (-) to read JSON data from standard input.`);
+                throw new Error(`Unexpected data format: ${expectedFormat}`);
             }
         }
     }
 }
 
 //
-// Writes to standard output.
+// Figure out the data format from the file name.
 //
-export function writeStdout(data: string): void {
-    process.stdout.write(data);
+function determineFormat(fileName: string): DataFormat {
+    if (fileName.endsWith(".json")) {
+        return "json";
+    }
+    else if (fileName.endsWith(".csv")) {
+        return "csv";
+    }
+    else if (fileName.endsWith(".yaml")) {
+        return "yaml";
+    }
+    else if (fileName.endsWith(".yml")) {
+        return "yaml";
+    }
+    else {
+        throw new Error(`Failed to identify data format from file name: "${fileName}"`);
+    }
+}
+
+//
+// Write data to standard output in the requested format.
+// Data format defaults to JSON if none is specified.
+//
+function outputDataToStdout(data: any, expectedFormat?: DataFormat): void {
+
+    let formattedData: string;
+
+    if (expectedFormat === undefined || expectedFormat === "json") {
+        formattedData = JSON.stringify(data, null, 4);
+    }
+    else if (expectedFormat == "csv") {
+        if (!isArray(data)) {
+            throw new Error(`To write csv to standard output, expect the data to be an array of records. Instead got "${typeof data}".`);
+        }
+        formattedData = toCsv(data);
+    }
+    else if (expectedFormat === "yaml") {
+        formattedData = toYaml(data);
+    }
+    else {
+        throw new Error(`Unexpected data format: ${expectedFormat}`);
+    }
+
+    process.stdout.write(formattedData);
 }
 
 //
 // Outputs data as JSON to a file or to standard output.
 //
-export async function outputJson(argv: string[], data: any): Promise<void> {
+export async function outputData(argv: string[], data: any, expectedFormat?: DataFormat): Promise<void> {
     if (argv.length === 0) {
         //
         // Default is to output to stdout.
         //
-        writeStdout(JSON.stringify(data, null, 4));
+        outputDataToStdout(data, expectedFormat);
     }
     else {
         const fileName = argv.shift()!.toLowerCase();
@@ -124,28 +193,34 @@ export async function outputJson(argv: string[], data: any): Promise<void> {
             //
             // Explicitly output to stdout.
             //
-            writeStdout(JSON.stringify(data, null, 4));
+            outputDataToStdout(data, expectedFormat);
         }
         else {
-            if (fileName.endsWith(".json")) {
-                return await writeJson(fileName, data);
+            if (expectedFormat === undefined) {
+                //
+                // Choose data format from the file extension.
+                //
+                expectedFormat = determineFormat(fileName);
             }
-            else if (fileName.endsWith(".csv")) {
+
+            //
+            // Load data from the requested file.
+            //
+            if (expectedFormat === "json") {
+                await writeJson(fileName, data);
+            }
+            else if (expectedFormat === "csv") {
                 if (!isArray(data)) {
                     throw new Error(`To write csv file ${fileName}, expect the data to be an array of records. Instead got "${typeof data}".`);
                 }
-                return await writeCsv(fileName, data);
+                await writeCsv(fileName, data);
             }
-            else if (fileName.endsWith(".yaml")) {
-                return await writeYaml(fileName, data);
-            }
-            else if (fileName.endsWith(".yml")) {
+            else if (expectedFormat === "yaml") {
                 return await writeYaml(fileName, data);
             }
             else {
-                throw new Error(`Expected a file name for output data. The file name should end with .json, .csv, .yaml or .yml. Use a hyphen (-) to write JSON data to standard output.`);
+                throw new Error(`Unexpected data format: ${expectedFormat}`);
             }
         }
-
     }
 }

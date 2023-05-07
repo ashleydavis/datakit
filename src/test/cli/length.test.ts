@@ -12,12 +12,12 @@ describe("cli/length", () => {
 
     it("can length of empty data set", async () => {
 
-        mockIo.inputJson = async () => {
+        mockIo.inputData = async () => {
             return [];
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (argv: string[], data: any[]) => {
+        mockIo.outputData = async (argv: string[], data: any[]) => {
             output = data;
         };
 
@@ -29,12 +29,12 @@ describe("cli/length", () => {
     it("can get length with 1 item", async () => {
 
         const input = [ {} ];
-        mockIo.inputJson = async () => {
+        mockIo.inputData = async () => {
             return input;
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (argv: string[], data: any[]) => {
+        mockIo.outputData = async (argv: string[], data: any[]) => {
             output = data;
         };
 
@@ -46,12 +46,12 @@ describe("cli/length", () => {
     it("can get length with 3 items", async () => {
 
         const input = [ {},  {},  {} ];
-        mockIo.inputJson = async () => {
+        mockIo.inputData = async () => {
             return input;
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (argv: string[], data: any[]) => {
+        mockIo.outputData = async (argv: string[], data: any[]) => {
             output = data;
         };
 

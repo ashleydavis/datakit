@@ -12,12 +12,12 @@ describe("cli/map", () => {
 
     it("can map over empty data set", async () => {
 
-        mockIo.inputJson = async () => {
+        mockIo.inputData = async () => {
             return [];
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (argv: string[], data: any[]) => {
+        mockIo.outputData = async (argv: string[], data: any[]) => {
             output = data;
         };
 
@@ -29,12 +29,12 @@ describe("cli/map", () => {
     it("can map over 1 item", async () => {
 
         const input = [ { "a": 1 } ];
-        mockIo.inputJson = async () => {
+        mockIo.inputData = async () => {
             return input;
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (argv: string[], data: any[]) => {
+        mockIo.outputData = async (argv: string[], data: any[]) => {
             output = data;
         };
 
@@ -47,12 +47,12 @@ describe("cli/map", () => {
     it("can map over 3 items", async () => {
 
         const input = [ { "a": 1 },  { "a": 2 },  { "a": 3 } ];
-        mockIo.inputJson = async () => {
+        mockIo.inputData = async () => {
             return input;
         };
 
         let output: any[] | undefined = undefined;
-        mockIo.outputJson = async (argv: string[], data: any[]) => {
+        mockIo.outputData = async (argv: string[], data: any[]) => {
             output = data;
         };
 
