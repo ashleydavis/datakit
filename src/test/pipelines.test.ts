@@ -1,5 +1,7 @@
 import { expect } from "chai";
 import { execSync } from "child_process";
+import exp from "constants";
+import * as fs from "fs-extra";
 
 function exec(cmd: string): { stdout?: string, stderr?: string, err?: any } {
     try {
@@ -45,87 +47,211 @@ function unindent(input: string) {
 
 describe("pipelines", () => {
 
-    const pipelines = [
+    interface IOutputSpec {
+        stdout?: string;
+        file?: {
+            [index: string]: string,
+        },
+    };
+
+    const pipelines: [string, string, IOutputSpec][] = [
         //
         // File reading
         //
+        // [
+        //     "count json from stdin",
+        //     "npx ts-node ./src/cli/length - < ./src/test/data/example-data.json",
+        //     { stdout: "3" },
+        // ],
+        // [
+        //     "count json from file",
+        //     "npx ts-node ./src/cli/length ./src/test/data/example-data.json",
+        //     { stdout: "3" },
+        // ],
+        // [
+        //     "count csv from stdin",
+        //     "npx ts-node ./src/cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./src/cli/length -",
+        //     { stdout: "3" },
+        // ],
+        // [
+        //     "count csv from file",
+        //     "npx ts-node ./src/cli/length ./src/test/data/example-data.csv",
+        //     { stdout: "3" },
+        // ],
+        // [
+        //     "count yaml from stdin",
+        //     "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/length -",
+        //     { stdout: "3" },
+        // ],
+        // [
+        //     "count yaml from file",
+        //     "npx ts-node ./src/cli/length ./src/test/data/example-data.yaml",
+        //     { stdout: "3" },
+        // ],
+        //
+        // File writing
+        //
         [
-            "count json from stdin",
-            "npx ts-node ./src/cli/length - < ./src/test/data/example-data.json",
-            "3",
+            "json to stdout",
+            "npx ts-node ./src/cli/transform ./src/test/data/example-data.json \"dataset => dataset\" -",
+            { 
+                stdout: unindent(`
+                    [
+                        {
+                            "Date": "2013-01-02",
+                            "CashPool": 20000,
+                            "SharesValue": 0
+                        },
+                        {
+                            "Date": "2013-01-03",
+                            "CashPool": 2121.303004999999,
+                            "SharesValue": 17721.62596
+                        },
+                        {
+                            "Date": "2013-01-04",
+                            "CashPool": 2121.303004999999,
+                            "SharesValue": 17555.82369
+                        }
+                    ]
+                `).trimEnd(),
+            },
         ],
         [
-            "count json from file",
-            "npx ts-node ./src/cli/length ./src/test/data/example-data.json",
-            "3",
+            "json to file",
+            "npx ts-node ./src/cli/transform ./src/test/data/example-data.json \"dataset => dataset\" ./src/test/output/output.json",
+            {
+                file: {
+                    "output.json": unindent(`
+                        [
+                            {
+                                "Date": "2013-01-02",
+                                "CashPool": 20000,
+                                "SharesValue": 0
+                            },
+                            {
+                                "Date": "2013-01-03",
+                                "CashPool": 2121.303004999999,
+                                "SharesValue": 17721.62596
+                            },
+                            {
+                                "Date": "2013-01-04",
+                                "CashPool": 2121.303004999999,
+                                "SharesValue": 17555.82369
+                            }
+                        ]
+                    `).trimEnd(),
+                },
+            },
         ],
         [
-            "count csv from stdin",
-            "npx ts-node ./src/cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./src/cli/length -",
-            "3",
+            "csv to yaml",
+            "npx ts-node ./src/cli/from-csv ./src/test/output/output.yaml < ./src/test/data/example-data.csv",
+            {
+                file: {
+                    "output.yaml": unindent(`
+                        - Date: 2013-01-02
+                          CashPool: 20000
+                          SharesValue: 0
+                        - Date: 2013-01-03
+                          CashPool: 2121.303004999999
+                          SharesValue: 17721.62596
+                        - Date: 2013-01-04
+                          CashPool: 2121.303004999999
+                          SharesValue: 17555.82369
+                    `),
+                },
+            },
         ],
         [
-            "count csv from file",
-            "npx ts-node ./src/cli/length ./src/test/data/example-data.csv",
-            "3",
-        ],
-        [
-            "count yaml from stdin",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/length -",
-            "3",
-        ],
-        [
-            "count yaml from file",
-            "npx ts-node ./src/cli/length ./src/test/data/example-data.yaml",
-            "3",
+            "yaml to csv",
+            "npx ts-node ./src/cli/from-yaml ./src/test/output/output.csv < ./src/test/data/example-data.yaml",
+            {
+                file: {
+                    "output.csv": unindent(`
+                        Date,CashPool,SharesValue
+                        2013-01-02,20000,0
+                        2013-01-03,2121.303004999999,17721.62596
+                        2013-01-04,2121.303004999999,17555.82369
+                    `).trimEnd(),
+                },
+            },
         ],
         //
-        // Transformation.
+        // Loading a user function.
         //
         [
-            "test-1",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./src/cli/to-yaml",
-            unindent(`
-                - Date: 2013-01-02
-                  CashPool: 20000
-                  SharesValue: 0
-                - Date: 2013-01-03
-                  CashPool: 2121
-                  SharesValue: 17721.62596
-                - Date: 2013-01-04
-                  CashPool: 2121
-                  SharesValue: 17555.82369
-                
-            `),
+            "loading user function from argument",
+            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - \"dataset => dataset.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./src/cli/to-yaml",
+            { 
+                stdout: unindent(`
+                    - Date: 2013-01-02
+                      CashPool: 20000
+                      SharesValue: 0
+                    - Date: 2013-01-03
+                      CashPool: 2121
+                      SharesValue: 17721.62596
+                    - Date: 2013-01-04
+                      CashPool: 2121
+                      SharesValue: 17555.82369
+                    
+                `),
+            },
         ],
         [
-            "test-2",
+            "loading user function from file",
             "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - -f ./src/test/code/transform-test.js | npx ts-node ./src/cli/to-yaml",
-            unindent(`
-                - Date: 2013-01-02
-                  CashPool: 20000
-                  SharesValue: 0
-                - Date: 2013-01-03
-                  CashPool: 2121
-                  SharesValue: 17721.62596
-                - Date: 2013-01-04
-                  CashPool: 2121
-                  SharesValue: 17555.82369
-                
-            `),
-        ],
-        [
-            "test-3",
-            "npx ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | npx ts-node ./src/cli/length -",
-            "3",
+            { 
+                stdout: unindent(`
+                    - Date: 2013-01-02
+                      CashPool: 20000
+                      SharesValue: 0
+                    - Date: 2013-01-03
+                      CashPool: 2121
+                      SharesValue: 17721.62596
+                    - Date: 2013-01-04
+                      CashPool: 2121
+                      SharesValue: 17555.82369
+                    
+                `),
+            },
         ],
     ];
+
+    fs.removeSync("./src/test/output");
+    fs.ensureDirSync("./src/test/output");
+
+    function checkOutput(test: string, actual: string, expected: string) {
+
+        actual = actual.split("\r\n").join("\n"); // Normalise line endings.
+
+        if (actual !== expected) {
+            console.error(`Actual output from "${test}" did not match expected output.`);
+            console.error(`==ACTUAL==`);
+            console.error(actual);
+            console.error(`==EXPECTED==`);
+            console.error(expected);
+            console.error(`====`);
+        }
+
+        expect(actual).to.eql(expected);
+    }
 
     for (const pipeline of pipelines) {
         const [name, cmd, expectedOutput] = pipeline;
         it(name, () => {
             const output = exec(cmd);
-            expect(output.stdout).to.eql(expectedOutput);
+            if (expectedOutput.stdout) {
+                checkOutput(name, output.stdout!, expectedOutput.stdout);
+            }
+            else if (expectedOutput.file) {
+                for (const [file, expectedContent] of Object.entries(expectedOutput.file)) {
+                    const fileOutput = fs.readFileSync(`./src/test/output/${file}`, "utf8");
+                    checkOutput(name, fileOutput, expectedContent);
+                }
+            }
+            else {
+                throw new Error(`No expected output set`);
+            }
         });
     }
 });

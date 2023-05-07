@@ -61,3 +61,4 @@ typings/
 /.rpt2_cache
 build/
 dist/
+src/test/output
