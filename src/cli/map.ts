@@ -41,7 +41,7 @@ export const documentation = {
         },
         {
             name: "output-file",
-            desc: "The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes the output to written to standard output instead of a file.",
+            desc: "The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.",
         }
     ],
     examples: [
