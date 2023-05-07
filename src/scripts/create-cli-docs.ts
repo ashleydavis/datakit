@@ -12,11 +12,17 @@
 
 import * as fs from 'fs';
 import handlebars from 'handlebars';
-import { documentation as map  } from "../cli/map";
+import { documentation as filter  } from "../cli/filter";
+import { documentation as formatTable  } from "../cli/format-table";
+import { documentation as formatTree  } from "../cli/format-tree";
 import { documentation as length  } from "../cli/length";
+import { documentation as map  } from "../cli/map";
 import { documentation as transform  } from "../cli/transform";
 
 const docs = [
+    filter,
+    formatTable,
+    formatTree,
     length,
     map,
     transform,
