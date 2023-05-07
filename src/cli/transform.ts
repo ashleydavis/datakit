@@ -1,6 +1,7 @@
 import { inputData, outputData } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { run } from "../lib/command";
+import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
 
@@ -16,31 +17,15 @@ export const documentation = {
     name: "transform",
     desc: "Transforms an entire dataset through a user defined function.",
     syntax: "transform <input-file> <transformer-fn> [<output-file>]",
-    inputs: [
-        "JSON file",
-        "CSV file", 
-        "Yaml file",
-        "JSON formatted array on standard input.",
-    ],
-    outputs: [
-        "JSON file",
-        "CSV file", 
-        "Yaml file",
-        "JSON formatted array on standard output.",
-    ],
+    inputs: standardCmdInputs,
+    outputs: standardCmdOutputs,
     args: [
-        {
-            name: "input-file",
-            desc: "Can be an input file name (json, csv or  yaml) or a hypen to indicate reading JSON data from standard input.",
-        },
+        standardInputFileHelp,
         {
             name: "transformer-fn",
             desc: "A JavaScript function to transform the input dataset. Specifying a file name will load the JavaScript code from the file.",
         },
-        {
-            name: "output-file",
-            desc: "The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.",
-        }
+        standardOutputFileHelp,
     ],
     examples: [
         {
