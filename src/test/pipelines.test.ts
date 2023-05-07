@@ -58,36 +58,36 @@ describe("pipelines", () => {
         //
         // File reading
         //
-        // [
-        //     "count json from stdin",
-        //     "npx ts-node ./src/cli/length - < ./src/test/data/example-data.json",
-        //     { stdout: "3" },
-        // ],
-        // [
-        //     "count json from file",
-        //     "npx ts-node ./src/cli/length ./src/test/data/example-data.json",
-        //     { stdout: "3" },
-        // ],
-        // [
-        //     "count csv from stdin",
-        //     "npx ts-node ./src/cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./src/cli/length -",
-        //     { stdout: "3" },
-        // ],
-        // [
-        //     "count csv from file",
-        //     "npx ts-node ./src/cli/length ./src/test/data/example-data.csv",
-        //     { stdout: "3" },
-        // ],
-        // [
-        //     "count yaml from stdin",
-        //     "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/length -",
-        //     { stdout: "3" },
-        // ],
-        // [
-        //     "count yaml from file",
-        //     "npx ts-node ./src/cli/length ./src/test/data/example-data.yaml",
-        //     { stdout: "3" },
-        // ],
+        [
+            "count json from stdin",
+            "npx ts-node ./src/cli/length - < ./src/test/data/example-data.json",
+            { stdout: "3" },
+        ],
+        [
+            "count json from file",
+            "npx ts-node ./src/cli/length ./src/test/data/example-data.json",
+            { stdout: "3" },
+        ],
+        [
+            "count csv from stdin",
+            "npx ts-node ./src/cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./src/cli/length -",
+            { stdout: "3" },
+        ],
+        [
+            "count csv from file",
+            "npx ts-node ./src/cli/length ./src/test/data/example-data.csv",
+            { stdout: "3" },
+        ],
+        [
+            "count yaml from stdin",
+            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/length -",
+            { stdout: "3" },
+        ],
+        [
+            "count yaml from file",
+            "npx ts-node ./src/cli/length ./src/test/data/example-data.yaml",
+            { stdout: "3" },
+        ],
         //
         // File writing
         //
