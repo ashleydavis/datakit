@@ -6,7 +6,7 @@ import { run } from "../lib/command";
 export async function main(argv: string[]): Promise<void> {
 
     const data = await inputJson(argv);
-    const { fn, details } = loadUserFn(argv, `r => transform(r)`);
+    const { fn, details } = loadUserFn(argv, `record => transform(record)`);
     verifyInputArray(data, "map");
 
     const transformed = data.map((record: any) => invokeUserFn(() => fn(record), details));
@@ -36,7 +36,7 @@ export const documentation = {
         },
         {
             name: "transformer-fn",
-            desc: "A JavaScript function to transform each record of the input dataset. Specifying a file name will load the JavaScript from the file.",
+            desc: "A JavaScript function to transform each record of the input dataset. Specifying a file name will load the JavaScript code from the file.",
         },
         {
             name: "output-file",
@@ -46,15 +46,15 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input, applies the transformation and writes to standard output",
-            cmd: 'command-that-produces-json | map - "r => r.x"',
+            cmd: 'command-that-produces-json | map - "record => record.x"',
         },
         {
             name: "Reads data from a file, applies the transformation and writes to standard output",
-            cmd: 'map input-file.csv "r -> r.x"',
+            cmd: 'map input-file.csv "record => record.x"',
         },
         {
             name: "Reads data from a file, applies the transformation and writes output to another file",
-            cmd: 'map input-file.csv "r -> r.x" output-file.csv'
+            cmd: 'map input-file.csv "record => record.x" output-file.csv'
         },
         {
             name: "Loads a JavaScript file for the transformation",
