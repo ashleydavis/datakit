@@ -1,9 +1,10 @@
-import { readStdin } from "../lib/io";
+import { inputJson } from "../lib/io";
 const YAML = require("yaml");
 
 async function main() {
-    const input = await readStdin();
-    const data = JSON.parse(input);
+
+    const argv = process.argv.slice(2); 
+    const data = await inputJson(argv);
     console.log(YAML.stringify(data));
 }
 
