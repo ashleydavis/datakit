@@ -180,7 +180,7 @@ describe("pipelines", () => {
         // Loading a user function.
         //
         [
-            "loading user function from argument",
+            "transform, loading user function from argument",
             "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - \"dataset => dataset.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./src/cli/to-yaml",
             { 
                 stdout: unindent(`
@@ -197,7 +197,7 @@ describe("pipelines", () => {
             },
         ],
         [
-            "loading user function from file",
+            "transform, loading user function from file",
             "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - -f ./src/test/code/transform-test.js | npx ts-node ./src/cli/to-yaml",
             { 
                 stdout: unindent(`
@@ -213,6 +213,59 @@ describe("pipelines", () => {
                 `),
             },
         ],
+        //
+        // Map
+        // 
+        [
+            "map",
+            "npx ts-node ./src/cli/map ./src/test/data/example-data.json \"r => ({ ...r, CashPool: Math.floor(r.CashPool) })\"",
+            {
+                stdout: unindent(`
+                [
+                    {
+                        "Date": "2013-01-02",
+                        "CashPool": 20000,
+                        "SharesValue": 0
+                    },
+                    {
+                        "Date": "2013-01-03",
+                        "CashPool": 2121,
+                        "SharesValue": 17721.62596
+                    },
+                    {
+                        "Date": "2013-01-04",
+                        "CashPool": 2121,
+                        "SharesValue": 17555.82369
+                    }
+                ]
+            `).trimEnd(),
+            },
+        ],
+        //
+        // Filter
+        // 
+        [
+            "filter",
+            "npx ts-node ./src/cli/filter ./src/test/data/example-data.json \"r => r.SharesValue > 17555\"",
+            {
+                stdout: unindent(`
+                    [
+                        {
+                            "Date": "2013-01-03",
+                            "CashPool": 2121.303004999999,
+                            "SharesValue": 17721.62596
+                        },
+                        {
+                            "Date": "2013-01-04",
+                            "CashPool": 2121.303004999999,
+                            "SharesValue": 17555.82369
+                        }
+                    ]
+                `).trimEnd(),
+            },
+        ],
+        // transform?
+    
     ];
 
     fs.removeSync("./src/test/output");
