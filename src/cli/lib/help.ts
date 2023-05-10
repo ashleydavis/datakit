@@ -2,14 +2,14 @@
 export const standardCmdInputs = [
     "JSON file",
     "CSV file", 
-    "Yaml file",
+    "YAML file",
     "JSON formatted array on standard input.",
 ];
 
 export const standardCmdOutputs = [
     "JSON file",
     "CSV file", 
-    "Yaml file",
+    "YAML file",
     "JSON formatted array on standard output.",
 ];
 

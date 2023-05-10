@@ -36,7 +36,7 @@ export const documentation = {
             cmd: 'format-table input-file.json',
         },
         {
-            name: "Reads data from a Yaml file, renders the data to an ascii table on standard output",
+            name: "Reads data from a YAML file, renders the data to an ascii table on standard output",
             cmd: 'format-table input-file.yaml',
         },
     ],

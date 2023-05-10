@@ -14,7 +14,7 @@ export const documentation = {
     inputs: [
         "JSON file",
         "CSV file", 
-        "Yaml file",
+        "YAML file",
         "JSON formatted array on standard input.",
     ],
     outputs: [

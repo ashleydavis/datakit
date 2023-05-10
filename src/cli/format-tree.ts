@@ -31,7 +31,7 @@ export const documentation = {
             cmd: 'format-tree input-file.json',
         },
         {
-            name: "Reads data from a Yaml file, renders the data to an ascii tree on standard output",
+            name: "Reads data from a YAML file, renders the data to an ascii tree on standard output",
             cmd: 'format-tree input-file.yaml',
         },
     ],

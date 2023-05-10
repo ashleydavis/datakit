@@ -21,8 +21,12 @@ map --help
 - [filter](#filter)
 - [format-table](#format-table)
 - [format-tree](#format-tree)
+- [from-csv](#from-csv)
+- [from-yaml](#from-yaml)
 - [length](#length)
 - [map](#map)
+- [to-csv](#to-csv)
+- [to-yaml](#to-yaml)
 - [transform](#transform)
 
 # filter
@@ -41,7 +45,7 @@ Input can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard input.
 
 ## Outputs
@@ -50,7 +54,7 @@ Output can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard output.
 
 ## Arguments
@@ -83,7 +87,7 @@ filter input-file.csv my-filter.js output-file.csv
 ```
 # format-table
 
-Formats JSON data to table rendered in ascii.
+Formats data to table rendered in ascii.
 
 ## Syntax
 
@@ -97,7 +101,7 @@ Input can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard input.
 
 ## Outputs
@@ -122,14 +126,14 @@ command-that-produces-json | format-table -
 ```bash
 format-table input-file.json
 ```
-### Reads data from a Yaml file, renders the data to an ascii table on standard output
+### Reads data from a YAML file, renders the data to an ascii table on standard output
 
 ```bash
 format-table input-file.yaml
 ```
 # format-tree
 
-Formats JSON data to tree rendered in ascii.
+Formats data to tree rendered in ascii.
 
 ## Syntax
 
@@ -143,7 +147,7 @@ Input can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard input.
 
 ## Outputs
@@ -168,10 +172,116 @@ command-that-produces-json | format-tree -
 ```bash
 format-tree input-file.json
 ```
-### Reads data from a Yaml file, renders the data to an ascii tree on standard output
+### Reads data from a YAML file, renders the data to an ascii tree on standard output
 
 ```bash
 format-tree input-file.yaml
+```
+# from-csv
+
+Converts data from the CSV (comma separated values) data format to the JSON data format.
+
+## Syntax
+
+```bash
+from-csv <csv-input-file> [<output-file>]
+```
+
+## Inputs
+
+Input can be one of the following:
+
+- CSV file
+- CSV formatted data on standard input
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (must be a CSV file) or a hypen to indicate reading CSV data from standard input.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Examples
+
+### Reads CSV data from standard input and writes JSON data to standard output
+
+```bash
+command-that-produces-csv | from-csv -
+```
+### Reads data from a CSV file and writes JSON data to standard output
+
+```bash
+from-csv input-file.csv
+```
+### Reads data from a CSV file and writes output to a YAML data file
+
+```bash
+from-csv input-file.csv output-file.yaml
+```
+### Reads data from a CSV file and writes output to a Json data file
+
+```bash
+from-csv input-file.csv output-file.json
+```
+# from-yaml
+
+Converts data from the YAML data format to the JSON data format.
+
+## Syntax
+
+```bash
+from-yaml <yaml-input-file> [<output-file>]
+```
+
+## Inputs
+
+Input can be one of the following:
+
+- YAML file
+- YAML formatted data on standard input
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (must be a YAML file) or a hypen to indicate reading YAML data from standard input.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Examples
+
+### Reads YAML data from standard input and writes JSON data to standard output
+
+```bash
+command-that-produces-yaml | from-yaml -
+```
+### Reads data from a YAML file and writes JSON data to standard output
+
+```bash
+from-yaml input-file.yaml
+```
+### Reads data from a YAML file and writes output to a CSV data file
+
+```bash
+from-yaml input-file.yaml output-file.csv
+```
+### Reads data from a YAML file and writes output to a JSON data file
+
+```bash
+from-yaml input-file.yaml output-file.json
 ```
 # length
 
@@ -189,7 +299,7 @@ Input can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard input.
 
 ## Outputs
@@ -230,7 +340,7 @@ Input can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard input.
 
 ## Outputs
@@ -239,7 +349,7 @@ Output can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard output.
 
 ## Arguments
@@ -270,6 +380,112 @@ map input-file.csv "record => record.x" output-file.csv
 ```bash
 map input-file.csv my-transformation.js
 ```
+# to-csv
+
+Converts data from the JSON data format to the CSV data format.
+
+## Syntax
+
+```bash
+to-csv <input-file> [<csv-output-file>]
+```
+
+## Inputs
+
+Input can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- CSV file
+- CSV formatted data on standard output
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or  yaml) or a hypen to indicate reading JSON data from standard input.
+- **csv-output-file** - The name of a file (must be a CSV file) to output the resulting dataset to. Omitting this causes CSV data to be written to standard output.
+
+## Examples
+
+### Reads JSON data from standard input and writes CSV data to standard output
+
+```bash
+command-that-produces-json | to-csv -
+```
+### Reads JSON data from standard input and writes a CSV data file
+
+```bash
+command-that-produces-json | to-csv output-file.csv
+```
+### Reads a JSON data file and writes a CSV data file
+
+```bash
+to-csv input-file.json output-file.csv
+```
+### Reads a YAML data file and writes a CSV data file
+
+```bash
+to-csv input-file.yaml output-file.csv
+```
+# to-yaml
+
+Converts data from the JSON data format to the YAML data format.
+
+## Syntax
+
+```bash
+to-yaml <input-file> [<yaml-output-file>]
+```
+
+## Inputs
+
+Input can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- YAML file
+- YAML formatted data on standard output
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or  yaml) or a hypen to indicate reading JSON data from standard input.
+- **yaml-output-file** - The name of a file (must be a YAML file) to output the resulting dataset to. Omitting this causes YAML data to be written to standard output.
+
+## Examples
+
+### Reads JSON data from standard input and writes YAML data to standard output
+
+```bash
+command-that-produces-json | to-yaml -
+```
+### Reads JSON data from standard input and writes a YAML data file
+
+```bash
+command-that-produces-json | to-yaml output-file.yaml
+```
+### Reads a JSON data file and writes a YAML data file
+
+```bash
+to-yaml input-file.json output-file.yaml
+```
+### Reads a CSV data file and writes a YAML data file
+
+```bash
+to-yaml input-file.csv output-file.yaml
+```
 # transform
 
 Transforms an entire dataset through a user defined function.
@@ -286,7 +502,7 @@ Input can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard input.
 
 ## Outputs
@@ -295,7 +511,7 @@ Output can be one of the following:
 
 - JSON file
 - CSV file
-- Yaml file
+- YAML file
 - JSON formatted array on standard output.
 
 ## Arguments
