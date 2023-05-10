@@ -1,31 +1,26 @@
-import { readJson } from "..";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
-import { outputData } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { verifyArray } from "../lib/verify";
+import { run } from "../lib/command";
+import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardInputFileHelpDesc, standardOutputFileHelp } from "./lib/help";
 
-async function main() {
-    const argv = process.argv.slice(2);
-    if (argv.length !== 5) {
-        throw new Error(`Usage: intersect <left-selector-fn> <left-file-name> <right-selector-fn> <right-file-name> <merge-fn>`);
-    }
+
+export async function main(argv: string[]): Promise<void> {
 
     const exampleFn = `r => r.key`;
+    const left = await inputData(argv);
+    verifyArray(left, "left dataset", "intersect");
     const leftSelectorFn = loadUserFn(argv, exampleFn);
-    const leftFileName = argv.shift()!;
+    const right = await inputData(argv);
+    verifyArray(right, "right dataset", "intersect");
     const rightSelectorFn = loadUserFn(argv, exampleFn);
-    const rightFileName = argv.shift()!;
     const mergeFn = loadUserFn(argv, `(left, right) => merge(left, right)`);
 
-    const left = await readJson(leftFileName); //todo: This should be allowed to use - for stdin.
-    verifyArray(left, "left input", "intersect");
-
-    const right = await readJson(rightFileName);
-    verifyArray(right, "right input", "intersect");
-
-    const leftKeys = left.map(record => {
+    const leftKeys = left.map((record: any) => {
         return invokeUserFn(() => leftSelectorFn.fn(record), leftSelectorFn.details);
     });
-    const rightKeys = right.map(record => {
+
+    const rightKeys = right.map((record: any) => {
         return invokeUserFn(() => rightSelectorFn.fn(record), rightSelectorFn.details);
     });
 
@@ -129,9 +124,47 @@ async function main() {
     await outputData(argv, output);
 }
 
-main()
-    .catch(err => {
-        console.error(`Failed with error:`);
-        console.error(err);
-        process.exit(1);
-    });
+export const documentation = {
+    name: "intersect",
+    desc: "Aggregates two data sets with common keys kind of like an SQL join.",
+    syntax: "intersect <left-input-file> <left-key-selector-fn> <right-input-file> <right-key-selector-fn> <merge-fn> [<output-file>]",
+    inputs: standardCmdInputs,
+    inputCount: 2,
+    outputs: standardCmdOutputs,
+    args: [
+        {
+            name: "left-input-file",
+            desc: standardInputFileHelpDesc,
+        },
+        {
+            name: "left-key-selector-fn",
+            desc: "A JavaScript function to select the join key for each record of the left dataset. Specifying a file name will load the JavaScript code from the file.",
+        },
+        {
+            name: "right-input-file",
+            desc: standardInputFileHelpDesc,
+        },
+        {
+            name: "right-key-selector-fn",
+            desc: "A JavaScript function to select the join key for each record of the right dataset. Specifying a file name will load the JavaScript code from the file.",
+        },
+        {
+            name: "merge-fn",
+            desc: "A JavaScript function to merge records from left and right datasets. Specifying a file name will load the JavaScript code from the file.",
+        },
+        standardOutputFileHelp,
+    ],
+    examples: [
+        {
+            name: `Reads two JSON files and merges the datasets based on the "email" field, writes output to a JSON file`,
+            cmd: 'intersect left-input.json "r => r.email" right-input.json "r => r.email" "(left, right) => ({ ...left, ...right })" output.json',
+        },
+    ],
+    notes: [
+        "You can only read input data from standard input from one of the left or right datasets.",
+    ]
+};
+
+if (require.main === module) {
+    run(main, documentation);
+}

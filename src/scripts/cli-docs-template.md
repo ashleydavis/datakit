@@ -35,7 +35,7 @@ map --help
 
 ## Inputs
 
-Input can be one of the following:
+Input can be {{this.inputCount}} of the following:
 
 {{#each this.inputs}}
 - {{this}}
@@ -54,6 +54,14 @@ Output can be one of the following:
 {{#each this.args}}
 - **{{this.name}}** - {{this.desc}}
 {{/each}}
+
+{{#if this.notes}}
+## Notes
+
+{{#each this.notes}}
+- {{this}}
+{{/each}}
+{{/if}}
 
 ## Examples
 

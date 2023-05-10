@@ -12,25 +12,29 @@
 
 import * as fs from 'fs';
 import handlebars from 'handlebars';
+import { IDocumentation } from '../lib/command';
+
 import { documentation as filter  } from "../cli/filter";
 import { documentation as formatTable  } from "../cli/format-table";
 import { documentation as formatTree  } from "../cli/format-tree";
 import { documentation as fromCsv  } from "../cli/from-csv";
 import { documentation as fromYaml  } from "../cli/from-yaml";
-import { documentation as group  } from "../cli/group";
+import { documentation as group } from "../cli/group";
+import { documentation as intersect } from "../cli/intersect";
 import { documentation as length  } from "../cli/length";
 import { documentation as map  } from "../cli/map";
 import { documentation as toCsv  } from "../cli/to-csv";
 import { documentation as toYaml  } from "../cli/to-yaml";
 import { documentation as transform  } from "../cli/transform";
 
-const docs = [
+const docs: IDocumentation[] = [
     filter,
     formatTable,
     formatTree,
     fromCsv,
     fromYaml,
     group,
+    intersect,
     length,
     map,
     toCsv,
@@ -41,6 +45,11 @@ const docs = [
 async function main() {
     
     const template = handlebars.compile(fs.readFileSync(`${__dirname}/cli-docs-template.md`, 'utf8'));
+    for (const doco of docs) {
+        if (doco.inputCount === undefined) {
+            doco.inputCount = 1;
+        }
+    }
     const markdownContent = template({ docs });
     const outputFileName = './docs/cli.md';
     fs.writeFileSync(outputFileName, markdownContent);

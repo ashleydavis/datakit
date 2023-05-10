@@ -46,7 +46,7 @@ export const documentation = {
         standardInputFileHelp,
         {
             name: "key-selector-fn",
-            desc: "A JavaScript function to to select the grouping key for each record of the input dataset. Specifying a file name will load the JavaScript code from the file.",
+            desc: "A JavaScript function to select the grouping key for each record of the input dataset. Specifying a file name will load the JavaScript code from the file.",
         },
         standardOutputFileHelp,
     ],

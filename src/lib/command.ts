@@ -6,11 +6,13 @@ export interface IDocumentation {
     desc: string;
     syntax: string;
     inputs: string[];
+    inputCount?: number;
     outputs: string[];
     args: {
         name: string;
         desc: string;
     }[];
+    notes?: string[];
     examples: {
         name: string;
         desc?: string;
@@ -29,6 +31,12 @@ function indent(input: string, indent: string): string {
 // Displays formatted documentation.
 //
 function displayDocumentation(doco: IDocumentation): void {
+
+    let inputCount =  "one of";
+    if (doco.inputCount !== undefined && doco.inputCount > 1) {
+        inputCount = `${doco.inputCount} of`
+    }
+
     console.log();
     console.log(chalk.cyanBright(doco.name));
     console.log();
@@ -38,7 +46,7 @@ function displayDocumentation(doco: IDocumentation): void {
     console.log();
     console.log(indent(doco.syntax, "\t"));
     console.log();
-    console.log("Inputs (one of):");
+    console.log(`Inputs (${inputCount}):`);
     console.log();
     console.log(indent(doco.inputs.map(input => "- " + input).join("\n"), "\t"));
     console.log();
@@ -50,6 +58,12 @@ function displayDocumentation(doco: IDocumentation): void {
     console.log();
     console.log(indent(doco.args.map(input => `- ${chalk.cyan(input.name)}: ${input.desc}`).join("\n"), "\t"));
     console.log();
+    if (doco.notes) {
+        console.log("Notes:");
+        console.log();
+        console.log(indent(doco.notes.map(note => `- ${note}`).join("\n"), "\t"));
+        console.log();
+    }
     console.log("Examples:");
     console.log();
     for (const example of doco.examples) {
