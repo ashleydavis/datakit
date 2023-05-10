@@ -15,7 +15,7 @@ export const standardCmdOutputs = [
 
 export const standardInputFileHelp = {
     name: "input-file",
-    desc: "Can be an input file name (json, csv or  yaml) or a hypen to indicate reading JSON data from standard input.",
+    desc: "Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.",
 };
 
 export const standardOutputFileHelp = {

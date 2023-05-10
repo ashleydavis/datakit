@@ -264,8 +264,37 @@ describe("pipelines", () => {
                 `).trimEnd(),
             },
         ],
-        // transform?
-    
+        //
+        // Group
+        //
+        [
+            "group",
+            "npx ts-node ./src/cli/group "
+                + "./src/test/data/starwars/characters.json "
+                +  "\"r => r.homeworld\" "
+                    + "| npx ts-node ./src/cli/map "
+                    + "- "
+                    + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
+                        + "| npx ts-node ./src/cli/take 3",
+            {
+                stdout: unindent(`
+                    [
+                        {
+                            "homeworld": "Tatooine",
+                            "numCharacters": 10
+                        },
+                        {
+                            "homeworld": "Naboo",
+                            "numCharacters": 11
+                        },
+                        {
+                            "homeworld": "Alderaan",
+                            "numCharacters": 3
+                        }
+                    ]
+                `),
+            },
+        ],    
     ];
 
     fs.removeSync("./src/test/output");

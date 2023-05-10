@@ -17,6 +17,7 @@ import { documentation as formatTable  } from "../cli/format-table";
 import { documentation as formatTree  } from "../cli/format-tree";
 import { documentation as fromCsv  } from "../cli/from-csv";
 import { documentation as fromYaml  } from "../cli/from-yaml";
+import { documentation as group  } from "../cli/group";
 import { documentation as length  } from "../cli/length";
 import { documentation as map  } from "../cli/map";
 import { documentation as toCsv  } from "../cli/to-csv";
@@ -29,6 +30,7 @@ const docs = [
     formatTree,
     fromCsv,
     fromYaml,
+    group,
     length,
     map,
     toCsv,

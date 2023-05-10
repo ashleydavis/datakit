@@ -53,7 +53,7 @@ function displayDocumentation(doco: IDocumentation): void {
     console.log("Examples:");
     console.log();
     for (const example of doco.examples) {
-        console.log(indent(example.name, "\t"));
+        console.log(indent(example.name + ":", "\t"));
         if (example.desc) {
             console.log();
             console.log(indent(example.desc, "\t\t"));
