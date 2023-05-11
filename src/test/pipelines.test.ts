@@ -294,7 +294,50 @@ describe("pipelines", () => {
                     ]
                 `),
             },
-        ],    
+        ],
+        //
+        // Intersect
+        //
+        [
+            "intersect",
+            "npx ts-node ./src/cli/intersect "
+                + "./src/test/data/starwars/characters.json "
+                + "\"character => character.homeworld\" "
+                + " ./src/test/data/starwars/planets.json "
+                + "\"planet => planet.name\" \"(character, planet) => ({ character, planet })\" "
+                    + "| npx ts-node ./src/cli/take 1",
+            {
+                stdout: unindent(`
+                    [
+                        {
+                            "character": {
+                                "name": "Luke Skywalker",
+                                "height": 172,
+                                "mass": 77,
+                                "hair_color": "blond",
+                                "skin_color": "fair",
+                                "eye_color": "blue",
+                                "birth_year": "19BBY",
+                                "gender": "male",
+                                "homeworld": "Tatooine",
+                                "species": "Human"
+                            },
+                            "planet": {
+                                "name": "Tatooine",
+                                "rotation_period": 23,
+                                "orbital_period": 304,
+                                "diameter": 10465,
+                                "climate": "arid",
+                                "gravity": "1 standard",
+                                "terrain": "desert",
+                                "surface_water": 1,
+                                "population": 200000
+                            }
+                        }
+                    ]
+                `),
+            },
+        ],
     ];
 
     fs.removeSync("./src/test/output");
