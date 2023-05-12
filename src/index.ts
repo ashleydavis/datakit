@@ -464,16 +464,12 @@ export interface IJsonOutputConfig {
  * @example
  * <pre>
  * 
- * const data = [ ... JavaScript array of data ... ];
+ * const data = ... JavaScript data ...;
  * const jsonData = datakit.toJson(data);
  * console.log(jsonData);
  * </pre>
  */
 export function toJson(input: any[], config?: IJsonOutputConfig): string {
-
-    if (!input || !isArray(input)) {
-        throw new Error("Expected 'input' parameter to 'datakit.toJson' to be a JavaScript array.");
-    }
 
     if (config) {
         if (!isObject(config)) {
@@ -602,10 +598,6 @@ export function toCsv(input: any[], config?: ICsvOutputConfig): string {
  * </pre>
  */
 export function toYaml(input: any[]): string {
-
-    if (!input || !isArray(input)) {
-        throw new Error("Expected 'input' parameter to 'datakit.toYaml' to be a JavaScript array.");
-    }
 
     return YAML.stringify(input);
 }
@@ -753,10 +745,6 @@ export async function writeJson(filePath: string, input: any[]): Promise<void> {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeJson' to be a string that specifies the path of the file to write to the local file system.");
     }
 
-    if (!input || !isArray(input)) {
-        throw new Error("Expected 'input' parameter to 'datakit.writeJson' to be a JavaScript array.");
-    }
-
     await writeFile(filePath, toJson(input));
 }
 
@@ -778,10 +766,6 @@ export function writeJsonSync(filePath: string, input: any[]): void {
 
     if (!isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeJsonSync' to be a string that specifies the path of the file to write to the local file system.");
-    }
-
-    if (!input || !isArray(input)) {
-        throw new Error("Expected 'input' parameter to 'datakit.writeJsonSync' to be a JavaScript array.");
     }
 
     const fs = require("fs");
@@ -808,10 +792,6 @@ export async function writeYaml(filePath: string, input: any[]): Promise<void> {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeYaml' to be a string that specifies the path of the file to write to the local file system.");
     }
 
-    if (!input || !isArray(input)) {
-        throw new Error("Expected 'input' parameter to 'datakit.writeYaml' to be a JavaScript array.");
-    }
-
     await writeFile(filePath, toYaml(input));
 }
 
@@ -833,10 +813,6 @@ export function writeYamlSync(filePath: string, input: any[]): void {
 
     if (!isString(filePath)) {
         throw new Error("Expected 'filePath' parameter to 'datakit.writeYamlSync' to be a string that specifies the path of the file to write to the local file system.");
-    }
-
-    if (!input || !isArray(input)) {
-        throw new Error("Expected 'input' parameter to 'datakit.writeYamlSync' to be a JavaScript array.");
     }
 
     const fs = require("fs");
