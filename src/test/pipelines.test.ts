@@ -265,59 +265,61 @@ describe("pipelines", () => {
             },
         ],
         //
-        // Group
+        // Group, skip and take.
         //
         [
-            "group",
+            "group, skip & take",
             "npx ts-node ./src/cli/group "
                 + "./src/test/data/starwars/characters.json "
                 +  "\"r => r.homeworld\" "
                     + "| npx ts-node ./src/cli/map "
                     + "- "
                     + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
-                        + "| npx ts-node ./src/cli/take 3",
+                        + "| npx ts-node ./src/cli/skip - 2"
+                        + "| npx ts-node ./src/cli/take - 3",
             {
                 stdout: unindent(`
                     [
                         {
-                            "homeworld": "Tatooine",
-                            "numCharacters": 10
-                        },
-                        {
-                            "homeworld": "Naboo",
-                            "numCharacters": 11
-                        },
-                        {
                             "homeworld": "Alderaan",
                             "numCharacters": 3
+                        },
+                        {
+                            "homeworld": "Stewjon",
+                            "numCharacters": 1
+                        },
+                        {
+                            "homeworld": "Eriadu",
+                            "numCharacters": 1
                         }
                     ]
-                `),
+                `).trimEnd(),
             },
         ],
         //
-        // Intersect
+        // Intersect, skip and take.
         //
         [
-            "intersect",
+            "intersect, skip & take",
             "npx ts-node ./src/cli/intersect "
                 + "./src/test/data/starwars/characters.json "
                 + "\"character => character.homeworld\" "
                 + " ./src/test/data/starwars/planets.json "
                 + "\"planet => planet.name\" \"(character, planet) => ({ character, planet })\" "
-                    + "| npx ts-node ./src/cli/take 1",
+                    + "| npx ts-node ./src/cli/skip - 3"
+                    + "| npx ts-node ./src/cli/take - 1",
             {
                 stdout: unindent(`
                     [
                         {
                             "character": {
-                                "name": "Luke Skywalker",
-                                "height": 172,
-                                "mass": 77,
-                                "hair_color": "blond",
-                                "skin_color": "fair",
-                                "eye_color": "blue",
-                                "birth_year": "19BBY",
+                                "name": "Darth Vader",
+                                "height": 202,
+                                "mass": 136,
+                                "hair_color": "none",
+                                "skin_color": "white",
+                                "eye_color": "yellow",
+                                "birth_year": "41.9BBY",
                                 "gender": "male",
                                 "homeworld": "Tatooine",
                                 "species": "Human"
@@ -335,7 +337,19 @@ describe("pipelines", () => {
                             }
                         }
                     ]
-                `),
+                `).trimEnd(),
+            },
+        ],
+        //
+        // Reduce
+        //
+        [
+            "reduce",
+            `echo [2, 3, 4] | npx ts-node ./src/cli/reduce - "(a, r) => a + r" 1`,
+            {
+                stdout: unindent(`
+                    10
+                `).trimEnd(),
             },
         ],
     ];

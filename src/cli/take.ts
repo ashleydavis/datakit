@@ -1,26 +1,54 @@
-import { fromJson, toJson } from "..";
-import { readStdin } from "../lib/io";
-import "./lib/load-globals";
+import { inputData, outputData } from "../lib/io";
 import { verifyInputArray } from "../lib/verify";
+import { run } from "../lib/command";
+import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 
-async function main() {
-    const argv = process.argv.slice(2);
+export async function main(argv: string[]): Promise<void> {
+
+    const data = await inputData(argv);
+    verifyInputArray(data, "skip");
+
     if (argv.length < 1) {
-        throw new Error(`Expected <number> argument.`);
+        throw new Error(`Expected <number> argument for number of records to take.`);
     }
 
-    const number = parseInt(argv[0]);
-    const input = await readStdin();
-    const data = fromJson(input);
-    verifyInputArray(data, "take");
+    const number = parseInt(argv.shift()!);
 
-    const transformed = data.slice(0, number);
-    console.log(toJson(transformed));
+    const taken = data.slice(0, number);
+    await outputData(argv, taken);
 }
 
-main()
-    .catch(err => {
-        console.error(`Failed with error:`);
-        console.error(err);
-        process.exit(1);
-    });
+
+export const documentation = {
+    name: "take",
+    desc: "Takes the first X records of the input dataset and writes them to the output dataset.",
+    syntax: "take <input-file> <take-number> [<output-file>]",
+    inputs: standardCmdInputs,
+    outputs: standardCmdOutputs,
+    args: [
+        standardInputFileHelp,
+        {
+            name: "take-number",
+            desc: "The number of records to take.",
+        },
+        standardOutputFileHelp,
+    ],
+    examples: [
+        {
+            name: "Reads JSON data from standard input, takes 3 records and writes them to standard output",
+            cmd: 'command-that-produces-json | take - 3',
+        },
+        { 
+            name: "Reads data from a file, takes 3 records and writes them to standard output",
+            cmd: 'take input-file.csv 3',
+        },
+        {
+            name: "Reads data from a file, takes 3 records and writes them to another file",
+            cmd: 'take input-file.csv 3 output-file.csv'
+        },
+    ],
+};
+
+if (require.main === module) {
+    run(main, documentation);
+}

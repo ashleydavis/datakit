@@ -23,6 +23,9 @@ import { documentation as group } from "../cli/group";
 import { documentation as intersect } from "../cli/intersect";
 import { documentation as length  } from "../cli/length";
 import { documentation as map  } from "../cli/map";
+import { documentation as reduce  } from "../cli/reduce";
+import { documentation as skip  } from "../cli/skip";
+import { documentation as take  } from "../cli/take";
 import { documentation as toCsv  } from "../cli/to-csv";
 import { documentation as toYaml  } from "../cli/to-yaml";
 import { documentation as transform  } from "../cli/transform";
@@ -37,6 +40,9 @@ const docs: IDocumentation[] = [
     intersect,
     length,
     map,
+    reduce,
+    skip,
+    take,
     toCsv,
     toYaml,
     transform,

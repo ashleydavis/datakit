@@ -27,6 +27,9 @@ map --help
 - [intersect](#intersect)
 - [length](#length)
 - [map](#map)
+- [reduce](#reduce)
+- [skip](#skip)
+- [take](#take)
 - [to-csv](#to-csv)
 - [to-yaml](#to-yaml)
 - [transform](#transform)
@@ -488,6 +491,167 @@ map input-file.csv "record => record.x" output-file.csv
 
 ```bash
 map input-file.csv my-transformation.js
+```
+# reduce
+
+Reduces or aggregates an input dataset to some output value by repeatedly calling the reducer function on every record of the input. Works just like `array.reduce` in JavaScript.
+
+## Syntax
+
+```bash
+reduce <input-file> <reducer-fn> [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **reducer-fn** - A JavaScript &quot;reducer&quot; function called for each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+
+## Examples
+
+### Reads JSON data from standard input, applies the reduction to compute total sales and writes to standard output
+
+```bash
+command-that-produces-json | reduce - "(a, r) => a + r.sales" 0
+```
+### Reads data from a file, applies the reduction to compute total sales and writes to standard output
+
+```bash
+reduce input-file.json "(a, r) => a + r.sales" 0
+```
+### Reads data from a file, applies the transformation and writes output to another file
+
+```bash
+reduce input-file.csv "(a, r) => a + r.sales" 0 output-file.csv
+```
+### Loads a JavaScript file for the transformation
+
+```bash
+reduce input-file.yaml my-reducer.js 0
+```
+# skip
+
+Skips the first X records of the input dataset and writes the remaining records to the output dataset.
+
+## Syntax
+
+```bash
+skip <input-file> <skip-number> [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **skip-number** - The number of records to skip.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+
+## Examples
+
+### Reads JSON data from standard input, skips 3 records and writes remaining records to standard output
+
+```bash
+command-that-produces-json | skip - 3
+```
+### Reads data from a file, skips 3 records and writes remaining records to standard output
+
+```bash
+skip input-file.csv 3
+```
+### Reads data from a file, skips 3 records and writes remaining records to another file
+
+```bash
+skip input-file.csv 3 output-file.csv
+```
+# take
+
+Takes the first X records of the input dataset and writes them to the output dataset.
+
+## Syntax
+
+```bash
+take <input-file> <take-number> [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **take-number** - The number of records to take.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+
+## Examples
+
+### Reads JSON data from standard input, takes 3 records and writes them to standard output
+
+```bash
+command-that-produces-json | take - 3
+```
+### Reads data from a file, takes 3 records and writes them to standard output
+
+```bash
+take input-file.csv 3
+```
+### Reads data from a file, takes 3 records and writes them to another file
+
+```bash
+take input-file.csv 3 output-file.csv
 ```
 # to-csv
 
