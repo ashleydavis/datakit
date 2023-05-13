@@ -18,6 +18,7 @@ map --help
 
 # Commands
 
+- [distinct](#distinct)
 - [filter](#filter)
 - [format-table](#format-table)
 - [format-tree](#format-tree)
@@ -35,6 +36,57 @@ map --help
 - [to-yaml](#to-yaml)
 - [transform](#transform)
 
+# distinct
+
+Returns the set of distinct values from the input dataset. Removes duplicate values from the dataset.
+
+## Syntax
+
+```bash
+distinct <input-file> [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+
+## Examples
+
+### Reads JSON data from standard input, removes duplicate values and writes to standard output
+
+```bash
+command-that-produces-json | distinct -
+```
+### Reads data from a file, removes duplicate values and writes to standard output
+
+```bash
+distinct input-file.csv
+```
+### Reads data from a file, removes duplicate values and writes output to another file
+
+```bash
+distinct input-file.csv output-file.csv
+```
 # filter
 
 Creates an output dataset by filtering the input dataset through the predicate function. Works just like `array.filter` in JavaScript.

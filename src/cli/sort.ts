@@ -45,25 +45,40 @@ export async function main(argv: string[]): Promise<void> {
     }
 
     data.sort((a: any, b: any): number => {
-        for (const criteria of sortCriteria) {
-            const keySelector = criteria.keySelectorFn;
-            const A = invokeUserFn(() => keySelector.fn(a), keySelector.details);
-            const B = invokeUserFn(() => keySelector.fn(b), keySelector.details);
-            let comparison = -1;
-            if (A === B) {
-                comparison = 0;
+        if (sortCriteria.length === 0) {
+            // No sort critera specified.
+            // Sort values directly in ascending order.
+            if (a === b) {
+                return 0;
             }
-            else if (A > B) {
-                comparison = 1;
+            else if (a > b) {
+                return 1;
             }
-
-            if (criteria.direction === "descending") {
-                // Inverts the comparison.
-                comparison = -comparison;
+            else {
+                return -1;
             }
-
-            if (comparison !== 0) {
-                return comparison;
+        }
+        else {
+            for (const criteria of sortCriteria) {
+                const keySelector = criteria.keySelectorFn;
+                const A = invokeUserFn(() => keySelector.fn(a), keySelector.details);
+                const B = invokeUserFn(() => keySelector.fn(b), keySelector.details);
+                let comparison = -1;
+                if (A === B) {
+                    comparison = 0;
+                }
+                else if (A > B) {
+                    comparison = 1;
+                }
+    
+                if (criteria.direction === "descending") {
+                    // Inverts the comparison.
+                    comparison = -comparison;
+                }
+    
+                if (comparison !== 0) {
+                    return comparison;
+                }
             }
         }
 

@@ -374,6 +374,22 @@ describe("pipelines", () => {
                 `).trimEnd(),
             },
         ],
+        //
+        // Distinct + sort.
+        //
+        [
+            "distinct + sort",
+            `npx ts-node ./src/cli/map - "r => r.homeworld" < ./src/test/data/starwars/characters.json | npx ts-node ./src/cli/distinct | npx ts-node ./src/cli/sort | npx ts-node ./src/cli/take - 3`,
+            {
+                stdout: unindent(`
+                    [
+                        "Alderaan",
+                        "Aleen Minor",
+                        "Bespin"
+                    ]
+                `).trimEnd(),
+            },
+        ],
     ];
 
     fs.removeSync("./src/test/output");
