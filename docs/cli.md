@@ -33,6 +33,7 @@ map --help
 - [sort](#sort)
 - [take](#take)
 - [to-csv](#to-csv)
+- [to-object](#to-object)
 - [to-yaml](#to-yaml)
 - [transform](#transform)
 
@@ -830,6 +831,66 @@ to-csv input-file.json output-file.csv
 
 ```bash
 to-csv input-file.yaml output-file.csv
+```
+# to-object
+
+Creates a JSON object from key/value pairs extracted from the input dataset.
+
+## Syntax
+
+```bash
+to-object <input-file> <key-selector-fn> <value-selector-fn> [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **key-selector-fn** - A JavaScript function to select the key from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **value-selector-fn** - A JavaScript function to select the value from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Notes
+
+- Unlike many other datakit commands the to-object command cannot output to the CSV format.
+
+## Examples
+
+### Reads JSON data from standard input and writes the JSON object to standard output
+
+```bash
+command-that-produces-json | to-object - "r => r.key" "r => r.value"
+```
+### Reads data from a file, applies the transformation and writes to standard output
+
+```bash
+to-object input-file.csv "r => r.key" "r => r.value"
+```
+### Reads data from a file, applies the transformation and writes output to another file
+
+```bash
+to-object input-file.csv "r => r.key" "r => r.value" output-file.json
+```
+### Loads JavaScript files for the key and value selector functions
+
+```bash
+to-object input-file.csv my-key-selector.js my-value-selector.js
 ```
 # to-yaml
 

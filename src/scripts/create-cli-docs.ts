@@ -29,6 +29,7 @@ import { documentation as skip  } from "../cli/skip";
 import { documentation as sort  } from "../cli/sort";
 import { documentation as take  } from "../cli/take";
 import { documentation as toCsv  } from "../cli/to-csv";
+import { documentation as toObject  } from "../cli/to-object";
 import { documentation as toYaml  } from "../cli/to-yaml";
 import { documentation as transform  } from "../cli/transform";
 
@@ -48,6 +49,7 @@ const docs: IDocumentation[] = [
     sort,
     take,
     toCsv,
+    toObject,
     toYaml,
     transform,
 ];
