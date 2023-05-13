@@ -32,7 +32,7 @@
     "test-4": "ts-node ./src/cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./src/cli/reduce - \"(a, r) => a + r.SharesValue\" \"0\"",
     "test-5": "ts-node ./src/cli/from-csv < .\\src\\test\\data\\example-data.csv | ts-node ./src/cli/transform - \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./src/cli/to-csv",
     "test-6": "echo { \"x\": 1, \"hello\": \"world\" } | ts-node ./src/cli/transform - \"data => ({ ...data, hello: 'computer'})\" | ts-node ./src/cli/to-yaml",
-    "test-7": "cat ./src/test/data/starwars/characters.json | ts-node ./src/cli/map - \"r => ({ name: r.name, gender: r.gender, homeworld: r.homeworld })\" | ts-node ./src/cli/sort - \"r => r.gender\" --direction=ascending \"r => r.name\" --direction=ascending |  ts-node ./src/cli/to-csv",
+    "test-sort": "cat ./src/test/data/starwars/characters.json | ts-node ./src/cli/map - \"r => ({ name: r.name, gender: r.gender, homeworld: r.homeworld })\" | ts-node ./src/cli/sort - \"r => r.gender\" \"r => r.name\" descending |  ts-node ./src/cli/to-csv",
     "test-format-tree-1": "ts-node ./src/cli/format-tree ./src/test/data/example-tree.json",
     "test-format-tree-2": "ts-node ./src/cli/transform - -f ./src/test/code/transform-tree.js < ./src/test/data/example-tree.json | ts-node ./src/cli/format-tree",
     "test-format-table-1": "ts-node ./src/cli/map - \"r => ({ ...r, name: chalk.green(r.name) })\" < ./src/test/data/starwars/characters.json | ts-node ./src/cli/format-table -",

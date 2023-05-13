@@ -29,6 +29,7 @@ map --help
 - [map](#map)
 - [reduce](#reduce)
 - [skip](#skip)
+- [sort](#sort)
 - [take](#take)
 - [to-csv](#to-csv)
 - [to-yaml](#to-yaml)
@@ -600,6 +601,77 @@ skip input-file.csv 3
 
 ```bash
 skip input-file.csv 3 output-file.csv
+```
+# sort
+
+Sorts the input dataset by the requested criteria and outputs the sorted dataset. Works a bit like `array.sort` in JavaScript, but really it's way more advanced.
+
+## Syntax
+
+```bash
+sort <input-file> (<sort-fn> [<sort-direction>])+ [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **sort-fn** - A JavaScript function to select the sort key from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **sort-direction** - Optional sort direction that may be &quot;ascending&quot; or &quot;descending&quot;. Defaults to &quot;ascending&quot;.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Notes
+
+- The sort function and sort direction can be stacked up to create nested levels of sorting.
+
+## Examples
+
+### Reads JSON data from standard input, sorts by email and writes to standard output
+
+```bash
+command-that-produces-json | sort - "record => record.email"
+```
+### Reads data from a file, sorts by email and writes to standard output
+
+```bash
+sort input-file.csv "record => record.email"
+```
+### Reads data from a file, sorts by email and writes output to another file
+
+```bash
+sort input-file.csv "record => record.email" output-file.csv
+```
+### Loads the sort function from a JavaScript file
+
+```bash
+sort input-file.csv my-sort-fn.js
+```
+### Reads data from standard input, sorts by name and then by age (a nested sort) and writes to standard output
+
+```bash
+sort - "r => r.email" "r => r.age" output-file.csv
+```
+### Reads data from standard input, sorts by age (oldest to youngest) and writes to standard output
+
+```bash
+sort - "r => r.age" descending output-file.csv
 ```
 # take
 

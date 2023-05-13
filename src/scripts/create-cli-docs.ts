@@ -25,6 +25,7 @@ import { documentation as length  } from "../cli/length";
 import { documentation as map  } from "../cli/map";
 import { documentation as reduce  } from "../cli/reduce";
 import { documentation as skip  } from "../cli/skip";
+import { documentation as sort  } from "../cli/sort";
 import { documentation as take  } from "../cli/take";
 import { documentation as toCsv  } from "../cli/to-csv";
 import { documentation as toYaml  } from "../cli/to-yaml";
@@ -42,6 +43,7 @@ const docs: IDocumentation[] = [
     map,
     reduce,
     skip,
+    sort,
     take,
     toCsv,
     toYaml,

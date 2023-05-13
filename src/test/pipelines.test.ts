@@ -352,6 +352,28 @@ describe("pipelines", () => {
                 `).trimEnd(),
             },
         ],
+        //
+        // Sort
+        //
+        [
+            "sort",
+            `cat ./src/test/data/starwars/characters.json `
+                + `| npx ts-node ./src/cli/sort - `
+                    + `"r => r.gender" ` 
+                    + `"r => r.name" `
+                    + `descending `
+                        + `| npx ts-node ./src/cli/take - 4`
+                            + `| npx ts-node ./src/cli/to-csv`,
+            {
+                stdout: unindent(`
+                    name,height,mass,hair_color,skin_color,eye_color,birth_year,gender,homeworld,species
+                    R5-D4,97,32,NA,"white, red",red,NA,NA,Tatooine,Droid
+                    R2-D2,96,32,NA,"white, blue",red,33BBY,NA,Naboo,Droid
+                    C-3PO,167,75,NA,gold,yellow,112BBY,NA,Tatooine,Droid
+                    Zam Wesell,168,55,blonde,"fair, green, yellow",yellow,NA,female,Zolan,Clawdite
+                `).trimEnd(),
+            },
+        ],
     ];
 
     fs.removeSync("./src/test/output");
