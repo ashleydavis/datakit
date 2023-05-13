@@ -20,4 +20,4 @@ Configures formatting for named fields in the JSON data.
 
 #### Defined in
 
-[index.ts:454](https://github.com/data-forge-notebook/datakit/blob/a275a26/src/index.ts#L454)
+[index.ts:454](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L454)
