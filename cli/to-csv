@@ -2,4 +2,7 @@
 
 'use strict';
 
-require('../build/cli/to-csv.js');
+const { run } = require("../build/lib/command");
+const { main, documentation } = require('../build/cli/to-csv.js');
+
+run(main, documentation);

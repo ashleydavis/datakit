@@ -2,4 +2,7 @@
 
 'use strict';
 
-require('../build/cli/length.js');
+const { run } = require("../build/lib/command");
+const { main, documentation } = require('../build/cli/length.js');
+
+run(main, documentation);

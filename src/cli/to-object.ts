@@ -1,8 +1,7 @@
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { inputData, outputData } from "../lib/io";
 import { verifyInputArray } from "../lib/verify";
-import { run } from "../lib/command";
-import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
+import { standardCmdInputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
 
@@ -66,7 +65,3 @@ export const documentation = {
         "Unlike many other datakit commands the to-object command cannot output to the CSV format."
     ],
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

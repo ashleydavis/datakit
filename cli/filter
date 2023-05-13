@@ -2,4 +2,7 @@
 
 'use strict';
 
-require('../build/cli/filter');
+const { run } = require("../build/lib/command");
+const { main, documentation } = require('../build/cli/filter.js');
+
+run(main, documentation);

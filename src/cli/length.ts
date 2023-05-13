@@ -1,5 +1,4 @@
 import { inputData, outputData } from "../lib/io";
-import { run } from "../lib/command";
 
 export async function main(argv: string[]): Promise<void> {
    
@@ -37,7 +36,3 @@ export const documentation = {
         },
     ],
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

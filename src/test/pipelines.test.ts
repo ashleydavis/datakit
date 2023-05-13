@@ -60,32 +60,32 @@ describe("pipelines", () => {
         //
         [
             "count json from stdin",
-            "npx ts-node ./src/cli/length - < ./src/test/data/example-data.json",
+            "npx ts-node ./cli/length - < ./src/test/data/example-data.json",
             { stdout: "3" },
         ],
         [
             "count json from file",
-            "npx ts-node ./src/cli/length ./src/test/data/example-data.json",
+            "npx ts-node ./cli/length ./src/test/data/example-data.json",
             { stdout: "3" },
         ],
         [
             "count csv from stdin",
-            "npx ts-node ./src/cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./src/cli/length -",
+            "npx ts-node ./cli/from-csv < ./src/test/data/example-data.csv | npx ts-node ./cli/length -",
             { stdout: "3" },
         ],
         [
             "count csv from file",
-            "npx ts-node ./src/cli/length ./src/test/data/example-data.csv",
+            "npx ts-node ./cli/length ./src/test/data/example-data.csv",
             { stdout: "3" },
         ],
         [
             "count yaml from stdin",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/length -",
+            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/length -",
             { stdout: "3" },
         ],
         [
             "count yaml from file",
-            "npx ts-node ./src/cli/length ./src/test/data/example-data.yaml",
+            "npx ts-node ./cli/length ./src/test/data/example-data.yaml",
             { stdout: "3" },
         ],
         //
@@ -93,7 +93,7 @@ describe("pipelines", () => {
         //
         [
             "json to stdout",
-            "npx ts-node ./src/cli/transform ./src/test/data/example-data.json \"dataset => dataset\" -",
+            "npx ts-node ./cli/transform ./src/test/data/example-data.json \"dataset => dataset\" -",
             { 
                 stdout: unindent(`
                     [
@@ -118,7 +118,7 @@ describe("pipelines", () => {
         ],
         [
             "json to file",
-            "npx ts-node ./src/cli/transform ./src/test/data/example-data.json \"dataset => dataset\" ./src/test/output/output.json",
+            "npx ts-node ./cli/transform ./src/test/data/example-data.json \"dataset => dataset\" ./src/test/output/output.json",
             {
                 file: {
                     "output.json": unindent(`
@@ -145,7 +145,7 @@ describe("pipelines", () => {
         ],
         [
             "csv to yaml",
-            "npx ts-node ./src/cli/from-csv ./src/test/data/example-data.csv ./src/test/output/output.yaml",
+            "npx ts-node ./cli/from-csv ./src/test/data/example-data.csv ./src/test/output/output.yaml",
             {
                 file: {
                     "output.yaml": unindent(`
@@ -164,7 +164,7 @@ describe("pipelines", () => {
         ],
         [
             "yaml to csv",
-            "npx ts-node ./src/cli/from-yaml ./src/test/data/example-data.yaml ./src/test/output/output.csv",
+            "npx ts-node ./cli/from-yaml ./src/test/data/example-data.yaml ./src/test/output/output.csv",
             {
                 file: {
                     "output.csv": unindent(`
@@ -181,7 +181,7 @@ describe("pipelines", () => {
         //
         [
             "transform, loading user function from argument",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - \"dataset => dataset.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./src/cli/to-yaml",
+            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/transform - \"dataset => dataset.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./cli/to-yaml",
             { 
                 stdout: unindent(`
                     - Date: 2013-01-02
@@ -198,7 +198,7 @@ describe("pipelines", () => {
         ],
         [
             "transform, loading user function from file",
-            "npx ts-node ./src/cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./src/cli/transform - -f ./src/test/code/transform-test.js | npx ts-node ./src/cli/to-yaml",
+            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/transform - -f ./src/test/code/transform-test.js | npx ts-node ./cli/to-yaml",
             { 
                 stdout: unindent(`
                     - Date: 2013-01-02
@@ -218,7 +218,7 @@ describe("pipelines", () => {
         // 
         [
             "map",
-            "npx ts-node ./src/cli/map ./src/test/data/example-data.json \"r => ({ ...r, CashPool: Math.floor(r.CashPool) })\"",
+            "npx ts-node ./cli/map ./src/test/data/example-data.json \"r => ({ ...r, CashPool: Math.floor(r.CashPool) })\"",
             {
                 stdout: unindent(`
                 [
@@ -246,7 +246,7 @@ describe("pipelines", () => {
         // 
         [
             "filter",
-            "npx ts-node ./src/cli/filter ./src/test/data/example-data.json \"r => r.SharesValue > 17555\"",
+            "npx ts-node ./cli/filter ./src/test/data/example-data.json \"r => r.SharesValue > 17555\"",
             {
                 stdout: unindent(`
                     [
@@ -269,14 +269,14 @@ describe("pipelines", () => {
         //
         [
             "group, skip & take",
-            "npx ts-node ./src/cli/group "
+            "npx ts-node ./cli/group "
                 + "./src/test/data/starwars/characters.json "
                 +  "\"r => r.homeworld\" "
-                    + "| npx ts-node ./src/cli/map "
+                    + "| npx ts-node ./cli/map "
                     + "- "
                     + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
-                        + "| npx ts-node ./src/cli/skip - 2"
-                        + "| npx ts-node ./src/cli/take - 3",
+                        + "| npx ts-node ./cli/skip - 2"
+                        + "| npx ts-node ./cli/take - 3",
             {
                 stdout: unindent(`
                     [
@@ -301,13 +301,13 @@ describe("pipelines", () => {
         //
         [
             "intersect, skip & take",
-            "npx ts-node ./src/cli/intersect "
+            "npx ts-node ./cli/intersect "
                 + "./src/test/data/starwars/characters.json "
                 + "\"character => character.homeworld\" "
                 + " ./src/test/data/starwars/planets.json "
                 + "\"planet => planet.name\" \"(character, planet) => ({ character, planet })\" "
-                    + "| npx ts-node ./src/cli/skip - 3"
-                    + "| npx ts-node ./src/cli/take - 1",
+                    + "| npx ts-node ./cli/skip - 3"
+                    + "| npx ts-node ./cli/take - 1",
             {
                 stdout: unindent(`
                     [
@@ -345,7 +345,7 @@ describe("pipelines", () => {
         //
         [
             "reduce",
-            `echo [2, 3, 4] | npx ts-node ./src/cli/reduce - "(a, r) => a + r" 1`,
+            `echo [2, 3, 4] | npx ts-node ./cli/reduce - "(a, r) => a + r" 1`,
             {
                 stdout: unindent(`
                     10
@@ -358,12 +358,12 @@ describe("pipelines", () => {
         [
             "sort",
             `cat ./src/test/data/starwars/characters.json `
-                + `| npx ts-node ./src/cli/sort - `
+                + `| npx ts-node ./cli/sort - `
                     + `"r => r.gender" ` 
                     + `"r => r.name" `
                     + `descending `
-                        + `| npx ts-node ./src/cli/take - 4`
-                            + `| npx ts-node ./src/cli/to-csv`,
+                        + `| npx ts-node ./cli/take - 4`
+                            + `| npx ts-node ./cli/to-csv`,
             {
                 stdout: unindent(`
                     name,height,mass,hair_color,skin_color,eye_color,birth_year,gender,homeworld,species
@@ -379,7 +379,7 @@ describe("pipelines", () => {
         //
         [
             "distinct + sort",
-            `npx ts-node ./src/cli/map - "r => r.homeworld" < ./src/test/data/starwars/characters.json | npx ts-node ./src/cli/distinct | npx ts-node ./src/cli/sort | npx ts-node ./src/cli/take - 3`,
+            `npx ts-node ./cli/map - "r => r.homeworld" < ./src/test/data/starwars/characters.json | npx ts-node ./cli/distinct | npx ts-node ./cli/sort | npx ts-node ./cli/take - 3`,
             {
                 stdout: unindent(`
                     [

@@ -1,6 +1,5 @@
 import { inputData, readStdin } from "../lib/io";
 import { asTree } from "treeify";
-import { run } from "../lib/command";
 import { standardCmdInputs, standardInputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
@@ -36,7 +35,3 @@ export const documentation = {
         },
     ],
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

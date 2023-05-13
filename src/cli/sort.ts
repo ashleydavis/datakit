@@ -1,8 +1,6 @@
 import { inputData, outputData } from "../lib/io";
 import { IUserFnDetails, invokeUserFn, loadUserFn } from "./lib/user-fn";
-import { consumeOptionalArg } from "./lib/args";
 import { verifyInputArray } from "../lib/verify";
-import { run } from "../lib/command";
 import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 
 type SortDirection = "ascending" | "descending";
@@ -136,7 +134,3 @@ export const documentation = {
         "The sort function and sort direction can be stacked up to create nested levels of sorting."
     ]
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

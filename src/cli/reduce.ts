@@ -1,7 +1,6 @@
 import { inputData, outputData } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { verifyInputArray } from "../lib/verify";
-import { run } from "../lib/command";
 import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
@@ -55,7 +54,3 @@ export const documentation = {
         },
     ],
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

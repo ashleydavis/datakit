@@ -1,5 +1,4 @@
 import { inputData, outputData } from "../lib/io";
-import { run } from "../lib/command";
 import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 import { verifyInputArray } from "../lib/verify";
 
@@ -52,7 +51,3 @@ export const documentation = {
         },
     ],
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

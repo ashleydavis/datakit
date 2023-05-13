@@ -1,7 +1,6 @@
 import { inputData, writeStdout } from "../lib/io";
 import { table } from "table";
 import chalk from 'chalk';
-import { run } from "../lib/command";
 import { standardCmdInputs, standardInputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
@@ -41,7 +40,3 @@ export const documentation = {
         },
     ],
 };
-
-if (require.main === module) {
-    run(main, documentation);
-}

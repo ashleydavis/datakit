@@ -2,4 +2,7 @@
 
 'use strict';
 
-require('../build/cli/reduce.js');
+const { run } = require("../build/lib/command");
+const { main, documentation } = require('../build/cli/reduce.js');
+
+run(main, documentation);
