@@ -1,7 +1,7 @@
 {
   "name": "datakit",
-  "version": "1.0.10",
-  "description": "Simple JavaScript/TypeScript library for reading and writing CSV and JSON data files.",
+  "version": "1.0.11",
+  "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
