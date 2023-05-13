@@ -63,7 +63,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -114,7 +114,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -263,7 +263,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -317,7 +317,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -373,7 +373,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -425,7 +425,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -515,7 +515,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -572,7 +572,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -629,7 +629,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -681,7 +681,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -752,7 +752,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
@@ -972,7 +972,7 @@ Output can be one of the following:
 - JSON file
 - CSV file
 - YAML file
-- JSON formatted array on standard output.
+- JSON formatted data on standard output.
 
 ## Arguments
 
