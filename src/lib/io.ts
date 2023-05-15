@@ -38,7 +38,7 @@ export function readStdin(): Promise<string> {
             timeout = setTimeout(() => {
                 timedout = true;
                 reject(new Error(`Timed out with no input on standard input. Use argument --help to get help about this command.`));
-            }, 1000 * 5);  
+            }, 1000 * 30);  
         };
 
         rl.on("line", (line: string) => {

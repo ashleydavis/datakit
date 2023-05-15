@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
