@@ -218,7 +218,7 @@ describe("pipelines", () => {
         // 
         [
             "map",
-            "npx ts-node ./cli/map ./src/test/data/example-data.json \"r => ({ ...r, CashPool: Math.floor(r.CashPool) })\"",
+            "npx ts-node ./cli/map \"r => ({ ...r, CashPool: Math.floor(r.CashPool) })\" ./src/test/data/example-data.json",
             {
                 stdout: unindent(`
                 [
@@ -273,7 +273,6 @@ describe("pipelines", () => {
                 + "./src/test/data/starwars/characters.json "
                 +  "\"r => r.homeworld\" "
                     + "| npx ts-node ./cli/map "
-                    + "- "
                     + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
                         + "| npx ts-node ./cli/skip - 2"
                         + "| npx ts-node ./cli/take - 3",
@@ -379,7 +378,7 @@ describe("pipelines", () => {
         //
         [
             "distinct + sort",
-            `npx ts-node ./cli/map - "r => r.homeworld" < ./src/test/data/starwars/characters.json | npx ts-node ./cli/distinct | npx ts-node ./cli/sort | npx ts-node ./cli/take - 3`,
+            `npx ts-node ./cli/map "r => r.homeworld" < ./src/test/data/starwars/characters.json | npx ts-node ./cli/distinct | npx ts-node ./cli/sort | npx ts-node ./cli/take - 3`,
             {
                 stdout: unindent(`
                     [

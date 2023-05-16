@@ -5,8 +5,9 @@ import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardO
 
 export async function main(argv: string[]): Promise<void> {
 
-    const data = await inputData(argv);
     const { fn, details } = loadUserFn(argv, `record => transform(record)`);
+
+    const data = await inputData(argv);
     verifyInputArray(data, "map");
 
     const transformed = data.map((record: any) => invokeUserFn(() => fn(record), details));
@@ -31,19 +32,23 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input, applies the transformation and writes to standard output",
-            cmd: 'command-that-produces-json | map - "record => record.x"',
+            cmd: 'command-that-produces-json | map "record => record.x"',
         },
         {
             name: "Reads data from a file, applies the transformation and writes to standard output",
-            cmd: 'map input-file.csv "record => record.x"',
+            cmd: 'map "record => record.x" input-file.csv',
         },
         {
             name: "Reads data from a file, applies the transformation and writes output to another file",
-            cmd: 'map input-file.csv "record => record.x" output-file.csv'
+            cmd: 'map "record => record.x"  input-file.csv output-file.csv'
+        },
+        {
+            name: "Reads data from a standard input, applies the transformation and writes output to another file",
+            cmd: 'map "record => record.x" - output-file.csv'
         },
         {
             name: "Loads a JavaScript file for the transformation",
-            cmd: 'map input-file.csv my-transformation.js',
+            cmd: 'map --file my-transformation.js input-file.csv output-file.csv',
         },
     ],
 };
