@@ -18,15 +18,15 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "map",
     desc: "Creates an output dataset by calling the transformer function on every record of the input dataset. Works just like `array.map` in JavaScript.",
-    syntax: "map <input-file> <transformer-fn> [<output-file>]",
+    syntax: "map <transformer-fn> [<input-file>] [<output-file>]",
     inputs: standardCmdInputs,
     outputs: standardCmdOutputs,
     args: [
-        standardInputFileHelp,
         {
             name: "transformer-fn",
             desc: "A JavaScript function to transform each record of the input dataset. Specifying a file name will load the JavaScript code from the file.",
         },
+        standardInputFileHelp,
         standardOutputFileHelp,
     ],
     examples: [

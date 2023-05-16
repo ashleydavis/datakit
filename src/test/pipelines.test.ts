@@ -270,8 +270,8 @@ describe("pipelines", () => {
         [
             "group, skip & take",
             "npx ts-node ./cli/group "
-                + "./src/test/data/starwars/characters.json "
                 +  "\"r => r.homeworld\" "
+                + "./src/test/data/starwars/characters.json "
                     + "| npx ts-node ./cli/map "
                     + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
                         + "| npx ts-node ./cli/skip - 2"

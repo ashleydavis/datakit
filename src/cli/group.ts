@@ -5,11 +5,11 @@ import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardO
 
 export async function main(argv: string[]): Promise<void> {
 
-    const data = await inputData(argv);
-    verifyInputArray(data, "group");
-
     const keySelectorFn = loadUserFn(argv, `r => r.key`);
 
+    const data = await inputData(argv);
+    verifyInputArray(data, "group");
+    
     interface IGroup {
         key: any;
         records: any[];
@@ -37,7 +37,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "group",
     desc: "Organises records from an input dataset into groups based on a key.",
-    syntax: "group <input-file> <key-selector-fn> [<output-file>]",
+    syntax: "group <key-selector-fn> [<input-file>] [<output-file>]",
     inputs: standardCmdInputs,
     outputs: standardCmdOutputs,
     args: [
@@ -51,11 +51,11 @@ export const documentation = {
     examples: [
         {
             name: `Reads JSON data from standard input, groups by "department" and writes the groups to standard output`,
-            cmd: 'command-that-produces-json | group - "record => record.department"',
+            cmd: 'command-that-produces-json | group "record => record.department"',
         },
         {
             name: `Reads data from a file, groups by "department" and writes the groups to standard output`,
-            cmd: 'group input-file.csv "record => record.department"',
+            cmd: 'group "record => record.department" input-file.csv',
         },
         {
             name: `Reads data from a file, groups by "department" and counts total sales, writing the output to a file`,

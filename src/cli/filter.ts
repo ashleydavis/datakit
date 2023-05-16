@@ -18,15 +18,15 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "filter",
     desc: "Creates an output dataset by filtering the input dataset through the predicate function. Works just like `array.filter` in JavaScript.",
-    syntax: "filter <input-file> <predicate-fn> [<output-file>]",
+    syntax: "filter <predicate-fn> [<input-file>] [<output-file>]",
     inputs: standardCmdInputs,
     outputs: standardCmdOutputs,
     args: [
-        standardInputFileHelp,
         {
             name: "predicate-fn",
             desc: "A JavaScript predicate function that is passed each record in the dataset and returns true/truthy to keep the record or false/falsy to rmeove the record. Specifying a file name will load the JavaScript code from the file.",
         },
+        standardInputFileHelp,
         standardOutputFileHelp,
     ],
     examples: [
