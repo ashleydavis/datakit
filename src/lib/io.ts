@@ -4,7 +4,6 @@ import { readJson } from "..";
 import { readCsv } from "..";
 import { readYaml } from "..";
 import { isArray } from "./utils";
-import exp from "constants";
 
 //
 // Reads data from standard input.
