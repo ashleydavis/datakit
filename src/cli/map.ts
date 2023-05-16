@@ -43,8 +43,8 @@ export const documentation = {
             cmd: 'map "record => record.x"  input-file.csv output-file.csv'
         },
         {
-            name: "Reads data from a standard input, applies the transformation and writes output to another file",
-            cmd: 'map "record => record.x" - output-file.csv'
+            name: "Reads JSON data from standard input, applies the transformation and writes output to another file",
+            cmd: 'command-that-produces-json | map "record => record.x" - output-file.csv'
         },
         {
             name: "Loads a JavaScript file for the transformation",

@@ -1,14 +1,14 @@
-import { inputData, outputData, readStdin } from "../lib/io";
+import { inputData, outputData } from "../lib/io";
 import { invokeUserFn, loadUserFn } from "./lib/user-fn";
 import { verifyInputArray } from "../lib/verify";
 import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardOutputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
     
+    const { fn, details } = loadUserFn(argv, `r => predicate(r)`);
+
     const data = await inputData(argv);
     verifyInputArray(data, "filter");
-
-    const { fn, details } = loadUserFn(argv, `r => predicate(key)`);
 
     const filtered = data.filter((record: any) => invokeUserFn(() => fn(record), details));
 
@@ -32,19 +32,23 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input, applies the filter and writes to standard output",
-            cmd: `command-that-produces-json | filter - "record => record.id === '1234'"`,
+            cmd: `command-that-produces-json | filter "record => record.id === '1234'"`,
         },
         {
             name: "Reads data from a file, applies the filter and writes to standard output",
-            cmd: `filter input-file.csv "record => record.id === '1234'"`,
+            cmd: `filter "record => record.id === '1234'" input-file.csv`,
         },
         {
             name: "Reads data from a file, applies the filter and writes output to another file",
-            cmd: `filter input-file.csv "record => record.id === '1234'" output-file.csv`,
+            cmd: `filter "record => record.id === '1234'"  input-file.csv output-file.csv`,
+        },
+        {
+            name: "Reads JSON data from standard input, applies the filter and writes output to another file",
+            cmd: `command-that-produces-json | filter "record => record.id === '1234'" - output-file.csv`,
         },
         {
             name: "Loads a JavaScript file for the filter function",
-            cmd: `filter input-file.csv my-filter.js output-file.csv`,
+            cmd: `filter --file my-filter.js input-file.csv output-file.csv`,
         },
     ],
 };

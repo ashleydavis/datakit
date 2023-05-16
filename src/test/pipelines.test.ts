@@ -246,7 +246,7 @@ describe("pipelines", () => {
         // 
         [
             "filter",
-            "npx ts-node ./cli/filter ./src/test/data/example-data.json \"r => r.SharesValue > 17555\"",
+            `npx ts-node ./cli/filter "r => r.SharesValue > 17555" ./src/test/data/example-data.json`,
             {
                 stdout: unindent(`
                     [
