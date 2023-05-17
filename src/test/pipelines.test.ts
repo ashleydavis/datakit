@@ -358,7 +358,7 @@ describe("pipelines", () => {
         [
             "sort",
             `cat ./src/test/data/starwars/characters.json `
-                + `| npx ts-node ./cli/sort - `
+                + `| npx ts-node ./cli/sort `
                     + `"r => r.gender" ` 
                     + `"r => r.name" `
                     + `descending `
