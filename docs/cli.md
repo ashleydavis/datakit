@@ -67,7 +67,7 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -95,7 +95,7 @@ Creates an output dataset by filtering the input dataset through the predicate f
 ## Syntax
 
 ```bash
-filter <input-file> <predicate-fn> [<output-file>]
+filter <predicate-fn> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -118,8 +118,8 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **predicate-fn** - A JavaScript predicate function that is passed each record in the dataset and returns true/truthy to keep the record or false/falsy to rmeove the record. Specifying a file name will load the JavaScript code from the file.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -128,22 +128,27 @@ Output can be one of the following:
 ### Reads JSON data from standard input, applies the filter and writes to standard output
 
 ```bash
-command-that-produces-json | filter - "record => record.id === '1234'"
+command-that-produces-json | filter "record => record.id === '1234'"
 ```
 ### Reads data from a file, applies the filter and writes to standard output
 
 ```bash
-filter input-file.csv "record => record.id === '1234'"
+filter "record => record.id === '1234'" input-file.csv
 ```
 ### Reads data from a file, applies the filter and writes output to another file
 
 ```bash
-filter input-file.csv "record => record.id === '1234'" output-file.csv
+filter "record => record.id === '1234'"  input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, applies the filter and writes output to another file
+
+```bash
+command-that-produces-json | filter "record => record.id === '1234'" - output-file.csv
 ```
 ### Loads a JavaScript file for the filter function
 
 ```bash
-filter input-file.csv my-filter.js output-file.csv
+filter --file my-filter.js input-file.csv output-file.csv
 ```
 # format-table
 
@@ -172,7 +177,7 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 
 
 ## Examples
@@ -219,7 +224,7 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 
 
 ## Examples
@@ -354,7 +359,7 @@ Organises records from an input dataset into groups based on a key.
 ## Syntax
 
 ```bash
-group <input-file> <key-selector-fn> [<output-file>]
+group <key-selector-fn> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -377,7 +382,7 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **key-selector-fn** - A JavaScript function to select the grouping key for each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
@@ -387,12 +392,12 @@ Output can be one of the following:
 ### Reads JSON data from standard input, groups by &quot;department&quot; and writes the groups to standard output
 
 ```bash
-command-that-produces-json | group - "record => record.department"
+command-that-produces-json | group "record => record.department"
 ```
 ### Reads data from a file, groups by &quot;department&quot; and writes the groups to standard output
 
 ```bash
-group input-file.csv "record => record.department"
+group "record => record.department" input-file.csv
 ```
 ### Reads data from a file, groups by &quot;department&quot; and counts total sales, writing the output to a file
 
@@ -406,7 +411,7 @@ Aggregates two data sets with common keys kind of like an SQL join.
 ## Syntax
 
 ```bash
-intersect <left-input-file> <left-key-selector-fn> <right-input-file> <right-key-selector-fn> <merge-fn> [<output-file>]
+intersect <left-key-selector-fn> <left-input-file> <right-key-selector-fn> <right-input-file> <merge-fn> [<output-file>]
 ```
 
 ## Inputs
@@ -429,10 +434,10 @@ Output can be one of the following:
 
 ## Arguments
 
-- **left-input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **left-key-selector-fn** - A JavaScript function to select the join key for each record of the left dataset. Specifying a file name will load the JavaScript code from the file.
-- **right-input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **left-input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **right-key-selector-fn** - A JavaScript function to select the join key for each record of the right dataset. Specifying a file name will load the JavaScript code from the file.
+- **right-input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **merge-fn** - A JavaScript function to merge records from left and right datasets. Specifying a file name will load the JavaScript code from the file.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
@@ -445,7 +450,7 @@ Output can be one of the following:
 ### Reads two JSON files and merges the datasets based on the &quot;email&quot; field, writes output to a JSON file
 
 ```bash
-intersect left-input.json "r => r.email" right-input.json "r => r.email" "(left, right) => ({ ...left, ...right })" output.json
+intersect "r => r.email" left-input.json "r => r.email" right-input.json "(left, right) => ({ ...left, ...right })" output.json
 ```
 # length
 
@@ -496,7 +501,7 @@ Creates an output dataset by calling the transformer function on every record of
 ## Syntax
 
 ```bash
-map <input-file> <transformer-fn> [<output-file>]
+map <transformer-fn> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -519,8 +524,8 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **transformer-fn** - A JavaScript function to transform each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -529,22 +534,27 @@ Output can be one of the following:
 ### Reads JSON data from standard input, applies the transformation and writes to standard output
 
 ```bash
-command-that-produces-json | map - "record => record.x"
+command-that-produces-json | map "record => record.x"
 ```
 ### Reads data from a file, applies the transformation and writes to standard output
 
 ```bash
-map input-file.csv "record => record.x"
+map "record => record.x" input-file.csv
 ```
 ### Reads data from a file, applies the transformation and writes output to another file
 
 ```bash
-map input-file.csv "record => record.x" output-file.csv
+map "record => record.x"  input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, applies the transformation and writes output to another file
+
+```bash
+command-that-produces-json | map "record => record.x" - output-file.csv
 ```
 ### Loads a JavaScript file for the transformation
 
 ```bash
-map input-file.csv my-transformation.js
+map --file my-transformation.js input-file.csv output-file.csv
 ```
 # reduce
 
@@ -553,7 +563,7 @@ Reduces or aggregates an input dataset to some output value by repeatedly callin
 ## Syntax
 
 ```bash
-reduce <input-file> <reducer-fn> [<output-file>]
+reduce <reducer-fn> <seed-value> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -576,8 +586,9 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **reducer-fn** - A JavaScript &quot;reducer&quot; function called for each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **seed-value** - JSON value that is used as the initial accumulator value for the reduction.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -586,17 +597,22 @@ Output can be one of the following:
 ### Reads JSON data from standard input, applies the reduction to compute total sales and writes to standard output
 
 ```bash
-command-that-produces-json | reduce - "(a, r) => a + r.sales" 0
+command-that-produces-json | reduce "(a, r) => a + r.sales" 0
 ```
-### Reads data from a file, applies the reduction to compute total sales and writes to standard output
+### Reads data from a file, applies the reduction and writes to standard output
 
 ```bash
-reduce input-file.json "(a, r) => a + r.sales" 0
+reduce "(a, r) => a + r.sales" 0 input-file.json
 ```
-### Reads data from a file, applies the transformation and writes output to another file
+### Reads data from a file, applies the reduction and writes output to another file
 
 ```bash
-reduce input-file.csv "(a, r) => a + r.sales" 0 output-file.csv
+reduce "(a, r) => a + r.sales" 0 input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, applies the reduction and writes output to another file
+
+```bash
+command-that-produces-json | reduce "(a, r) => a + r.sales" 0 - output-file.csv
 ```
 ### Loads a JavaScript file for the transformation
 
@@ -610,7 +626,7 @@ Skips the first X records of the input dataset and writes the remaining records 
 ## Syntax
 
 ```bash
-skip <input-file> <skip-number> [<output-file>]
+skip <skip-number> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -633,8 +649,8 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **skip-number** - The number of records to skip.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -643,17 +659,22 @@ Output can be one of the following:
 ### Reads JSON data from standard input, skips 3 records and writes remaining records to standard output
 
 ```bash
-command-that-produces-json | skip - 3
+command-that-produces-json | skip 3
 ```
 ### Reads data from a file, skips 3 records and writes remaining records to standard output
 
 ```bash
-skip input-file.csv 3
+skip 3 input-file.csv
 ```
 ### Reads data from a file, skips 3 records and writes remaining records to another file
 
 ```bash
-skip input-file.csv 3 output-file.csv
+skip 3  input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, skips 3 records and writes remaining records to a file
+
+```bash
+command-that-produces-json | skip 3 - output-file.csv
 ```
 # sort
 
@@ -662,7 +683,7 @@ Sorts the input dataset by the requested criteria and outputs the sorted dataset
 ## Syntax
 
 ```bash
-sort <input-file> (<sort-fn> [<sort-direction>])+ [<output-file>]
+sort (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -685,9 +706,9 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **sort-fn** - A JavaScript function to select the sort key from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
 - **sort-direction** - Optional sort direction that may be &quot;ascending&quot; or &quot;descending&quot;. Defaults to &quot;ascending&quot;.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 ## Notes
@@ -699,32 +720,32 @@ Output can be one of the following:
 ### Reads JSON data from standard input, sorts by email and writes to standard output
 
 ```bash
-command-that-produces-json | sort - "record => record.email"
+command-that-produces-json | sort "record => record.email"
 ```
 ### Reads data from a file, sorts by email and writes to standard output
 
 ```bash
-sort input-file.csv "record => record.email"
+sort"record => record.email" input-file.csv 
 ```
 ### Reads data from a file, sorts by email and writes output to another file
 
 ```bash
-sort input-file.csv "record => record.email" output-file.csv
+sort "record => record.email" input-file.csv output-file.csv
 ```
 ### Loads the sort function from a JavaScript file
 
 ```bash
-sort input-file.csv my-sort-fn.js
+sort --file my-sort-fn.js input-file.csv
 ```
-### Reads data from standard input, sorts by name and then by age (a nested sort) and writes to standard output
+### Reads JSON data from standard input, sorts by name and then by age (a nested sort) and writes to standard output
 
 ```bash
-sort - "r => r.email" "r => r.age" output-file.csv
+sort "r => r.email" "r => r.age" - output-file.csv
 ```
-### Reads data from standard input, sorts by age (oldest to youngest) and writes to standard output
+### Reads JSON data from standard input, sorts by age (oldest to youngest) and writes to standard output
 
 ```bash
-sort - "r => r.age" descending output-file.csv
+sort "r => r.age" descending - output-file.csv
 ```
 # take
 
@@ -733,7 +754,7 @@ Takes the first X records of the input dataset and writes them to the output dat
 ## Syntax
 
 ```bash
-take <input-file> <take-number> [<output-file>]
+take <take-number> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -756,8 +777,8 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **take-number** - The number of records to take.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -766,17 +787,22 @@ Output can be one of the following:
 ### Reads JSON data from standard input, takes 3 records and writes them to standard output
 
 ```bash
-command-that-produces-json | take - 3
+command-that-produces-json | take 3
 ```
 ### Reads data from a file, takes 3 records and writes them to standard output
 
 ```bash
-take input-file.csv 3
+take 3 input-file.csv
 ```
 ### Reads data from a file, takes 3 records and writes them to another file
 
 ```bash
-take input-file.csv 3 output-file.csv
+take 3 input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, takes 3 records and writes them to a file
+
+```bash
+command-that-produces-json | take 3 - output-file.csv
 ```
 # to-csv
 
@@ -785,7 +811,7 @@ Converts data from the JSON data format to the CSV data format.
 ## Syntax
 
 ```bash
-to-csv <input-file> [<csv-output-file>]
+to-csv [<input-file>] [<csv-output-file>]
 ```
 
 ## Inputs
@@ -806,7 +832,7 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **csv-output-file** - The name of a file (must be a CSV file) to output the resulting dataset to. Omitting this causes CSV data to be written to standard output.
 
 
@@ -839,7 +865,7 @@ Creates a JSON object from key/value pairs extracted from the input dataset.
 ## Syntax
 
 ```bash
-to-object <input-file> <key-selector-fn> <value-selector-fn> [<output-file>]
+to-object <key-selector-fn> <value-selector-fn> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -861,9 +887,9 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **key-selector-fn** - A JavaScript function to select the key from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
 - **value-selector-fn** - A JavaScript function to select the value from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 ## Notes
@@ -875,22 +901,27 @@ Output can be one of the following:
 ### Reads JSON data from standard input and writes the JSON object to standard output
 
 ```bash
-command-that-produces-json | to-object - "r => r.key" "r => r.value"
+command-that-produces-json | to-object "r => r.key" "r => r.value"
 ```
-### Reads data from a file, applies the transformation and writes to standard output
+### Reads data from a file and writes the JSON object to standard output
 
 ```bash
-to-object input-file.csv "r => r.key" "r => r.value"
+to-object "r => r.key" "r => r.value"  input-file.csv
 ```
-### Reads data from a file, applies the transformation and writes output to another file
+### Reads data from a file and writes the JSON object to a file
 
 ```bash
-to-object input-file.csv "r => r.key" "r => r.value" output-file.json
+to-object "r => r.key" "r => r.value" input-file.csv output-file.json
 ```
 ### Loads JavaScript files for the key and value selector functions
 
 ```bash
-to-object input-file.csv my-key-selector.js my-value-selector.js
+to-object --file my-key-selector.js --file my-value-selector.js input-file.csv
+```
+### Reads JSON data from standard inputand writes the JSON object to a file
+
+```bash
+to-object "r => r.key" "r => r.value" - output-file.json
 ```
 # to-yaml
 
@@ -899,7 +930,7 @@ Converts data from the JSON data format to the YAML data format.
 ## Syntax
 
 ```bash
-to-yaml <input-file> [<yaml-output-file>]
+to-yaml [<input-file>] [<yaml-output-file>]
 ```
 
 ## Inputs
@@ -920,7 +951,7 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **yaml-output-file** - The name of a file (must be a YAML file) to output the resulting dataset to. Omitting this causes YAML data to be written to standard output.
 
 
@@ -929,12 +960,12 @@ Output can be one of the following:
 ### Reads JSON data from standard input and writes YAML data to standard output
 
 ```bash
-command-that-produces-json | to-yaml -
+command-that-produces-json | to-yaml
 ```
 ### Reads JSON data from standard input and writes a YAML data file
 
 ```bash
-command-that-produces-json | to-yaml output-file.yaml
+command-that-produces-json | to-yaml - output-file.yaml
 ```
 ### Reads a JSON data file and writes a YAML data file
 
@@ -953,7 +984,7 @@ Transforms an entire dataset through a user defined function.
 ## Syntax
 
 ```bash
-transform <input-file> <transformer-fn> [<output-file>]
+transform <transformer-fn> [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -976,8 +1007,8 @@ Output can be one of the following:
 
 ## Arguments
 
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
 - **transformer-fn** - A JavaScript function to transform the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
@@ -986,20 +1017,25 @@ Output can be one of the following:
 ### Reads JSON data from standard input, applies the transformation and writes to standard output
 
 ```bash
-command-that-produces-json | transform - "dataset => transform(dataset)"
+command-that-produces-json | transform "dataset => transform(dataset)"
 ```
 ### Reads data from a file, applies the transformation and writes to standard output
 
 ```bash
-transform input-file.csv "dataset => transform(dataset)"
+transform "dataset => transform(dataset)" input-file.csv
 ```
 ### Reads data from a file, applies the transformation and writes output to another file
 
 ```bash
-transform input-file.csv "dataset => transform(dataset)" output-file.csv
+transform "dataset => transform(dataset)" input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, applies the transformation and writes output to a file
+
+```bash
+command-that-produces-json | transform "dataset => transform(dataset)" - output-file.csv
 ```
 ### Loads a JavaScript file for the transformation
 
 ```bash
-transform input-file.csv my-transformation.js
+transform --file my-transformation.js input-file.csv
 ```
