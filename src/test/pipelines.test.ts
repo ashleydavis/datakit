@@ -270,7 +270,7 @@ describe("pipelines", () => {
         [
             "group, skip & take",
             "npx ts-node ./cli/group "
-                +  "\"r => r.homeworld\" "
+                + "\"r => r.homeworld\" "
                 + "./src/test/data/starwars/characters.json "
                     + "| npx ts-node ./cli/map "
                     + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
@@ -301,10 +301,11 @@ describe("pipelines", () => {
         [
             "intersect, skip & take",
             "npx ts-node ./cli/intersect "
+                + `"character => character.homeworld" `
                 + "./src/test/data/starwars/characters.json "
-                + "\"character => character.homeworld\" "
+                + `"planet => planet.name" `
                 + " ./src/test/data/starwars/planets.json "
-                + "\"planet => planet.name\" \"(character, planet) => ({ character, planet })\" "
+                + `"(character, planet) => ({ character, planet })" `
                     + "| npx ts-node ./cli/skip - 3"
                     + "| npx ts-node ./cli/take - 1",
             {

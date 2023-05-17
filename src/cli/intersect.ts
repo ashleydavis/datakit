@@ -6,12 +6,12 @@ import { standardCmdInputs, standardCmdOutputs, standardInputFileHelp, standardI
 export async function main(argv: string[]): Promise<void> {
 
     const exampleFn = `r => r.key`;
+    const leftSelectorFn = loadUserFn(argv, exampleFn);
     const left = await inputData(argv);
     verifyArray(left, "left dataset", "intersect");
-    const leftSelectorFn = loadUserFn(argv, exampleFn);
+    const rightSelectorFn = loadUserFn(argv, exampleFn);
     const right = await inputData(argv);
     verifyArray(right, "right dataset", "intersect");
-    const rightSelectorFn = loadUserFn(argv, exampleFn);
     const mergeFn = loadUserFn(argv, `(left, right) => merge(left, right)`);
 
     const leftKeys = left.map((record: any) => {
@@ -125,26 +125,26 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "intersect",
     desc: "Aggregates two data sets with common keys kind of like an SQL join.",
-    syntax: "intersect <left-input-file> <left-key-selector-fn> <right-input-file> <right-key-selector-fn> <merge-fn> [<output-file>]",
+    syntax: "intersect <left-key-selector-fn> <left-input-file> <right-key-selector-fn> <right-input-file> <merge-fn> [<output-file>]",
     inputs: standardCmdInputs,
     inputCount: 2,
     outputs: standardCmdOutputs,
     args: [
         {
-            name: "left-input-file",
-            desc: standardInputFileHelpDesc,
-        },
-        {
             name: "left-key-selector-fn",
             desc: "A JavaScript function to select the join key for each record of the left dataset. Specifying a file name will load the JavaScript code from the file.",
         },
         {
-            name: "right-input-file",
+            name: "left-input-file",
             desc: standardInputFileHelpDesc,
         },
         {
             name: "right-key-selector-fn",
             desc: "A JavaScript function to select the join key for each record of the right dataset. Specifying a file name will load the JavaScript code from the file.",
+        },
+        {
+            name: "right-input-file",
+            desc: standardInputFileHelpDesc,
         },
         {
             name: "merge-fn",
@@ -155,7 +155,7 @@ export const documentation = {
     examples: [
         {
             name: `Reads two JSON files and merges the datasets based on the "email" field, writes output to a JSON file`,
-            cmd: 'intersect left-input.json "r => r.email" right-input.json "r => r.email" "(left, right) => ({ ...left, ...right })" output.json',
+            cmd: 'intersect "r => r.email" left-input.json "r => r.email" right-input.json "(left, right) => ({ ...left, ...right })" output.json',
         },
     ],
     notes: [
