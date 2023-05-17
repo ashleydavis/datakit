@@ -37,7 +37,7 @@
     "test-format-tree-2": "ts-node ./cli/transform - -f ./src/test/code/transform-tree.js < ./src/test/data/example-tree.json | ts-node ./cli/format-tree",
     "test-format-table-1": "ts-node ./cli/map \"r => ({ ...r, name: chalk.green(r.name) })\" < ./src/test/data/starwars/characters.json | ts-node ./cli/format-table -",
     "test-format-table-2": "ts-node ./cli/map \"r => ({ ...r, name: r.homeworld === 'Tatooine' ? chalk.green(r.name) : r.name })\" < ./src/test/data/starwars/characters.json | ts-node ./cli/format-table",
-    "test-skip-take": "cat ./src/test/data/starwars/characters.json | ts-node ./cli/skip - 1 | ts-node ./cli/take - 5 | ts-node ./cli/to-csv",
+    "test-skip-take": "cat ./src/test/data/starwars/characters.json | ts-node ./cli/skip 1 | ts-node ./cli/take - 5 | ts-node ./cli/to-csv",
     "test-intersect-1": "ts-node ./cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => ({ character, planet })\"",
     "test-intersect-2": "ts-node ./cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => character ? (planet ? ({ ...planet, ...character}) : character) : undefined\"",
     "test-group-1": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json",

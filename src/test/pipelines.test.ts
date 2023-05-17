@@ -274,7 +274,7 @@ describe("pipelines", () => {
                 + "./src/test/data/starwars/characters.json "
                     + "| npx ts-node ./cli/map "
                     + "\"r => ({ homeworld: r.key, numCharacters: r.records.length })\" "
-                        + "| npx ts-node ./cli/skip - 2"
+                        + "| npx ts-node ./cli/skip 2"
                         + "| npx ts-node ./cli/take - 3",
             {
                 stdout: unindent(`
@@ -306,7 +306,7 @@ describe("pipelines", () => {
                 + `"planet => planet.name" `
                 + " ./src/test/data/starwars/planets.json "
                 + `"(character, planet) => ({ character, planet })" `
-                    + "| npx ts-node ./cli/skip - 3"
+                    + "| npx ts-node ./cli/skip 3"
                     + "| npx ts-node ./cli/take - 1",
             {
                 stdout: unindent(`
