@@ -42,7 +42,7 @@
     "test-intersect-2": "ts-node ./cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => character ? (planet ? ({ ...planet, ...character}) : character) : undefined\"",
     "test-group-1": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json",
     "test-group-2": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./cli/reduce \"(o, r) => { o[r.key] = r. records; return o; }\" \"{}\"",
-    "test-group-3": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./cli/to-object - \"r => r.key\" \"r => r.records\"",
+    "test-group-3": "npx ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | npx ts-node ./cli/to-object \"r => r.key\" \"r => r.records\"",
     "test-err-1": "ts-node ./cli/map \"r => x\" < ./src/test/data/starwars/characters.json",
     "test-err-2": "ts-node ./cli/map --file ./src/test/code/map-test-with-error.js < ./src/test/data/starwars/characters.json"
   },
