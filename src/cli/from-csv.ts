@@ -11,7 +11,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "from-csv",
     desc: "Converts data from the CSV (comma separated values) data format to the JSON data format.",
-    syntax: "from-csv <csv-input-file> [<output-file>]",
+    syntax: "from-csv [<csv-input-file>] [<output-file>]",
     inputs: [
         "CSV file",
         "CSV formatted data on standard input",

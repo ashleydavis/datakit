@@ -2,10 +2,12 @@ import { inputData, writeStdout } from "../lib/io";
 import { table } from "table";
 import chalk from 'chalk';
 import { standardCmdInputs, standardInputFileHelp } from "./lib/help";
+import { verifyInputArray } from "../lib/verify";
 
 export async function main(argv: string[]): Promise<void> {
 
     const data = await inputData(argv);
+    verifyInputArray(data, "format-table");
 
     const header = data.length > 0 ? Object.keys(data[0]) : [];
     const boldHeader = header.map(column => chalk.bold(column));
@@ -17,7 +19,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "format-table",
     desc: "Formats data to table rendered in ascii.",
-    syntax: "format-table <input-file>",
+    syntax: "format-table [<input-file>]",
     inputs: standardCmdInputs,
     outputs: [
         "A table rendered in ascii output to standard output."

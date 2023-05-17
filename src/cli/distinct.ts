@@ -29,7 +29,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "distinct",
     desc: "Returns the set of distinct values from the input dataset. Removes duplicate values from the dataset.",
-    syntax: "distinct <input-file> [<output-file>]",
+    syntax: "distinct [<input-file>] [<output-file>]",
     inputs: standardCmdInputs,
     outputs: standardCmdOutputs,
     args: [

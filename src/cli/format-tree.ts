@@ -12,7 +12,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "format-tree",
     desc: "Formats data to tree rendered in ascii.",
-    syntax: "format-tree <input-file>",
+    syntax: "format-tree [<input-file>]",
     inputs: standardCmdInputs,
     outputs: [
         "A tree rendered in ascii output to standard output."

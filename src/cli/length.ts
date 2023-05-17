@@ -1,15 +1,18 @@
 import { inputData, outputData } from "../lib/io";
+import { verifyInputArray } from "../lib/verify";
 
 export async function main(argv: string[]): Promise<void> {
    
     const data = await inputData(argv);
+    verifyInputArray(data, "length");
+
     await outputData(argv, data.length);
 }
 
 export const documentation = {
     name: "length",
     desc: "Gets the number of records in a dataset. Works just like `array.length` in JavaScript.",
-    syntax: "length <input-file>",
+    syntax: "length [<input-file>]",
     inputs: [
         "JSON file",
         "CSV file", 

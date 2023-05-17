@@ -11,7 +11,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "from-yaml",
     desc: "Converts data from the YAML data format to the JSON data format.",
-    syntax: "from-yaml <yaml-input-file> [<output-file>]",
+    syntax: "from-yaml [<yaml-input-file>] [<output-file>]",
     inputs: [
         "YAML file",
         "YAML formatted data on standard input",

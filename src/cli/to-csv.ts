@@ -1,10 +1,12 @@
 import { inputData, outputData } from "../lib/io";
+import { verifyInputArray } from "../lib/verify";
 import { standardCmdInputs, standardInputFileHelp } from "./lib/help";
 
 export async function main(argv: string[]): Promise<void> {
 
     const data = await inputData(argv);
-    
+    verifyInputArray(data, "to-csv");
+
     await outputData(argv, data, "csv");
 }
 
