@@ -93,7 +93,7 @@ describe("pipelines", () => {
         //
         [
             "json to stdout",
-            "npx ts-node ./cli/transform ./src/test/data/example-data.json \"dataset => dataset\" -",
+            "npx ts-node ./cli/transform \"dataset => dataset\" ./src/test/data/example-data.json -",
             { 
                 stdout: unindent(`
                     [
@@ -118,7 +118,7 @@ describe("pipelines", () => {
         ],
         [
             "json to file",
-            "npx ts-node ./cli/transform ./src/test/data/example-data.json \"dataset => dataset\" ./src/test/output/output.json",
+            "npx ts-node ./cli/transform \"dataset => dataset\" ./src/test/data/example-data.json ./src/test/output/output.json",
             {
                 file: {
                     "output.json": unindent(`
@@ -181,7 +181,7 @@ describe("pipelines", () => {
         //
         [
             "transform, loading user function from argument",
-            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/transform - \"dataset => dataset.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./cli/to-yaml",
+            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/transform \"dataset => dataset.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | npx ts-node ./cli/to-yaml",
             { 
                 stdout: unindent(`
                     - Date: 2013-01-02
@@ -198,7 +198,7 @@ describe("pipelines", () => {
         ],
         [
             "transform, loading user function from file",
-            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/transform - -f ./src/test/code/transform-test.js | npx ts-node ./cli/to-yaml",
+            "npx ts-node ./cli/from-yaml < ./src/test/data/example-data.yaml | npx ts-node ./cli/transform -f ./src/test/code/transform-test.js | npx ts-node ./cli/to-yaml",
             { 
                 stdout: unindent(`
                     - Date: 2013-01-02
