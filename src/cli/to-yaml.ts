@@ -11,7 +11,7 @@ export async function main(argv: string[]): Promise<void> {
 export const documentation = {
     name: "to-yaml",
     desc: "Converts data from the JSON data format to the YAML data format.",
-    syntax: "to-yaml <input-file> [<yaml-output-file>]",
+    syntax: "to-yaml [<input-file>] [<yaml-output-file>]",
     inputs: standardCmdInputs,
     outputs: [
         "YAML file",
@@ -27,11 +27,11 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input and writes YAML data to standard output",
-            cmd: 'command-that-produces-json | to-yaml -',
+            cmd: 'command-that-produces-json | to-yaml',
         },
         {
             name: "Reads JSON data from standard input and writes a YAML data file",
-            cmd: 'command-that-produces-json | to-yaml output-file.yaml',
+            cmd: 'command-that-produces-json | to-yaml - output-file.yaml',
         },
         {
             name: "Reads a JSON data file and writes a YAML data file",
