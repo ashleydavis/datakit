@@ -345,7 +345,7 @@ describe("pipelines", () => {
         //
         [
             "reduce",
-            `echo [2, 3, 4] | npx ts-node ./cli/reduce - "(a, r) => a + r" 1`,
+            `echo [2, 3, 4] | npx ts-node ./cli/reduce "(a, r) => a + r" 1`,
             {
                 stdout: unindent(`
                     10

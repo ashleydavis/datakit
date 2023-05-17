@@ -29,7 +29,7 @@
     "test-1": "ts-node ./cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./cli/transform - \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./cli/to-yaml",
     "test-2": "ts-node ./cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./cli/transform - -f ./src/test/code/transform-test.js | ts-node ./cli/to-yaml",
     "test-3": "ts-node ./cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./cli/length -",
-    "test-4": "ts-node ./cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./cli/reduce - \"(a, r) => a + r.SharesValue\" \"0\"",
+    "test-4": "ts-node ./cli/from-yaml < .\\src\\test\\data\\example-data.yaml | ts-node ./cli/reduce \"(a, r) => a + r.SharesValue\" \"0\"",
     "test-5": "ts-node ./cli/from-csv < .\\src\\test\\data\\example-data.csv | ts-node ./cli/transform - \"records => records.map(r => ({ ...r, CashPool: Math.floor(r.CashPool) }))\" | ts-node ./cli/to-csv",
     "test-6": "echo { \"x\": 1, \"hello\": \"world\" } | ts-node ./cli/transform - \"data => ({ ...data, hello: 'computer'})\" | ts-node ./cli/to-yaml",
     "test-sort": "cat ./src/test/data/starwars/characters.json | ts-node ./cli/map \"r => ({ name: r.name, gender: r.gender, homeworld: r.homeworld })\" | ts-node ./cli/sort - \"r => r.gender\" \"r => r.name\" descending |  ts-node ./cli/to-csv",
@@ -41,7 +41,7 @@
     "test-intersect-1": "ts-node ./cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => ({ character, planet })\"",
     "test-intersect-2": "ts-node ./cli/intersect \"character => character.homeworld\" ./src/test/data/starwars/characters.json \"planet => planet.name\" ./src/test/data/starwars/planets.json \"(character, planet) => character ? (planet ? ({ ...planet, ...character}) : character) : undefined\"",
     "test-group-1": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json",
-    "test-group-2": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./cli/reduce - \"(o, r) => { o[r.key] = r. records; return o; }\" \"{}\"",
+    "test-group-2": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./cli/reduce \"(o, r) => { o[r.key] = r. records; return o; }\" \"{}\"",
     "test-group-3": "ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | ts-node ./cli/to-object - \"r => r.key\" \"r => r.records\"",
     "test-err-1": "ts-node ./cli/map \"r => x\" < ./src/test/data/starwars/characters.json",
     "test-err-2": "ts-node ./cli/map --file ./src/test/code/map-test-with-error.js < ./src/test/data/starwars/characters.json"
