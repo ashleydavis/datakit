@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -59,7 +59,7 @@
     "map": "./cli/map",
     "reduce": "./cli/reduce",
     "skip": "./cli/skip",
-    "sort": "./cli/sort",
+    "orderBy": "./cli/sort",
     "take": "./cli/take",
     "to-csv": "./cli/to-csv",
     "to-object": "./cli/to-object",
