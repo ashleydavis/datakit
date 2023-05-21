@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1001,
+        "name": "Product A",
+        "category": "Category 1",
+        "price": 10.99
+    },
+    {
+        "id": 1002,
+        "name": "Product B",
+        "category": "Category 2",
+        "price": 19.99
+    },
+    {
+        "id": 1003,
+        "name": "Product C",
+        "category": "Category 1",
+        "price": 7.99
+    },
+    {
+        "id": 1004,
+        "name": "Product D",
+        "category": "Category 2",
+        "price": 14.99
+    },
+    {
+        "id": 1005,
+        "name": "Product E",
+        "category": "Category 1",
+        "price": 8.99
+    },
+    {
+        "id": 1006,
+        "name": "Product F",
+        "category": "Category 2",
+        "price": 11.99
+    },
+    {
+        "id": 1007,
+        "name": "Product G",
+        "category": "Category 1",
+        "price": 6.99
+    },
+    {
+        "id": 1008,
+        "name": "Product H",
+        "category": "Category 2",
+        "price": 9.99
+    },
+    {
+        "id": 1009,
+        "name": "Product I",
+        "category": "Category 1",
+        "price": 16.99
+    },
+    {
+        "id": 1010,
+        "name": "Product J",
+        "category": "Category 2",
+        "price": 12.99
+    },
+    {
+        "id": 1011,
+        "name": "Product K",
+        "category": "Category 1",
+        "price": 5.99
+    },
+    {
+        "id": 1012,
+        "name": "Product L",
+        "category": "Category 2",
+        "price": 13.99
+    },
+    {
+        "id": 1013,
+        "name": "Product M",
+        "category": "Category 1",
+        "price": 9.99
+    },
+    {
+        "id": 1014,
+        "name": "Product N",
+        "category": "Category 2",
+        "price": 18.99
+    },
+    {
+        "id": 1015,
+        "name": "Product O",
+        "category": "Category 1",
+        "price": 7.99
+    },
+    {
+        "id": 1016,
+        "name": "Product P",
+        "category": "Category 2",
+        "price": 10.99
+    },
+    {
+        "id": 1017,
+        "name": "Product Q",
+        "category": "Category 1",
+        "price": 14.99
+    },
+    {
+        "id": 1018,
+        "name": "Product R",
+        "category": "Category 2",
+        "price": 8.99
+    },
+    {
+        "id": 1019,
+        "name": "Product S",
+        "category": "Category 1",
+        "price": 11.99
+    },
+    {
+        "id": 1020,
+        "name": "Product T",
+        "category": "Category 2",
+        "price": 6.99
+    }
+]

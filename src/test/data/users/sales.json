@@ -1,0 +1,122 @@
+[
+    {
+        "user_id": 1,
+        "product_id": 1001,
+        "quantity": 5,
+        "price": 10.99
+    },
+    {
+        "user_id": 2,
+        "product_id": 1002,
+        "quantity": 3,
+        "price": 19.99
+    },
+    {
+        "user_id": 3,
+        "product_id": 1003,
+        "quantity": 2,
+        "price": 7.99
+    },
+    {
+        "user_id": 4,
+        "product_id": 1004,
+        "quantity": 1,
+        "price": 14.99
+    },
+    {
+        "user_id": 5,
+        "product_id": 1005,
+        "quantity": 4,
+        "price": 8.99
+    },
+    {
+        "user_id": 6,
+        "product_id": 1006,
+        "quantity": 2,
+        "price": 11.99
+    },
+    {
+        "user_id": 7,
+        "product_id": 1007,
+        "quantity": 1,
+        "price": 6.99
+    },
+    {
+        "user_id": 8,
+        "product_id": 1008,
+        "quantity": 3,
+        "price": 9.99
+    },
+    {
+        "user_id": 9,
+        "product_id": 1009,
+        "quantity": 2,
+        "price": 16.99
+    },
+    {
+        "user_id": 10,
+        "product_id": 1010,
+        "quantity": 4,
+        "price": 12.99
+    },
+    {
+        "user_id": 11,
+        "product_id": 1011,
+        "quantity": 1,
+        "price": 5.99
+    },
+    {
+        "user_id": 12,
+        "product_id": 1012,
+        "quantity": 3,
+        "price": 13.99
+    },
+    {
+        "user_id": 13,
+        "product_id": 1013,
+        "quantity": 2,
+        "price": 9.99
+    },
+    {
+        "user_id": 14,
+        "product_id": 1014,
+        "quantity": 1,
+        "price": 18.99
+    },
+    {
+        "user_id": 15,
+        "product_id": 1015,
+        "quantity": 4,
+        "price": 7.99
+    },
+    {
+        "user_id": 16,
+        "product_id": 1016,
+        "quantity": 2,
+        "price": 10.99
+    },
+    {
+        "user_id": 17,
+        "product_id": 1017,
+        "quantity": 1,
+        "price": 14.99
+    },
+    {
+        "user_id": 18,
+        "product_id": 1018,
+        "quantity": 3,
+        "price": 8.99
+    },
+    {
+        "user_id": 19,
+        "product_id": 1019,
+        "quantity": 2,
+        "price": 11.99
+    },
+    {
+        "user_id": 20,
+        "product_id": 1020,
+        "quantity": 4,
+        "price": 6.99
+    }
+]
