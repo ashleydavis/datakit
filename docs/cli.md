@@ -28,9 +28,9 @@ map --help
 - [intersect](#intersect)
 - [length](#length)
 - [map](#map)
+- [orderBy](#orderBy)
 - [reduce](#reduce)
 - [skip](#skip)
-- [orderBy](#orderBy)
 - [take](#take)
 - [to-csv](#to-csv)
 - [to-object](#to-object)
@@ -556,6 +556,77 @@ command-that-produces-json | map "record => record.x" - output-file.csv
 ```bash
 map --file my-transformation.js input-file.csv output-file.csv
 ```
+# orderBy
+
+Sorts the input dataset by the requested criteria and outputs the sorted dataset. Works a bit like `array.sort` in JavaScript, but really it's way more advanced.
+
+## Syntax
+
+```bash
+orderBy (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **sort-fn** - A JavaScript function to select the sort key from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
+- **sort-direction** - Optional sort direction that may be &quot;ascending&quot; or &quot;descending&quot;. Defaults to &quot;ascending&quot;.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Notes
+
+- The sort function and sort direction can be stacked up to create nested levels of sorting.
+
+## Examples
+
+### Reads JSON data from standard input, sorts by email and writes to standard output
+
+```bash
+command-that-produces-json | orderBy "record => record.email"
+```
+### Reads data from a file, sorts by email and writes to standard output
+
+```bash
+orderBy "record => record.email" input-file.csv 
+```
+### Reads data from a file, sorts by email and writes output to another file
+
+```bash
+orderBy "record => record.email" input-file.csv output-file.csv
+```
+### Loads the sort function from a JavaScript file
+
+```bash
+orderBy --file my-sort-fn.js input-file.csv
+```
+### Reads JSON data from standard input, sorts by name and then by age (a nested sort) and writes to standard output
+
+```bash
+orderBy "r => r.email" "r => r.age" - output-file.csv
+```
+### Reads JSON data from standard input, sorts by age (oldest to youngest) and writes to standard output
+
+```bash
+orderBy "r => r.age" descending - output-file.csv
+```
 # reduce
 
 Reduces or aggregates an input dataset to some output value by repeatedly calling the reducer function on every record of the input. Works just like `array.reduce` in JavaScript.
@@ -675,77 +746,6 @@ skip 3  input-file.csv output-file.csv
 
 ```bash
 command-that-produces-json | skip 3 - output-file.csv
-```
-# orderBy
-
-Sorts the input dataset by the requested criteria and outputs the sorted dataset. Works a bit like `array.sort` in JavaScript, but really it's way more advanced.
-
-## Syntax
-
-```bash
-orderBy (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]
-```
-
-## Inputs
-
-Input can be 1 of the following:
-
-- JSON file
-- CSV file
-- YAML file
-- JSON formatted array on standard input.
-
-## Outputs
-
-Output can be one of the following:
-
-- JSON file
-- CSV file
-- YAML file
-- JSON formatted data on standard output.
-
-## Arguments
-
-- **sort-fn** - A JavaScript function to select the sort key from each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
-- **sort-direction** - Optional sort direction that may be &quot;ascending&quot; or &quot;descending&quot;. Defaults to &quot;ascending&quot;.
-- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
-- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
-
-## Notes
-
-- The sort function and sort direction can be stacked up to create nested levels of sorting.
-
-## Examples
-
-### Reads JSON data from standard input, sorts by email and writes to standard output
-
-```bash
-command-that-produces-json | orderBy "record => record.email"
-```
-### Reads data from a file, sorts by email and writes to standard output
-
-```bash
-orderBy"record => record.email" input-file.csv 
-```
-### Reads data from a file, sorts by email and writes output to another file
-
-```bash
-orderBy "record => record.email" input-file.csv output-file.csv
-```
-### Loads the sort function from a JavaScript file
-
-```bash
-orderBy --file my-sort-fn.js input-file.csv
-```
-### Reads JSON data from standard input, sorts by name and then by age (a nested sort) and writes to standard output
-
-```bash
-orderBy "r => r.email" "r => r.age" - output-file.csv
-```
-### Reads JSON data from standard input, sorts by age (oldest to youngest) and writes to standard output
-
-```bash
-orderBy "r => r.age" descending - output-file.csv
 ```
 # take
 

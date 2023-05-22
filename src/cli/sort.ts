@@ -111,7 +111,7 @@ export const documentation = {
         },
         {
             name: "Reads data from a file, sorts by email and writes to standard output",
-            cmd: 'orderBy"record => record.email" input-file.csv ',
+            cmd: 'orderBy "record => record.email" input-file.csv ',
         },
         {
             name: "Reads data from a file, sorts by email and writes output to another file",
