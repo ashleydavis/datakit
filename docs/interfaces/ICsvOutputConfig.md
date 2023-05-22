@@ -22,7 +22,7 @@ Names of columns to output.
 
 #### Defined in
 
-[index.ts:521](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L521)
+[index.ts:521](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L521)
 
 ___
 
@@ -34,7 +34,7 @@ Configures formatting for named columns in the CSV data.
 
 #### Defined in
 
-[index.ts:510](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L510)
+[index.ts:510](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L510)
 
 ___
 
@@ -47,4 +47,4 @@ Defaults to true.
 
 #### Defined in
 
-[index.ts:516](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L516)
+[index.ts:516](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L516)

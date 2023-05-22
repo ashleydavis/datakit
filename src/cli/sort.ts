@@ -40,7 +40,7 @@ export async function main(argv: string[]): Promise<void> {
     }
 
     const data = await inputData(argv);
-    verifyInputArray(data, "sort");
+    verifyInputArray(data, "orderBy");
 
     data.sort((a: any, b: any): number => {
         if (sortCriteria.length === 0) {
@@ -87,9 +87,9 @@ export async function main(argv: string[]): Promise<void> {
 }
 
 export const documentation = {
-    name: "sort",
+    name: "orderBy",
     desc: "Sorts the input dataset by the requested criteria and outputs the sorted dataset. Works a bit like `array.sort` in JavaScript, but really it's way more advanced.",
-    syntax: `sort (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]`,
+    syntax: `orderBy (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]`,
     inputs: standardCmdInputs,
     outputs: standardCmdOutputs,
     args: [
@@ -107,27 +107,27 @@ export const documentation = {
     examples: [
         {
             name: "Reads JSON data from standard input, sorts by email and writes to standard output",
-            cmd: 'command-that-produces-json | sort "record => record.email"',
+            cmd: 'command-that-produces-json | orderBy "record => record.email"',
         },
         {
             name: "Reads data from a file, sorts by email and writes to standard output",
-            cmd: 'sort"record => record.email" input-file.csv ',
+            cmd: 'orderBy"record => record.email" input-file.csv ',
         },
         {
             name: "Reads data from a file, sorts by email and writes output to another file",
-            cmd: 'sort "record => record.email" input-file.csv output-file.csv'
+            cmd: 'orderBy "record => record.email" input-file.csv output-file.csv'
         },
         {
             name: "Loads the sort function from a JavaScript file",
-            cmd: 'sort --file my-sort-fn.js input-file.csv',
+            cmd: 'orderBy --file my-sort-fn.js input-file.csv',
         },
         {
             name: "Reads JSON data from standard input, sorts by name and then by age (a nested sort) and writes to standard output",
-            cmd: 'sort "r => r.email" "r => r.age" - output-file.csv'
+            cmd: 'orderBy "r => r.email" "r => r.age" - output-file.csv'
         },
         {
             name: "Reads JSON data from standard input, sorts by age (oldest to youngest) and writes to standard output",
-            cmd: 'sort "r => r.age" descending - output-file.csv'
+            cmd: 'orderBy "r => r.age" descending - output-file.csv'
         },
     ],
     notes: [

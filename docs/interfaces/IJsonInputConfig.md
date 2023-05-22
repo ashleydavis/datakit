@@ -20,4 +20,4 @@ Configures parsing for named fields in the JSON data.
 
 #### Defined in
 
-[index.ts:54](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L54)
+[index.ts:54](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L54)

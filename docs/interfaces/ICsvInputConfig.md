@@ -24,7 +24,7 @@ Default: undefined
 
 #### Defined in
 
-[index.ts:111](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L111)
+[index.ts:111](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L111)
 
 ___
 
@@ -37,7 +37,7 @@ Default: false.
 
 #### Defined in
 
-[index.ts:117](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L117)
+[index.ts:117](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L117)
 
 ___
 
@@ -49,7 +49,7 @@ Configure parsing for named columns in the CSV data.
 
 #### Defined in
 
-[index.ts:105](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L105)
+[index.ts:105](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L105)
 
 ___
 
@@ -62,4 +62,4 @@ Default: true
 
 #### Defined in
 
-[index.ts:123](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L123)
+[index.ts:123](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L123)

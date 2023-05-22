@@ -70,7 +70,7 @@ Returns an array of JavaScript objects that were deserialized from the CSV text.
 
 #### Defined in
 
-[index.ts:135](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L135)
+[index.ts:135](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L135)
 
 ___
 
@@ -101,7 +101,7 @@ Returns an array of JavaScript objects that were deserialized from the JSON text
 
 #### Defined in
 
-[index.ts:64](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L64)
+[index.ts:64](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L64)
 
 ___
 
@@ -126,7 +126,7 @@ Returns an array with an element describing each field.
 
 #### Defined in
 
-[index.ts:30](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L30)
+[index.ts:30](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L30)
 
 ___
 
@@ -156,7 +156,7 @@ Returns an array of JavaScript objects that were deserialized from the YAML text
 
 #### Defined in
 
-[index.ts:217](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L217)
+[index.ts:217](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L217)
 
 ___
 
@@ -206,7 +206,7 @@ Returns a promise for the loaded data.
 
 #### Defined in
 
-[index.ts:284](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L284)
+[index.ts:284](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L284)
 
 ___
 
@@ -262,7 +262,7 @@ Returns the loaded data.
 
 #### Defined in
 
-[index.ts:375](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L375)
+[index.ts:375](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L375)
 
 ___
 
@@ -296,7 +296,7 @@ A promise that is resolved with the contents of the file.
 
 #### Defined in
 
-[index.ts:241](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L241)
+[index.ts:241](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L241)
 
 ___
 
@@ -336,7 +336,7 @@ Returns a promise for the loaded data.
 
 #### Defined in
 
-[index.ts:314](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L314)
+[index.ts:314](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L314)
 
 ___
 
@@ -376,7 +376,7 @@ Returns the loaded data.
 
 #### Defined in
 
-[index.ts:405](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L405)
+[index.ts:405](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L405)
 
 ___
 
@@ -416,7 +416,7 @@ Returns a promise for the loaded data.
 
 #### Defined in
 
-[index.ts:338](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L338)
+[index.ts:338](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L338)
 
 ___
 
@@ -456,7 +456,7 @@ Returns the loaded data.
 
 #### Defined in
 
-[index.ts:429](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L429)
+[index.ts:429](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L429)
 
 ___
 
@@ -508,7 +508,7 @@ Returns a string in the CSV data format that represents the data.
 
 #### Defined in
 
-[index.ts:552](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L552)
+[index.ts:552](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L552)
 
 ___
 
@@ -544,7 +544,7 @@ Returns a string in the JSON data format that represents the data.
 
 #### Defined in
 
-[index.ts:472](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L472)
+[index.ts:472](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L472)
 
 ___
 
@@ -579,7 +579,7 @@ Returns a string in the YAML data format that represents the data.
 
 #### Defined in
 
-[index.ts:600](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L600)
+[index.ts:600](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L600)
 
 ___
 
@@ -628,7 +628,7 @@ Returns a promise that resolves when the file has been written.
 
 #### Defined in
 
-[index.ts:665](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L665)
+[index.ts:665](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L665)
 
 ___
 
@@ -676,7 +676,7 @@ datakit.writeCsvSync("my-data-file.csv", config);
 
 #### Defined in
 
-[index.ts:708](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L708)
+[index.ts:708](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L708)
 
 ___
 
@@ -711,7 +711,7 @@ A promise that is resolved when the file has been written.
 
 #### Defined in
 
-[index.ts:621](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L621)
+[index.ts:621](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L621)
 
 ___
 
@@ -746,7 +746,7 @@ Returns a promise that resolves when the file has been written.
 
 #### Defined in
 
-[index.ts:742](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L742)
+[index.ts:742](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L742)
 
 ___
 
@@ -781,7 +781,7 @@ Returns a promise that resolves when the file has been written.
 
 #### Defined in
 
-[index.ts:765](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L765)
+[index.ts:765](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L765)
 
 ___
 
@@ -816,7 +816,7 @@ Returns a promise that resolves when the file has been written.
 
 #### Defined in
 
-[index.ts:789](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L789)
+[index.ts:789](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L789)
 
 ___
 
@@ -851,4 +851,4 @@ Returns a promise that resolves when the file has been written.
 
 #### Defined in
 
-[index.ts:812](https://github.com/data-forge-notebook/datakit/blob/24af282/src/index.ts#L812)
+[index.ts:812](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L812)

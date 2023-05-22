@@ -30,7 +30,7 @@ map --help
 - [map](#map)
 - [reduce](#reduce)
 - [skip](#skip)
-- [sort](#sort)
+- [orderBy](#orderBy)
 - [take](#take)
 - [to-csv](#to-csv)
 - [to-object](#to-object)
@@ -44,7 +44,7 @@ Returns the set of distinct values from the input dataset. Removes duplicate val
 ## Syntax
 
 ```bash
-distinct <input-file> [<output-file>]
+distinct [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -157,7 +157,7 @@ Formats data to table rendered in ascii.
 ## Syntax
 
 ```bash
-format-table <input-file>
+format-table [<input-file>]
 ```
 
 ## Inputs
@@ -204,7 +204,7 @@ Formats data to tree rendered in ascii.
 ## Syntax
 
 ```bash
-format-tree <input-file>
+format-tree [<input-file>]
 ```
 
 ## Inputs
@@ -251,7 +251,7 @@ Converts data from the CSV (comma separated values) data format to the JSON data
 ## Syntax
 
 ```bash
-from-csv <csv-input-file> [<output-file>]
+from-csv [<csv-input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -305,7 +305,7 @@ Converts data from the YAML data format to the JSON data format.
 ## Syntax
 
 ```bash
-from-yaml <yaml-input-file> [<output-file>]
+from-yaml [<yaml-input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -459,7 +459,7 @@ Gets the number of records in a dataset. Works just like `array.length` in JavaS
 ## Syntax
 
 ```bash
-length <input-file>
+length [<input-file>]
 ```
 
 ## Inputs
@@ -676,14 +676,14 @@ skip 3  input-file.csv output-file.csv
 ```bash
 command-that-produces-json | skip 3 - output-file.csv
 ```
-# sort
+# orderBy
 
 Sorts the input dataset by the requested criteria and outputs the sorted dataset. Works a bit like `array.sort` in JavaScript, but really it's way more advanced.
 
 ## Syntax
 
 ```bash
-sort (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]
+orderBy (<sort-fn> [<sort-direction>])+ [<input-file>] [<output-file>]
 ```
 
 ## Inputs
@@ -720,32 +720,32 @@ Output can be one of the following:
 ### Reads JSON data from standard input, sorts by email and writes to standard output
 
 ```bash
-command-that-produces-json | sort "record => record.email"
+command-that-produces-json | orderBy "record => record.email"
 ```
 ### Reads data from a file, sorts by email and writes to standard output
 
 ```bash
-sort"record => record.email" input-file.csv 
+orderBy"record => record.email" input-file.csv 
 ```
 ### Reads data from a file, sorts by email and writes output to another file
 
 ```bash
-sort "record => record.email" input-file.csv output-file.csv
+orderBy "record => record.email" input-file.csv output-file.csv
 ```
 ### Loads the sort function from a JavaScript file
 
 ```bash
-sort --file my-sort-fn.js input-file.csv
+orderBy --file my-sort-fn.js input-file.csv
 ```
 ### Reads JSON data from standard input, sorts by name and then by age (a nested sort) and writes to standard output
 
 ```bash
-sort "r => r.email" "r => r.age" - output-file.csv
+orderBy "r => r.email" "r => r.age" - output-file.csv
 ```
 ### Reads JSON data from standard input, sorts by age (oldest to youngest) and writes to standard output
 
 ```bash
-sort "r => r.age" descending - output-file.csv
+orderBy "r => r.age" descending - output-file.csv
 ```
 # take
 
