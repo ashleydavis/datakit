@@ -55,6 +55,16 @@ Output can be one of the following:
 - **{{this.name}}** - {{this.desc}}
 {{/each}}
 
+{{#if this.options}}
+## Options
+
+{{#each this.options}}
+- **{{optionNames this.names}}={{this.placeholder}}**
+  - {{this.desc}} 
+  - Example: --{{this.names.[0]}}={{this.example}}
+{{/each}}
+
+{{/if}}
 {{#if this.notes}}
 ## Notes
 

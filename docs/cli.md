@@ -811,7 +811,7 @@ Converts data from the JSON data format to the CSV data format.
 ## Syntax
 
 ```bash
-to-csv [<input-file>] [<csv-output-file>]
+to-csv [options] [<input-file>] [<csv-output-file>]
 ```
 
 ## Inputs
@@ -835,6 +835,12 @@ Output can be one of the following:
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **csv-output-file** - The name of a file (must be a CSV file) to output the resulting dataset to. Omitting this causes CSV data to be written to standard output.
 
+## Options
+
+- **--columns, --c=&lt;column-names&gt;**
+  - Sets the columns (and their order) that will be included in the output CSV 
+  - Example: --columns=ColumnA,ColumnB,ColumnC
+
 
 ## Examples
 
@@ -857,6 +863,11 @@ to-csv input-file.json output-file.csv
 
 ```bash
 to-csv input-file.yaml output-file.csv
+```
+### Writes a CSV file setting the column names
+
+```bash
+to-csv input-file.json output-file.csv --columns ColumnA,ColumnB,ColumnC
 ```
 # to-object
 

@@ -22,7 +22,7 @@ export interface IUserFnDetails {
 
 //
 // Loads a user function.
-//
+//  
 export function loadUserFn(argv: string[], exampleFn: string): { fn: Function, details: IUserFnDetails } {
 
     let userFn: any;
@@ -31,7 +31,13 @@ export function loadUserFn(argv: string[], exampleFn: string): { fn: Function, d
         throw new Error(`Expected a user function, something like: "${exampleFn}"`);
     }
 
-    let fileName: string | undefined = consumeOptionalArg(argv, ["-f", "--file"], "my-file.js");
+    const fileOption = {
+        names: ["file", "f"],
+        placeholder: "<file-name>",
+        example: "my-file.js",
+        desc: "The name of the file to load the user function from.",
+    }
+    let fileName: string | undefined = consumeOptionalArg(argv, 0, fileOption);
     let loadSourceCode: (() => string) | undefined = undefined;
     if (fileName) {
         const filePath = path.resolve(fileName);

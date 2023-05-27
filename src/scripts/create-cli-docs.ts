@@ -62,6 +62,11 @@ async function main() {
             doco.inputCount = 1;
         }
     }
+
+    handlebars.registerHelper('optionNames', function (optionNames: string[]) {
+        return optionNames.map(name => `--${name}`).join(", ");;
+    })
+
     const markdownContent = template({ docs });
     const outputFileName = './docs/cli.md';
     fs.writeFileSync(outputFileName, markdownContent);

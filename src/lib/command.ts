@@ -1,3 +1,4 @@
+import { IOption } from "../cli/lib/args";
 import "../cli/lib/load-globals";
 import chalk from 'chalk';
 
@@ -12,6 +13,7 @@ export interface IDocumentation {
         name: string;
         desc: string;
     }[];
+    options?: IOption[];
     notes?: string[];
     examples: {
         name: string;
@@ -58,6 +60,16 @@ function displayDocumentation(doco: IDocumentation): void {
     console.log();
     console.log(indent(doco.args.map(input => `- ${chalk.cyan(input.name)}: ${input.desc}`).join("\n"), "\t"));
     console.log();
+    if (doco.options) {
+        console.log("Options:");
+        console.log();
+        for (const option of doco.options) {
+            const names = option.names.map(name => `--` + name).join(", ");
+            const opt = chalk.cyan(`${names}=${option.placeholder}`);
+            console.log(indent(`${opt}: ${option.desc}. ${chalk.cyan(`Example`)}: --${option.names[0]}=${option.example}`, "\t"));
+            console.log();
+        }
+    }
     if (doco.notes) {
         console.log("Notes:");
         console.log();

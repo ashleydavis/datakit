@@ -4,6 +4,7 @@ import { readJson } from "..";
 import { readCsv } from "..";
 import { readYaml } from "..";
 import { isArray } from "./utils";
+import { ICsvOutputConfig } from "..";
 
 //
 // Reads data from standard input.
@@ -160,7 +161,7 @@ export function writeStdout(data: string): void {
 // Write data to standard output in the requested format.
 // Data format defaults to JSON if none is specified.
 //
-function outputDataToStdout(data: any, expectedFormat?: DataFormat): void {
+function outputDataToStdout(data: any, expectedFormat?: DataFormat, config?: ICsvOutputConfig): void {
 
     let formattedData: string;
 
@@ -171,7 +172,7 @@ function outputDataToStdout(data: any, expectedFormat?: DataFormat): void {
         if (!isArray(data)) {
             throw new Error(`To write csv to standard output, expect the data to be an array of records. Instead got "${typeof data}".`);
         }
-        formattedData = toCsv(data);
+        formattedData = toCsv(data, config);
     }
     else if (expectedFormat === "yaml") {
         formattedData = toYaml(data);
@@ -186,12 +187,12 @@ function outputDataToStdout(data: any, expectedFormat?: DataFormat): void {
 //
 // Outputs data as JSON to a file or to standard output.
 //
-export async function outputData(argv: string[], data: any, expectedFormat?: DataFormat): Promise<void> {
+export async function outputData(argv: string[], data: any, expectedFormat?: DataFormat, config?: ICsvOutputConfig): Promise<void> {
     if (argv.length === 0) {
         //
         // Default is to output to stdout.
         //
-        outputDataToStdout(data, expectedFormat);
+        outputDataToStdout(data, expectedFormat, config);
     }
     else {
         const fileName = argv.shift()!.toLowerCase();
@@ -199,7 +200,7 @@ export async function outputData(argv: string[], data: any, expectedFormat?: Dat
             //
             // Explicitly output to stdout.
             //
-            outputDataToStdout(data, expectedFormat);
+            outputDataToStdout(data, expectedFormat, config);
         }
         else {
             if (expectedFormat === undefined) {
@@ -219,7 +220,7 @@ export async function outputData(argv: string[], data: any, expectedFormat?: Dat
                 if (!isArray(data)) {
                     throw new Error(`To write csv file ${fileName}, expect the data to be an array of records. Instead got "${typeof data}".`);
                 }
-                await writeCsv(fileName, data);
+                await writeCsv(fileName, data, config);
             }
             else if (expectedFormat === "yaml") {
                 return await writeYaml(fileName, data);
