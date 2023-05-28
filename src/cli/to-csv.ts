@@ -8,8 +8,10 @@ export async function main(argv: string[], flags: Flags): Promise<void> {
     const data = await inputData(argv);
     verifyInputArray(data, "to-csv");
 
+    const columnNames = flags.columns ? flags.columns.split(",").map(column => column.trim()): undefined;
+
     await outputData(argv, data, "csv", {
-        columnNames: flags.columns.split(",").map(column => column.trim()),
+        columnNames,
     });
 }
 
