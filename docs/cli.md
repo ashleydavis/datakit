@@ -28,7 +28,9 @@ map --help
 - [intersect](#intersect)
 - [length](#length)
 - [map](#map)
+- [omit](#omit)
 - [orderBy](#orderBy)
+- [pick](#pick)
 - [reduce](#reduce)
 - [skip](#skip)
 - [take](#take)
@@ -69,6 +71,7 @@ Output can be one of the following:
 
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -121,6 +124,7 @@ Output can be one of the following:
 - **predicate-fn** - A JavaScript predicate function that is passed each record in the dataset and returns true/truthy to keep the record or false/falsy to rmeove the record. Specifying a file name will load the JavaScript code from the file.
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -180,6 +184,7 @@ Output can be one of the following:
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 
 
+
 ## Examples
 
 ### Reads JSON data from standard input, renders the data to an ascii table on standard output
@@ -225,6 +230,7 @@ Output can be one of the following:
 ## Arguments
 
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+
 
 
 ## Examples
@@ -274,6 +280,7 @@ Output can be one of the following:
 
 - **input-file** - Can be an input file name (must be a CSV file) or a hypen to indicate reading CSV data from standard input.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -328,6 +335,7 @@ Output can be one of the following:
 
 - **input-file** - Can be an input file name (must be a YAML file) or a hypen to indicate reading YAML data from standard input.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -385,6 +393,7 @@ Output can be one of the following:
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **key-selector-fn** - A JavaScript function to select the grouping key for each record of the input dataset. Specifying a file name will load the JavaScript code from the file.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -445,6 +454,7 @@ Output can be one of the following:
 
 - You can only read input data from standard input from one of the left or right datasets.
 
+
 ## Examples
 
 ### Reads two JSON files and merges the datasets based on the &quot;email&quot; field, writes output to a JSON file
@@ -480,6 +490,7 @@ Output can be one of the following:
 ## Arguments
 
 - **input-file** - Can be an input file name (json, csv or  yaml) or a hypen to indicate reading JSON data from standard input.
+
 
 
 ## Examples
@@ -529,6 +540,7 @@ Output can be one of the following:
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
+
 ## Examples
 
 ### Reads JSON data from standard input, applies the transformation and writes to standard output
@@ -555,6 +567,70 @@ command-that-produces-json | map "record => record.x" - output-file.csv
 
 ```bash
 map --file my-transformation.js input-file.csv output-file.csv
+```
+# omit
+
+Creates a new dataset by omitting the specified fields from the input dataset.
+
+## Syntax
+
+```bash
+omit <fields> [<input-file>] [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **fields** - Comma-separated list of field names to omit from the input data
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Notes
+
+- The input data can be an array of objects or a single object.
+
+## See also
+
+
+
+## Examples
+
+### Reads JSON data from standard input, omits some fields and writes to standard output
+
+```bash
+command-that-produces-json | omit ColumnA,ColumnB,ColumnC
+```
+### Reads data from a file, omits some fields and writes to standard output
+
+```bash
+omit ColumnA,ColumnB,ColumnC input-file.csv
+```
+### Reads data from a file, omits some fields and writes output to another file
+
+```bash
+omit ColumnA,ColumnB,ColumnC input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, omits some fields and writes output to another file
+
+```bash
+command-that-produces-json | omit ColumnA,ColumnB,ColumnC - output-file.csv
 ```
 # orderBy
 
@@ -595,6 +671,7 @@ Output can be one of the following:
 
 - The sort function and sort direction can be stacked up to create nested levels of sorting.
 
+
 ## Examples
 
 ### Reads JSON data from standard input, sorts by email and writes to standard output
@@ -626,6 +703,70 @@ orderBy "r => r.email" "r => r.age" - output-file.csv
 
 ```bash
 orderBy "r => r.age" descending - output-file.csv
+```
+# pick
+
+Creates a new dataset by picking the specified fields from the input dataset.
+
+## Syntax
+
+```bash
+pick <fields> [<input-file>] [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **fields** - Comma-separated list of field names to pick from the input data
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Notes
+
+- The input data can be an array of objects or a single object.
+
+## See also
+
+
+
+## Examples
+
+### Reads JSON data from standard input, picks some fields and writes to standard output
+
+```bash
+command-that-produces-json | pick ColumnA,ColumnB,ColumnC
+```
+### Reads data from a file, picks some fields and writes to standard output
+
+```bash
+pick ColumnA,ColumnB,ColumnC input-file.csv
+```
+### Reads data from a file, picks some fields and writes output to another file
+
+```bash
+pick ColumnA,ColumnB,ColumnC input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, picks some fields and writes output to another file
+
+```bash
+command-that-produces-json | pick ColumnA,ColumnB,ColumnC - output-file.csv
 ```
 # reduce
 
@@ -661,6 +802,7 @@ Output can be one of the following:
 - **seed-value** - JSON value that is used as the initial accumulator value for the reduction.
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -725,6 +867,7 @@ Output can be one of the following:
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
 
 
+
 ## Examples
 
 ### Reads JSON data from standard input, skips 3 records and writes remaining records to standard output
@@ -780,6 +923,7 @@ Output can be one of the following:
 - **take-number** - The number of records to take.
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples
@@ -840,6 +984,7 @@ Output can be one of the following:
 - **--columns, --c=&lt;column-names&gt;**
   - Sets the columns (and their order) that will be included in the output CSV 
   - Example: --columns=ColumnA,ColumnB,ColumnC
+
 
 
 ## Examples
@@ -907,6 +1052,7 @@ Output can be one of the following:
 
 - Unlike many other datakit commands the to-object command cannot output to the CSV format.
 
+
 ## Examples
 
 ### Reads JSON data from standard input and writes the JSON object to standard output
@@ -966,6 +1112,7 @@ Output can be one of the following:
 - **yaml-output-file** - The name of a file (must be a YAML file) to output the resulting dataset to. Omitting this causes YAML data to be written to standard output.
 
 
+
 ## Examples
 
 ### Reads JSON data from standard input and writes YAML data to standard output
@@ -1021,6 +1168,7 @@ Output can be one of the following:
 - **transformer-fn** - A JavaScript function to transform the input dataset. Specifying a file name will load the JavaScript code from the file.
 - **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
 - **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
 
 
 ## Examples

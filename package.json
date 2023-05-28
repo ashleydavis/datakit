@@ -64,7 +64,9 @@
     "to-csv": "./cli/to-csv",
     "to-object": "./cli/to-object",
     "to-yaml": "./cli/to-yaml",
-    "transform": "./cli/transform"
+    "transform": "./cli/transform",
+    "omit": "./cli/omit",
+    "pick": "./cli/pick"
   },
   "repository": {
     "type": "git",

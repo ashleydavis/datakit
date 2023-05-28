@@ -58,10 +58,12 @@ export interface IOption {
     desc: string;
 }
 
+export type Flags = { [index: string]: string };
+
 //
 // Pulls options from the set of arguments.
 //
-export function pullOptions(options: IOption[], argv: string[]): { [index: string]: string } {
+export function pullOptions(options: IOption[], argv: string[]): Flags {
     const output: any = {};
 
     for (const option of options) {
@@ -73,7 +75,7 @@ export function pullOptions(options: IOption[], argv: string[]): { [index: strin
     }
 
     return output;
- }
+}
 
 //
 // Find the value for an option in the list of arguments.
@@ -88,3 +90,4 @@ function findOption(argv: string[], option: IOption): any {
 
     return undefined;
 }
+

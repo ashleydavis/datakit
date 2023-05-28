@@ -24,6 +24,8 @@ import { documentation as group } from "../cli/group";
 import { documentation as intersect } from "../cli/intersect";
 import { documentation as length  } from "../cli/length";
 import { documentation as map  } from "../cli/map";
+import { documentation as omit  } from "../cli/omit";
+import { documentation as pick } from "../cli/pick";
 import { documentation as reduce  } from "../cli/reduce";
 import { documentation as skip  } from "../cli/skip";
 import { documentation as orderBy  } from "../cli/sort";
@@ -44,7 +46,9 @@ const docs: IDocumentation[] = [
     intersect,
     length,
     map,
+    omit,
     orderBy,
+    pick,
     reduce,
     skip,
     take,

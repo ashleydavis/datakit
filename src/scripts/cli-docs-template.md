@@ -73,6 +73,15 @@ Output can be one of the following:
 {{/each}}
 {{/if}}
 
+{{#if this.seeAlso}}
+## See also
+
+{{#each this.seeAls}}
+- **{{this.cmd}}: {{this.desc}}
+{{/each}}
+
+{{/if}}
+
 ## Examples
 
 {{#each this.examples}}

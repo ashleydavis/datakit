@@ -1,17 +1,15 @@
 import { inputData, outputData } from "../lib/io";
 import { verifyInputArray } from "../lib/verify";
-import { pullOptions } from "./lib/args";
+import { Flags, pullOptions } from "./lib/args";
 import { standardCmdInputs, standardInputFileHelp } from "./lib/help";
 
-export async function main(argv: string[]): Promise<void> {
-
-    const options = pullOptions(documentation.options, argv);
+export async function main(argv: string[], flags: Flags): Promise<void> {
 
     const data = await inputData(argv);
     verifyInputArray(data, "to-csv");
 
     await outputData(argv, data, "csv", {
-        columnNames: options.columns.split(",").map(column => column.trim()),
+        columnNames: flags.columns.split(",").map(column => column.trim()),
     });
 }
 

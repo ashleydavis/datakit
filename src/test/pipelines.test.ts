@@ -390,6 +390,46 @@ describe("pipelines", () => {
                 `).trimEnd(),
             },
         ],
+        //
+        // Pick
+        //
+        [
+            "pick",
+            `npx ts-node ./cli/pick name,homeworld < ./src/test/data/starwars/characters.json | npx ts-node ./cli/take 1`,
+            {
+                stdout: unindent(`
+                    [
+                        {
+                            "name": "Luke Skywalker",
+                            "homeworld": "Tatooine"
+                        }
+                    ]
+                `).trimEnd(),
+            },
+        ],
+        //
+        // Omit
+        //
+        [
+            "omit",
+            `npx ts-node ./cli/omit name,homeworld < ./src/test/data/starwars/characters.json | npx ts-node ./cli/take 1`,
+            {
+                stdout: unindent(`
+                [
+                    {
+                        "height": 172,
+                        "mass": 77,
+                        "hair_color": "blond",
+                        "skin_color": "fair",
+                        "eye_color": "blue",
+                        "birth_year": "19BBY",
+                        "gender": "male",
+                        "species": "Human"
+                    }
+                ]
+                `).trimEnd(),
+            },
+        ],
     ];
 
     fs.removeSync("./src/test/output");

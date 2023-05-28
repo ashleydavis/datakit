@@ -1,4 +1,4 @@
-import { IOption } from "../cli/lib/args";
+import { Flags, IOption, pullOptions } from "../cli/lib/args";
 import "../cli/lib/load-globals";
 import chalk from 'chalk';
 
@@ -15,6 +15,10 @@ export interface IDocumentation {
     }[];
     options?: IOption[];
     notes?: string[];
+    seeAlso?: {
+            cmd: string;
+            desc: string;
+    }[],
     examples: {
         name: string;
         desc?: string;
@@ -76,6 +80,12 @@ function displayDocumentation(doco: IDocumentation): void {
         console.log(indent(doco.notes.map(note => `- ${note}`).join("\n"), "\t"));
         console.log();
     }
+    if (doco.seeAlso) {
+        console.log("See also:");
+        console.log();
+        console.log(indent(doco.seeAlso.map(seeAlso => `- ${chalk.cyan(seeAlso.cmd)}: ${seeAlso.desc}`).join("\n"), "\t"));
+        console.log();
+    }
     console.log("Examples:");
     console.log();
     for (const example of doco.examples) {
@@ -96,7 +106,7 @@ function displayDocumentation(doco: IDocumentation): void {
 //
 // Parses args before invoking a command then handling errors.
 //
-export async function run(invoke: (argv: string[]) => Promise<void>, doco: IDocumentation): Promise<void> {
+export async function run(invoke: (argv: string[], flags: Flags) => Promise<void>, doco: IDocumentation): Promise<void> {
 
     const argv = process.argv.slice(2);
     if (detectHelpArg(argv)) {
@@ -104,8 +114,14 @@ export async function run(invoke: (argv: string[]) => Promise<void>, doco: IDocu
         process.exit(2);
     }
 
+    let flags: Flags = {};
+
+    if (doco.options) {
+        flags = Object.assign(flags, pullOptions(doco.options, argv));
+    }
+
     try {
-        await invoke(argv);
+        await invoke(argv, flags);
     }
     catch (err: any) {
         if (err.message) {
