@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -66,7 +66,9 @@
     "to-yaml": "./cli/to-yaml",
     "transform": "./cli/transform",
     "omit": "./cli/omit",
-    "pick": "./cli/pick"
+    "pick": "./cli/pick",
+    "concat": "./cli/concat",
+    "flatten": "./cli/flatten"
   },
   "repository": {
     "type": "git",

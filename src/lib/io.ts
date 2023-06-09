@@ -68,7 +68,7 @@ type DataFormat = "json" | "csv" | "yaml";
 // Reads data from standard input in the requested format.
 // Data format defaults to JSON if none is specified.
 //
-async function inputDataFromStdin(expectedFormat?: DataFormat): Promise<any> {
+export async function inputDataFromStdin(expectedFormat?: DataFormat): Promise<any> {
     const input = await readStdin();
     if (expectedFormat === undefined || expectedFormat === "json") {
         return JSON.parse(input);
@@ -161,7 +161,7 @@ export function writeStdout(data: string): void {
 // Write data to standard output in the requested format.
 // Data format defaults to JSON if none is specified.
 //
-function outputDataToStdout(data: any, expectedFormat?: DataFormat, config?: ICsvOutputConfig): void {
+export function outputDataToStdout(data: any, expectedFormat?: DataFormat, config?: ICsvOutputConfig): void {
 
     let formattedData: string;
 

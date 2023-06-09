@@ -1,0 +1,402 @@
+[
+    {
+        "user": {
+            "id": 1,
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "age": 30,
+            "address": {
+                "street": "123 Main St",
+                "city": "Anytown",
+                "state": "ABC",
+                "zipcode": "12345"
+            }
+        },
+        "sale": {
+            "user_id": 1,
+            "product_id": 1001,
+            "quantity": 5,
+            "price": 10.99
+        }
+    },
+    {
+        "user": {
+            "id": 2,
+            "name": "Jane Smith",
+            "email": "jane.smith@example.com",
+            "age": 28,
+            "address": {
+                "street": "456 Elm St",
+                "city": "Otherville",
+                "state": "XYZ",
+                "zipcode": "54321"
+            }
+        },
+        "sale": {
+            "user_id": 2,
+            "product_id": 1002,
+            "quantity": 3,
+            "price": 19.99
+        }
+    },
+    {
+        "user": {
+            "id": 3,
+            "name": "David Johnson",
+            "email": "david.johnson@example.com",
+            "age": 35,
+            "address": {
+                "street": "789 Oak Ave",
+                "city": "Smalltown",
+                "state": "DEF",
+                "zipcode": "67890"
+            }
+        },
+        "sale": {
+            "user_id": 3,
+            "product_id": 1003,
+            "quantity": 2,
+            "price": 7.99
+        }
+    },
+    {
+        "user": {
+            "id": 4,
+            "name": "Emily Brown",
+            "email": "emily.brown@example.com",
+            "age": 25,
+            "address": {
+                "street": "321 Pine Ln",
+                "city": "Cityville",
+                "state": "GHI",
+                "zipcode": "45678"
+            }
+        },
+        "sale": {
+            "user_id": 4,
+            "product_id": 1004,
+            "quantity": 1,
+            "price": 14.99
+        }
+    },
+    {
+        "user": {
+            "id": 5,
+            "name": "Michael Wilson",
+            "email": "michael.wilson@example.com",
+            "age": 32,
+            "address": {
+                "street": "654 Maple Rd",
+                "city": "Townsville",
+                "state": "JKL",
+                "zipcode": "98765"
+            }
+        },
+        "sale": {
+            "user_id": 5,
+            "product_id": 1005,
+            "quantity": 4,
+            "price": 8.99
+        }
+    },
+    {
+        "user": {
+            "id": 6,
+            "name": "Olivia Taylor",
+            "email": "olivia.taylor@example.com",
+            "age": 29,
+            "address": {
+                "street": "987 Cedar Dr",
+                "city": "Villagetown",
+                "state": "MNO",
+                "zipcode": "54321"
+            }
+        },
+        "sale": {
+            "user_id": 6,
+            "product_id": 1006,
+            "quantity": 2,
+            "price": 11.99
+        }
+    },
+    {
+        "user": {
+            "id": 7,
+            "name": "Daniel Martinez",
+            "email": "daniel.martinez@example.com",
+            "age": 27,
+            "address": {
+                "street": "456 Oak Ave",
+                "city": "Bigcity",
+                "state": "PQR",
+                "zipcode": "12345"
+            }
+        },
+        "sale": {
+            "user_id": 7,
+            "product_id": 1007,
+            "quantity": 1,
+            "price": 6.99
+        }
+    },
+    {
+        "user": {
+            "id": 8,
+            "name": "Sophia Anderson",
+            "email": "sophia.anderson@example.com",
+            "age": 31,
+            "address": {
+                "street": "789 Pine Ln",
+                "city": "Megatown",
+                "state": "STU",
+                "zipcode": "67890"
+            }
+        },
+        "sale": {
+            "user_id": 8,
+            "product_id": 1008,
+            "quantity": 3,
+            "price": 9.99
+        }
+    },
+    {
+        "user": {
+            "id": 9,
+            "name": "Matthew Thomas",
+            "email": "matthew.thomas@example.com",
+            "age": 26,
+            "address": {
+                "street": "123 Elm St",
+                "city": "Hometown",
+                "state": "VWX",
+                "zipcode": "23456"
+            }
+        },
+        "sale": {
+            "user_id": 9,
+            "product_id": 1009,
+            "quantity": 2,
+            "price": 16.99
+        }
+    },
+    {
+        "user": {
+            "id": 10,
+            "name": "Isabella White",
+            "email": "isabella.white@example.com",
+            "age": 33,
+            "address": {
+                "street": "456 Cedar Dr",
+                "city": "Suburbia",
+                "state": "YZA",
+                "zipcode": "78901"
+            }
+        },
+        "sale": {
+            "user_id": 10,
+            "product_id": 1010,
+            "quantity": 4,
+            "price": 12.99
+        }
+    },
+    {
+        "user": {
+            "id": 11,
+            "name": "Ethan Lee",
+            "email": "ethan.lee@example.com",
+            "age": 24,
+            "address": {
+                "street": "789 Oak Ave",
+                "city": "Townville",
+                "state": "BCD",
+                "zipcode": "23456"
+            }
+        },
+        "sale": {
+            "user_id": 11,
+            "product_id": 1011,
+            "quantity": 1,
+            "price": 5.99
+        }
+    },
+    {
+        "user": {
+            "id": 12,
+            "name": "Mia Harris",
+            "email": "mia.harris@example.com",
+            "age": 27,
+            "address": {
+                "street": "123 Pine Ln",
+                "city": "Citytown",
+                "state": "EFG",
+                "zipcode": "78901"
+            }
+        },
+        "sale": {
+            "user_id": 12,
+            "product_id": 1012,
+            "quantity": 3,
+            "price": 13.99
+        }
+    },
+    {
+        "user": {
+            "id": 13,
+            "name": "James Clark",
+            "email": "james.clark@example.com",
+            "age": 29,
+            "address": {
+                "street": "456 Maple Rd",
+                "city": "Villageland",
+                "state": "HIJ",
+                "zipcode": "23456"
+            }
+        },
+        "sale": {
+            "user_id": 13,
+            "product_id": 1013,
+            "quantity": 2,
+            "price": 9.99
+        }
+    },
+    {
+        "user": {
+            "id": 14,
+            "name": "Ava Walker",
+            "email": "ava.walker@example.com",
+            "age": 32,
+            "address": {
+                "street": "789 Cedar Dr",
+                "city": "Megalopolis",
+                "state": "KLM",
+                "zipcode": "78901"
+            }
+        },
+        "sale": {
+            "user_id": 14,
+            "product_id": 1014,
+            "quantity": 1,
+            "price": 18.99
+        }
+    },
+    {
+        "user": {
+            "id": 15,
+            "name": "Benjamin King",
+            "email": "benjamin.king@example.com",
+            "age": 28,
+            "address": {
+                "street": "123 Oak Ave",
+                "city": "Towntown",
+                "state": "NOP",
+                "zipcode": "23456"
+            }
+        },
+        "sale": {
+            "user_id": 15,
+            "product_id": 1015,
+            "quantity": 4,
+            "price": 7.99
+        }
+    },
+    {
+        "user": {
+            "id": 16,
+            "name": "Charlotte Scott",
+            "email": "charlotte.scott@example.com",
+            "age": 31,
+            "address": {
+                "street": "456 Pine Ln",
+                "city": "Cityland",
+                "state": "QRS",
+                "zipcode": "78901"
+            }
+        },
+        "sale": {
+            "user_id": 16,
+            "product_id": 1016,
+            "quantity": 2,
+            "price": 10.99
+        }
+    },
+    {
+        "user": {
+            "id": 17,
+            "name": "Alexander Green",
+            "email": "alexander.green@example.com",
+            "age": 26,
+            "address": {
+                "street": "789 Maple Rd",
+                "city": "Villageville",
+                "state": "TUV",
+                "zipcode": "23456"
+            }
+        },
+        "sale": {
+            "user_id": 17,
+            "product_id": 1017,
+            "quantity": 1,
+            "price": 14.99
+        }
+    },
+    {
+        "user": {
+            "id": 18,
+            "name": "Grace Adams",
+            "email": "grace.adams@example.com",
+            "age": 30,
+            "address": {
+                "street": "123 Cedar Dr",
+                "city": "Megacity",
+                "state": "WXY",
+                "zipcode": "78901"
+            }
+        },
+        "sale": {
+            "user_id": 18,
+            "product_id": 1018,
+            "quantity": 3,
+            "price": 8.99
+        }
+    },
+    {
+        "user": {
+            "id": 19,
+            "name": "Joseph Baker",
+            "email": "joseph.baker@example.com",
+            "age": 27,
+            "address": {
+                "street": "456 Oak Ave",
+                "city": "Bigtown",
+                "state": "ZAB",
+                "zipcode": "23456"
+            }
+        },
+        "sale": {
+            "user_id": 19,
+            "product_id": 1019,
+            "quantity": 2,
+            "price": 11.99
+        }
+    },
+    {
+        "user": {
+            "id": 20,
+            "name": "Lily Turner",
+            "email": "lily.turner@example.com",
+            "age": 29,
+            "address": {
+                "street": "789 Pine Ln",
+                "city": "Hugeville",
+                "state": "BCD",
+                "zipcode": "78901"
+            }
+        },
+        "sale": {
+            "user_id": 20,
+            "product_id": 1020,
+            "quantity": 4,
+            "price": 6.99
+        }
+    }
+]

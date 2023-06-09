@@ -430,6 +430,47 @@ describe("pipelines", () => {
                 `).trimEnd(),
             },
         ],
+        //
+        // Concat
+        //
+        [
+            "concat",
+            `npx ts-node ./cli/concat ./src/test/data/concat-data-1.json ./src/test/data/concat-data-2.json`,
+            {
+                stdout: unindent(`
+                    [
+                        {
+                            "a": 1
+                        },
+                        {
+                            "a": 2
+                        }
+                    ]
+                `).trimEnd(),
+            },
+        ],
+        //
+        // Flatten
+        //
+        [
+            "flatten",
+            `npx ts-node ./cli/flatten ./src/test/data/flatten-data.json`,
+            {
+                stdout: unindent(`
+                    [
+                        1, 
+                        2, 
+                        [
+                            3, 
+                            [
+                                4
+                            ]
+                        ], 
+                        5
+                    ]
+                `).trimEnd(),
+            },
+        ],
     ];
 
     fs.removeSync("./src/test/output");
