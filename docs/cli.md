@@ -18,8 +18,10 @@ map --help
 
 # Commands
 
+- [concat](#concat)
 - [distinct](#distinct)
 - [filter](#filter)
+- [flatten](#flatten)
 - [format-table](#format-table)
 - [format-tree](#format-tree)
 - [from-csv](#from-csv)
@@ -39,6 +41,57 @@ map --help
 - [to-yaml](#to-yaml)
 - [transform](#transform)
 
+# concat
+
+Creates an output dataset by concatenating multiple input datasets. Works like `array.concat` in JavaScript.
+
+## Syntax
+
+```bash
+concat ...<input-file>
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON formatted data on standard output
+
+## Arguments
+
+- **...input-file** - One or more input file names (json, csv or yaml) or a hypen to indicate reading JSON data from standard input.
+
+## Notes
+
+- This command (unlike most others in Datakit) isn&#x27;t able to output directly to a file. Use redirection to write a file, shown in the example above.
+
+
+## Examples
+
+### Concatenates the data from multiple files and writes the result to standard output
+
+```bash
+concat input-file1.json input-file2.json input-file3.json
+```
+### Reads JSON data from standard input concatenates it with a file and writes the result to standard output
+
+```bash
+command-that-produces-json | concat - input-file.json
+```
+### Concatenates the data from multiple files and writes the result to a file
+
+```bash
+concat input-file1.json input-file2.json input-file3.json > output-file.json
+```
 # distinct
 
 Returns the set of distinct values from the input dataset. Removes duplicate values from the dataset.
@@ -153,6 +206,66 @@ command-that-produces-json | filter "record => record.id === '1234'" - output-fi
 
 ```bash
 filter --file my-filter.js input-file.csv output-file.csv
+```
+# flatten
+
+Flattens a nested dataset by 1 level. Works just like `array.flat` in JavaScript with an argument of 1 or the `flatten` function in Lodash.
+
+## Syntax
+
+```bash
+flatten [<input-file>] [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+## Notes
+
+- There is no reason to use this command with CSV data, because CSV data can&#x27;t be nested. Use this command with JSON and YAML data.
+
+
+## Examples
+
+### Reads JSON data from standard input, flattens it and writes to standard output
+
+```bash
+command-that-produces-json | flatten
+```
+### Reads data from a file, flattens it and writes to standard output
+
+```bash
+flatten input-file.json
+```
+### Reads data from a file, flattens it and writes output to another file
+
+```bash
+flatten input-file.json output-file.json
+```
+### Reads JSON data from standard input, flattens it and writes output to another file
+
+```bash
+command-that-produces-json | flatten - output-file.json
 ```
 # format-table
 

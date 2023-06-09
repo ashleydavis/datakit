@@ -21,7 +21,7 @@ The name of the field.
 
 #### Defined in
 
-[index.ts:14](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L14)
+[index.ts:14](https://github.com/ashleydavis/datakit/blob/4dc37ce/src/index.ts#L14)
 
 ___
 
@@ -33,4 +33,4 @@ The value of the field.
 
 #### Defined in
 
-[index.ts:19](https://github.com/data-forge-notebook/datakit/blob/90dde73/src/index.ts#L19)
+[index.ts:19](https://github.com/ashleydavis/datakit/blob/4dc37ce/src/index.ts#L19)
