@@ -16,6 +16,7 @@ export async function main(argv: string[]): Promise<void> {
 
   data.map((record: any) => {
     const result = invokeUserFn(() => fn(record), details);
+    // TODO: Allow user to override this?
     console.log(result);
     return record;
   });
