@@ -68,7 +68,8 @@
     "omit": "./cli/omit",
     "pick": "./cli/pick",
     "concat": "./cli/concat",
-    "flatten": "./cli/flatten"
+    "flatten": "./cli/flatten",
+    "probe": "./cli/probe"
   },
   "repository": {
     "type": "git",
