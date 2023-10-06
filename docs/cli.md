@@ -18,6 +18,7 @@ map --help
 
 # Commands
 
+- [batch](#batch)
 - [concat](#concat)
 - [distinct](#distinct)
 - [filter](#filter)
@@ -41,6 +42,63 @@ map --help
 - [to-yaml](#to-yaml)
 - [transform](#transform)
 
+# batch
+
+Outputs the input dataset as an array of arrays, each sub-array containing the specified number of records.
+
+## Syntax
+
+```bash
+batch <batch-size> [<input-file>] [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **batch-size** - Specifies the size for each batch.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+
+
+## Examples
+
+### Reads JSON data from standard input, batches the records into groups of 5 and writes to standard output
+
+```bash
+command-that-produces-json | batch 5
+```
+### Reads data from a file, batches the records into groups of 5 and writes to standard output
+
+```bash
+batch 5 input-file.csv
+```
+### Reads data from a file, batches the records into groups of 5 and writes output to another file
+
+```bash
+batch 5 input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, applies the transformation and writes output to another file
+
+```bash
+command-that-produces-json | batch 5 - output-file.csv
+```
 # concat
 
 Creates an output dataset by concatenating multiple input datasets. Works like `array.concat` in JavaScript.

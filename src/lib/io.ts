@@ -185,6 +185,38 @@ export function outputDataToStdout(data: any, expectedFormat?: DataFormat, confi
 }
 
 //
+// Outputs data to a name file.
+//
+export async function outputDataToFile(data: any, fileName: string, expectedFormat?: DataFormat, config?: ICsvOutputConfig) {
+
+    if (expectedFormat === undefined) {
+        //
+        // Choose data format from the file extension.
+        //
+        expectedFormat = determineFormat(fileName);
+    }
+
+    //
+    // Load data from the requested file.
+    //
+    if (expectedFormat === "json") {
+        await writeJson(fileName, data);
+    }
+    else if (expectedFormat === "csv") {
+        if (!isArray(data)) {
+            throw new Error(`To write csv file ${fileName}, expect the data to be an array of records. Instead got "${typeof data}".`);
+        }
+        await writeCsv(fileName, data, config);
+    }
+    else if (expectedFormat === "yaml") {
+        return await writeYaml(fileName, data);
+    }
+    else {
+        throw new Error(`Unexpected data format: ${expectedFormat}`);
+    }
+}
+
+//
 // Outputs data as JSON to a file or to standard output.
 //
 export async function outputData(argv: string[], data: any, expectedFormat?: DataFormat, config?: ICsvOutputConfig): Promise<void> {
@@ -203,31 +235,7 @@ export async function outputData(argv: string[], data: any, expectedFormat?: Dat
             outputDataToStdout(data, expectedFormat, config);
         }
         else {
-            if (expectedFormat === undefined) {
-                //
-                // Choose data format from the file extension.
-                //
-                expectedFormat = determineFormat(fileName);
-            }
-
-            //
-            // Load data from the requested file.
-            //
-            if (expectedFormat === "json") {
-                await writeJson(fileName, data);
-            }
-            else if (expectedFormat === "csv") {
-                if (!isArray(data)) {
-                    throw new Error(`To write csv file ${fileName}, expect the data to be an array of records. Instead got "${typeof data}".`);
-                }
-                await writeCsv(fileName, data, config);
-            }
-            else if (expectedFormat === "yaml") {
-                return await writeYaml(fileName, data);
-            }
-            else {
-                throw new Error(`Unexpected data format: ${expectedFormat}`);
-            }
+            await outputDataToFile(data, fileName, expectedFormat, config);
         }
     }
 }

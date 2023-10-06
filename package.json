@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -47,6 +47,8 @@
     "test-err-2": "ts-node ./cli/map --file ./src/test/code/map-test-with-error.js < ./src/test/data/starwars/characters.json"
   },
   "bin": {
+    "batch": "./cli/batch",
+    "split-to-files": "./cli/split-to-files",
     "distinct": "./cli/distinct",
     "filter": "./cli/filter",
     "format-table": "./cli/format-table",

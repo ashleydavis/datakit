@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const { run } = require("../build/lib/command");
+const { main, documentation } = require('../build/cli/split-to-files.js');
+
+run(main, documentation);

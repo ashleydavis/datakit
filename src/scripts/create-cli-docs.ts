@@ -14,6 +14,7 @@ import * as fs from 'fs';
 import handlebars from 'handlebars';
 import { IDocumentation } from '../lib/command';
 
+import { documentation as batch } from "../cli/batch";
 import { documentation as concat } from "../cli/concat";
 import { documentation as distinct } from "../cli/distinct";
 import { documentation as filter } from "../cli/filter";
@@ -38,6 +39,7 @@ import { documentation as toYaml } from "../cli/to-yaml";
 import { documentation as transform } from "../cli/transform";
 
 const docs: IDocumentation[] = [
+    batch,
     concat,
     distinct,
     filter,
