@@ -30,6 +30,7 @@ import { documentation as map } from "../cli/map";
 import { documentation as omit } from "../cli/omit";
 import { documentation as pick } from "../cli/pick";
 import { documentation as reduce } from "../cli/reduce";
+import { documentation as run } from "../cli/run";
 import { documentation as skip } from "../cli/skip";
 import { documentation as orderBy } from "../cli/sort";
 import { documentation as take } from "../cli/take";
@@ -56,6 +57,7 @@ const docs: IDocumentation[] = [
     orderBy,
     pick,
     reduce,
+    run,
     skip,
     take,
     toCsv,

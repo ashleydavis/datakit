@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const { run } = require("../build/lib/command.js");
+const { main, documentation } = require('../build/cli/run.js');
+
+run(main, documentation);

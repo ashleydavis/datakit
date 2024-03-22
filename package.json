@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -46,11 +46,14 @@
     "test-err-1": "ts-node ./cli/map \"r => x\" < ./src/test/data/starwars/characters.json",
     "test-err-2": "ts-node ./cli/map --file ./src/test/code/map-test-with-error.js < ./src/test/data/starwars/characters.json",
     "test-cmd": "ts-node ./cli/map \"async r => await runCmd(`echo ${r.Name}`)\" \"./src/test/data/cmds.csv\" | ts-node ./cli/map \"r => r.stdout\"",
+    "test-run": "ts-node ./cli/run \"r => `echo ${r.Name}`\" \"./src/test/data/cmds.csv\"",
+    "test-run-with-exit": "ts-node ./cli/run \"r => `exit 1`\" \"./src/test/data/cmds.csv\"",
     "test-bad-cmd": "ts-node ./cli/map \"r => await runCmd(`echo ${r.Name}`)\" \"./src/test/data/cmds.csv\"",
     "test-length": "cat ./src/test/data/cmds.csv | ts-node ./cli/length"
   },
   "bin": {
     "batch": "./cli/batch",
+    "run": "./cli/run",
     "split-to-files": "./cli/split-to-files",
     "distinct": "./cli/distinct",
     "filter": "./cli/filter",

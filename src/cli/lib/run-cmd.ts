@@ -10,12 +10,6 @@ export interface IRunCmdResult {
     error: Error | undefined;
 
     //
-    // The exit code of the command.
-    //
-    //fio:
-    // code: number | undefined;
-
-    //
     // The standard output of the command.
     //
     stdout: string;
@@ -26,18 +20,13 @@ export interface IRunCmdResult {
     stderr: string;
 }
 
-export async function runCmd(command: string, options: { encoding: BufferEncoding; } & ExecOptions): Promise<IRunCmdResult> {
-    // args = args || [];
-    options = options || {};
-
-    // console.log("Running cmd: " + command + " " + args.join(' ')); //fio;
-
+export async function runCmd(command: string, options?: ExecOptions): Promise<IRunCmdResult> {
     return new Promise<IRunCmdResult>((resolve) => {
-        exec(command, options, (error, stdout, stderr) => {
+        exec(command, options || {}, (error, stdout, stderr) => {
             resolve({
                 error: error === null ? undefined : error,
-                stdout: stdout,
-                stderr: stderr,                        
+                stdout: stdout as string,
+                stderr: stderr as string,
             });
         });
     });    
