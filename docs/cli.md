@@ -35,6 +35,7 @@ map --help
 - [orderBy](#orderBy)
 - [pick](#pick)
 - [reduce](#reduce)
+- [run](#run)
 - [skip](#skip)
 - [take](#take)
 - [to-csv](#to-csv)
@@ -1002,6 +1003,69 @@ command-that-produces-json | reduce "(a, r) => a + r.sales" 0 - output-file.csv
 
 ```bash
 reduce input-file.yaml my-reducer.js 0
+```
+# run
+
+Execute a command for each record in the input dataset.
+
+## Syntax
+
+```bash
+run <cmd-selector-fn> [<input-file>] [<output-file>]
+```
+
+## Inputs
+
+Input can be 1 of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted array on standard input.
+
+## Outputs
+
+Output can be one of the following:
+
+- JSON file
+- CSV file
+- YAML file
+- JSON formatted data on standard output.
+
+## Arguments
+
+- **cmd-selector-fn** - A JavaScript function to transform each record of the input dataset that creates a command to execute.
+- **input-file** - Can be an input file name (json, csv or yaml) or a hypen to indicate reading JSON data from standard input. Can be omitted if there are no further arguments.
+- **output-file** - The name of a file (json, csv or yaml) to output the resulting dataset to. Omitting this causes JSON output to be written to standard output.
+
+
+
+## Examples
+
+### Reads JSON data from standard input, creates a command and executes the command for each record.
+
+```bash
+command-that-produces-json | run "record => `echo ${record.x}`"
+```
+### Reads data from a CSV or JSON file, creates a command and executes the command for each record.
+
+```bash
+run "record => `echo ${record.x}`" input-file.csv
+```
+### Reads data from a file, creates a command and executes the command for each record, writing the output to another file.
+
+```bash
+run "record => `echo ${record.x}`"  input-file.csv output-file.csv
+```
+### Reads JSON data from standard input, creates a command and executes the command for each record, writing the output to a file.
+
+```bash
+command-that-produces-json | run "record => `echo ${record.x}`" - output-file.csv
+```
+### Loads a JavaScript file that provides the function that creates the command.
+
+```bash
+run --file my-transformation.js input-file.csv output-file.csv
 ```
 # skip
 
