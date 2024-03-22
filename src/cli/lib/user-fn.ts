@@ -42,14 +42,24 @@ export function loadUserFn(argv: string[], exampleFn: string): { fn: Function, d
     if (fileName) {
         const filePath = path.resolve(fileName);
         loadSourceCode = () => fs.readFileSync(filePath, "utf8");
-        userFn = require(filePath);
-        fileName = path.basename(fileName);
+        try {
+            userFn = require(filePath);
+            fileName = path.basename(fileName);
+        }
+        catch (err: any) {
+            handleUserFnError(err, { loadSourceCode, fileName });
+        }
     }
     else {
         fileName = "<anonymous>";
         const sourceCode = argv.shift()!;
         loadSourceCode = () => sourceCode;
-        userFn = eval(sourceCode);
+        try {
+            userFn = eval(sourceCode);
+        }
+        catch (err: any) {
+            handleUserFnError(err, { loadSourceCode, fileName });
+        }
     }
 
     if (!isFunction(userFn)) {
@@ -70,38 +80,62 @@ export function loadUserFn(argv: string[], exampleFn: string): { fn: Function, d
 //
 export function invokeUserFn(fn: Function, details: IUserFnDetails): any {
     try {
-        return fn();
+        const result = fn();
+        if (result && result.catch) {
+            return result.catch((err: any) => {
+                handleUserFnError(err, details);
+            });            
+        }
+
+        return result;
     }
     catch (err: any) {
-        if (err.stack) {
-            const matches = (new RegExp(`${details.fileName}:(\\d+):(\\d+)`)).exec(err.stack);
-            if (matches) {
-
-                const message = err.message || firstLine(err.stack);
-                const lineNumber = parseInt(matches[1]);
-                const columnNumber = parseInt(matches[2]);
-
-                console.error(chalk.red(`Error: `) + message);
-                console.error(` ${chalk.cyan("-->")} ${details.fileName}:${lineNumber}:${columnNumber}`)
-
-                const sourceCode = details.loadSourceCode();
-                const sourceCodeLines = sourceCode.split("\n");
-                console.error();
-                console.error(sourceCodeLines.slice(Math.max(0, lineNumber-3), lineNumber-1).map(line => "    " + line).join("\n"));
-                console.error(`${chalk.red("  > ")}${sourceCodeLines[lineNumber-1]}`);
-                console.error(" ".repeat(columnNumber-1) + chalk.red("    ^ "  + message));
-                console.error(sourceCodeLines.slice(lineNumber, lineNumber + 3).map(line => "    " + line).join("\n"));
-
-                console.error();
-                console.error(err.stack.split("\n").map((line: string) => "  " + line).join("\n"));
-                console.error();
-
-                throw new Error(`Runtime error from user function`);
-            }
-        }
-        
-        throw err;
+        handleUserFnError(err, details);        
     }
+}
+
+//
+// Handles an error from user code.
+//
+function handleUserFnError(err: any, details: IUserFnDetails) {
+    if (err.stack) {
+        const matches = (new RegExp(`${details.fileName}:(\\d+):(\\d+)`)).exec(err.stack);
+        if (matches) {
+            const message = err.message || firstLine(err.stack);
+            const lineNumber = parseInt(matches[1]);
+            const columnNumber = parseInt(matches[2]);
+
+            console.error(chalk.red(`Error: `) + message);
+            console.error(` ${chalk.cyan("-->")} ${details.fileName}:${lineNumber}:${columnNumber}`);
+
+            const sourceCode = details.loadSourceCode();
+            const sourceCodeLines = sourceCode.split("\n");
+            console.error();
+            console.error(sourceCodeLines.slice(Math.max(0, lineNumber - 3), lineNumber - 1).map(line => "    " + line).join("\n"));
+            console.error(`${chalk.red("  > ")}${sourceCodeLines[lineNumber - 1]}`);
+            console.error(" ".repeat(columnNumber - 1) + chalk.red("    ^ " + message));
+            console.error(sourceCodeLines.slice(lineNumber, lineNumber + 3).map(line => "    " + line).join("\n"));
+
+            console.error();
+            console.error(err.stack.split("\n").map((line: string) => "  " + line).join("\n"));
+            console.error();
+
+            throw new Error(`Runtime error from user function`);
+        }
+        else if (err.stack.startsWith("SyntaxError:")) {
+            console.error(chalk.red(`Syntax error: `) + err.message);
+            const sourceCode = details.loadSourceCode();
+            console.error();
+            console.error(sourceCode);
+            console.error();
+            console.error(err.stack.split("\n").map((line: string) => "  " + line).join("\n"));
+            console.error();
+
+            throw new Error(`Syntax error from user function`);
+        }
+    }
+
+    throw err;
 }
 
 //

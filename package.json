@@ -1,6 +1,6 @@
 {
   "name": "datakit",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Simple JavaScript toolkit for data transform across JSON, CSV and YAML.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -45,7 +45,9 @@
     "test-group-3": "npx ts-node ./cli/group \"r => r.homeworld\" < ./src/test/data/starwars/characters.json | npx ts-node ./cli/to-object \"r => r.key\" \"r => r.records\"",
     "test-err-1": "ts-node ./cli/map \"r => x\" < ./src/test/data/starwars/characters.json",
     "test-err-2": "ts-node ./cli/map --file ./src/test/code/map-test-with-error.js < ./src/test/data/starwars/characters.json",
-    "test-cmds": "ts-node ./cli/map \"r => runCmd(`echo ${r.Name}`)\" \"./src/test/data/cmds.csv\" | ts-node ./cli/map \"r => r.stdout\""
+    "test-cmd": "ts-node ./cli/map \"async r => await runCmd(`echo ${r.Name}`)\" \"./src/test/data/cmds.csv\" | ts-node ./cli/map \"r => r.stdout\"",
+    "test-bad-cmd": "ts-node ./cli/map \"r => await runCmd(`echo ${r.Name}`)\" \"./src/test/data/cmds.csv\"",
+    "test-length": "cat ./src/test/data/cmds.csv | ts-node ./cli/length"
   },
   "bin": {
     "batch": "./cli/batch",
