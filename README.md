@@ -82,10 +82,6 @@ You can also read and write YAML files using similar functions.
 
 Consider using [Data-Forge](http://data-forge-js.com/) for data transformation, analysis and visualization in JavaScript and TypeScript.
 
-## Resources
-
-- [API docs](https://data-forge-notebook.github.io/datakit/)
-
 ## Support the developer 
 
 <a target="_blank" href="https://www.codecapers.com.au/about#support-my-work">Click here to **support the developer.**</a>
